@@ -16,3 +16,7 @@ migration_1980 <- migration_data %>% filter(Year == 1980)
 migration_1990 <- migration_data %>% filter(Year == 1990)
 migration_2000 <- migration_data %>% filter(Year == 2000)
 
+test <- igraph::graph_from_data_frame(migration_1960, directed = TRUE, vertices = NULL)
+
+
+igraph::tkplot(test)
