@@ -13,5 +13,6 @@ write_xlsx(migration_data, "migration_data.xlsx")
 migration_1960 <- migration_data %>% filter(Year == 1960)
 migration_1970 <- migration_data %>% filter(Year == 1970)
 migration_1980 <- migration_data %>% filter(Year == 1980)
+migration_1990 <- migration_data %>% filter(Year == 1990)
 migration_2000 <- migration_data %>% filter(Year == 2000)
 
