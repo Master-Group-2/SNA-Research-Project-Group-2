@@ -15,3 +15,22 @@ migration_1970 <- migration_data %>% filter(Year == 1970)
 migration_1980 <- migration_data %>% filter(Year == 1980)
 migration_1990 <- migration_data %>% filter(Year == 1990)
 migration_2000 <- migration_data %>% filter(Year == 2000)
+
+countries <- migration_1960$Country
+
+migration_1960_test <- migration_1960
+migration_1960_test$Year <- NULL
+
+migration_1960_test <- migration_1960_test[ ,sort(names(migration_1960_test))]
+rownames(migration_1960_test) <- countries
+
+migration_1960_test2 <- migration_1960_test[sort(row.names(migration_1960_test)), ]
+
+migration_1960_matrix <- data.matrix(migration_1960_test2)
+
+test <- igraph::graph_from_adjacency_matrix(migration_1960_matrix,
+                                            mode = c('directed'),
+                                            weighted = TRUE)
+
+igraph::tkplot(test)
+plot(test)
