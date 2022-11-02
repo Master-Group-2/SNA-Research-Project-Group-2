@@ -38,10 +38,42 @@ test <- igraph::delete.edges(test, which(igraph::E(test)$weight<100))
 test <- igraph::simplify(test)
 test
 igraph::tkplot(test)
+
+# Adding an extra edge attribute with scaled weights
+# First creating the function to sclae
+fun_range <- function(x) {                              # Create user-defined function
+  (x - min(x)) / (max(x)-min(x))
+}
+
+# Then running the function and adding it to our graph 
+weightscaled <- fun_range(x = igraph::edge.attributes(test)$weight)
+test <- igraph::set.edge.attribute(test, "weight.scaled", index = igraph::E(test), weightscaled)
+
+# Plotting the network 
 plot(test,
      main= "Migrations between EU countries 1960",
-     edge.arrow.size = igraph::E(test)$weight,
+     edge.width = igraph::E(test)$weight.scaled*20,
+     edge.arrow.size = 0.1,
      curved = TRUE,
-     vertex.size = 30,
-     layout = igraph::layout.circle(test)
+     vertex.size = 20,
+     layout = igraph::layout_on_sphere
+)
+
+
+plot(test,
+     vertex.shape="circle",
+     layout = igraph::layout_on_grid,
+     main= "Migrations between EU countries 1960",
+     edge.width = igraph::E(test)$weight.scaled*15,
+     edge.arrow.size = 0.1,
+     vertex.size = 10,
+)
+
+plot(test,
+     vertex.shape="circle",
+     layout = igraph::layout_randomly,
+     main= "Migrations between EU countries 1960",
+     edge.width = igraph::E(test)$weight.scaled*15,
+     edge.arrow.size = 0.1,
+     vertex.size = 10,
 )
