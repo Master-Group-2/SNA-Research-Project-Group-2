@@ -7,7 +7,7 @@ my_data <- read_excel("Data_Extract_From_Global_Bilateral_Migration.xlsx")
 drop <- c("Year Code", "Country Origin Code", "Migration by Gender Name", "Migration by Gender Code")
 migration_data = my_data[,!(names(my_data) %in% drop)]
 migration_data <- setNames(migration_data, c("Year", "Country", "Belarus", "Czech Republic", "Germany", "Hungary", "Macedonia, FYR", "Russian Federation", "Ukraine", "Austria", "Belgium", "Bulgaria", "Croatia", "Denmark", "Estonia", "France", "Finland", "Georgia", "Greece", "Iceland", "Ireland", "Italy", "Liechtenstein", "Lithuania", "Luxembourg", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "Slovenia", "Spain", "Sweden", "Switzerland", "United Kingdom", "Albania", "Bosnia and Herzegovina", "Cyprus", "Latvia", "Monaco", "Slovak Republic"))
-migration_data[migration_data == 0] <- NA
+#migration_data[migration_data == 0] <- NA
 
 write_xlsx(migration_data, "migration_data.xlsx")
 
@@ -29,10 +29,19 @@ rownames(migration_1960_test) <- countries
 migration_1960_test2 <- migration_1960_test[sort(row.names(migration_1960_test)), ]
 
 migration_1960_matrix <- data.matrix(migration_1960_test2)
-
 test <- igraph::graph_from_adjacency_matrix(migration_1960_matrix,
                                             mode = c('directed'),
                                             weighted = TRUE)
-
+summary(test)
+igraph::edge.attributes(test)
+test <- igraph::delete.edges(test, which(igraph::E(test)$weight<100))
+test <- igraph::simplify(test)
+test
 igraph::tkplot(test)
-plot(test)
+plot(test,
+     main= "Migrations between EU countries 1960",
+     edge.arrow.size = igraph::E(test)$weight,
+     curved = TRUE,
+     vertex.size = 30,
+     layout = igraph::layout.circle(test)
+)
