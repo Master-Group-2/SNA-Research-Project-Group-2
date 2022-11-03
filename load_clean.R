@@ -34,7 +34,7 @@ test <- igraph::graph_from_adjacency_matrix(migration_1960_matrix,
                                             weighted = TRUE)
 summary(test)
 igraph::edge.attributes(test)
-test <- igraph::delete.edges(test, which(igraph::E(test)$weight<100))
+test <- igraph::delete.edges(test, which(igraph::E(test)$weight<10000))
 test <- igraph::simplify(test)
 test
 igraph::tkplot(test)
@@ -48,6 +48,58 @@ fun_range <- function(x) {                              # Create user-defined fu
 # Then running the function and adding it to our graph 
 weightscaled <- fun_range(x = igraph::edge.attributes(test)$weight)
 test <- igraph::set.edge.attribute(test, "weight.scaled", index = igraph::E(test), weightscaled)
+
+test <- igraph::set.vertex.attribute(test, 'region', index = 1, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 2, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 3, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 4, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 5, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 6, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 7, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 8, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 9, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 10, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 11, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 12, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 13, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 14, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 15, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 16, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 17, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 18, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 19, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 20, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 21, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 22, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 23, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 24, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 25, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 26, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 27, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 28, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 29, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 30, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 31, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 32, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 33, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 34, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 35, 'South')
+test <- igraph::set.vertex.attribute(test, 'region', index = 36, 'North')
+test <- igraph::set.vertex.attribute(test, 'region', index = 37, 'West')
+test <- igraph::set.vertex.attribute(test, 'region', index = 38, 'East')
+test <- igraph::set.vertex.attribute(test, 'region', index = 39, 'North')
+
+
+colrs <- c("South"="yellow", "West"="green", "East"="red", "North"="blue")
+igraph::V(test)$color <- colrs[igraph::V(test)$region]
+
+igraph::get.vertex.attribute(test, 'color')
+
+eastWest <- igraph::delete.vertices(test, which(igraph::V(test)$region=='North'))
+eastWest2 <- igraph::delete.vertices(eastWest, which(igraph::V(eastWest)$region=='South'))
+
+eastWest
+eastWest2
 
 # Plotting the network 
 plot(test,
@@ -75,5 +127,8 @@ plot(test,
      main= "Migrations between EU countries 1960",
      edge.width = igraph::E(test)$weight.scaled*15,
      edge.arrow.size = 0.1,
+     vertex.color = igraph::V(test)$color,
      vertex.size = 10,
+     vertex.label.color = 'black',
 )
+
