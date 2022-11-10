@@ -123,45 +123,31 @@ plot(migration_networks[[1]],
      vertex.label.color = 'black',
 )
 
-## Centrality
-snafun::v_stress(test)
-snafun::g_centralize(test, measure = 'betweenness')$centralization
-
-betweenness_central <- function(x, directed = FALSE){
-  netw <- snafun::fix_cug_input(x, directed = directed)
-  snafun::g_centralize(netw, 'betweenness')$centralization
-}
-
-betw_igraph <- function(x, directed = FALSE){
-  netw <- snafun::fix_cug_input(x, directed = directed)
-  igraph::centr_betw(netw, directed = TRUE)$centralization
-}
-
-test_network <- snafun::to_network(test)
-summary(test_network)
-
-sna::cug.test(test_network,
-              FUN = betweenness_central,
-              mode = 'digraph',
-              cmode = 'edges',
-              ignore.eval = FALSE,
-              reps = 1000)
-
+## Centrality Analysis
 centrality_analysis <- function(igraph_graphs, years){
-  countries <- igraph::get.vertex.attribute(igraph_graphs[1], 'name')
+  countries <- igraph::get.vertex.attribute(igraph_graphs[[1]], 'name')
   central_data <- data.frame(countries)
   colnames(central_data) <- 'Country'
   
   for (index in 1:length(years)){
-    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[index])
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[[index]])
   }
+  central_data
 }
 
-centrality <- snafun::v_stress(test_network)
-countries <- igraph::get.vertex.attribute(test, 'name')
+years <- c(1960, 1970, 1980, 1990, 2000)
+central_data <- centrality_analysis(migration_networks, years)
 
-central_data <- data.frame(countries, centrality)
-colnames(central_data) <- c('Country', 'Centrality_1960')
+## Igraph to network
+migration_networks_network <- list()
+for (network_no in 1:length(migration_networks)){
+  migration_networks_network[[network_no]] <- snafun::to_network(migration_networks[[network_no]])
+}
 
-central_data['test'] <- countries
+### QAP test example
+# mod <- sna::netlm(y = migration_networks_network[[1]], 
+#                   x = list(migration_networks_network[c(2:5)]), 
+#                   nullhyp = 'qapspp', reps = 1001)
+# mod$names <- c("Intcpt", "1970", "1980", "1990", "2000")
+# summary(mod)
 
