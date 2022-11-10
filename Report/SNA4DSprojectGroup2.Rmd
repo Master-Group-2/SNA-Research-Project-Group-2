@@ -72,12 +72,35 @@ what are your results and the main conclusion?
 (about 1000 words) -- 0.5 POINTS Place your topic of choice within the
 existing literature and explain what you are going to address in this
 report and why.
-
 -   What is the main topic that is going to be studied in this paper?
-
 -   Why is it important?
 
--   What are the existing studies that address it already?
+Humanity has always moved a lot, for many different reasons, such as work or study opportunities, for safety of to join family. 
+Because there are so many factors that play a role in migration, a lot of research has already been performed on this topic. 
+However, at the same time, there are still a lot of thing unknown, which is why this paper will elaborate further on the topic of migration. 
+In this paper, the focus will be specifically on migration within Europe with the use of social network analysis. 
+
+Importance 
+As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. 
+In 2020, it was estimated that 281 million people live in a country that is not their country of birth (United Nations & Nations, 2019).
+This is over three times the estimated number in 1970. 
+With this increase in migration, come a lot of other changes, since migration has different effects on a country. 
+For example, research has shown that skilled migrants have a positive effect on innovation (Fassio et al., 2019). 
+Besides that there are effects on the economy, since migration “boosts the working-age population” and “contributes to technological progress” (OECD, 2014). 
+
+Since it migration has many different effects, it is important to know why people move. 
+This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. 
+In line with this reasoning, Dustmann and Frattini (2011) found differences in the rate of European born immigrants between different European nations. 
+An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe. 
+
+Current research 
+Some researchers have already looked at the reasons why people migrate to other countries. 
+The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors (Exploring Migration Causes - Why People Migrate | News | European Parliament, 2020).  
+
+Socio-political factors can be described as persecution, politics (Lam, 2002) or culture (Kontuly & Smith, 1995). 
+Davenport et al. (2003) indeed find that threats to personal integrity are the most important reason why people migrate. 
+Demographic and economic factors are labor standards, unemployment (DaVanzo, 1978) and the country's overall economic health (Czaika, 2014). 
+Finally environmental factors can be fleeing of natural disasters (Drabo & Mbaye, 2014; Berlemann & Steinhardt, 2017) and possibly in the future climate change. 
 
 -   What are your questions and hypotheses? Why are they important? How
     are they connected to previous work or to a problem you raised?
