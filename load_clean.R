@@ -148,5 +148,44 @@ plot(test,
      vertex.label.color = 'black',
 )
 
+## Centrality
+snafun::v_stress(test)
+snafun::g_centralize(test, measure = 'betweenness')$centralization
 
+betweenness_central <- function(x, directed = FALSE){
+  netw <- snafun::fix_cug_input(x, directed = directed)
+  snafun::g_centralize(netw, 'betweenness')$centralization
+}
 
+betw_igraph <- function(x, directed = FALSE){
+  netw <- snafun::fix_cug_input(x, directed = directed)
+  igraph::centr_betw(netw, directed = TRUE)$centralization
+}
+
+test_network <- snafun::to_network(test)
+summary(test_network)
+
+sna::cug.test(test_network,
+              FUN = betweenness_central,
+              mode = 'digraph',
+              cmode = 'edges',
+              ignore.eval = FALSE,
+              reps = 1000)
+
+centrality_analysis <- function(igraph_graphs, years){
+  countries <- igraph::get.vertex.attribute(igraph_graphs[1], 'name')
+  central_data <- data.frame(countries)
+  colnames(central_data) <- 'Country'
+  
+  for (index in 1:length(years)){
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[index])
+  }
+}
+
+centrality <- snafun::v_stress(test_network)
+countries <- igraph::get.vertex.attribute(test, 'name')
+
+central_data <- data.frame(countries, centrality)
+colnames(central_data) <- c('Country', 'Centrality_1960')
+
+central_data['test'] <- countries
