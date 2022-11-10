@@ -123,4 +123,31 @@ plot(migration_networks[[1]],
      vertex.label.color = 'black',
 )
 
-migration_networks[[1]]
+## Centrality Analysis
+centrality_analysis <- function(igraph_graphs, years){
+  countries <- igraph::get.vertex.attribute(igraph_graphs[[1]], 'name')
+  central_data <- data.frame(countries)
+  colnames(central_data) <- 'Country'
+  
+  for (index in 1:length(years)){
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[[index]])
+  }
+  central_data
+}
+
+years <- c(1960, 1970, 1980, 1990, 2000)
+central_data <- centrality_analysis(migration_networks, years)
+
+## Igraph to network
+migration_networks_network <- list()
+for (network_no in 1:length(migration_networks)){
+  migration_networks_network[[network_no]] <- snafun::to_network(migration_networks[[network_no]])
+}
+
+### QAP test example
+# mod <- sna::netlm(y = migration_networks_network[[1]], 
+#                   x = list(migration_networks_network[c(2:5)]), 
+#                   nullhyp = 'qapspp', reps = 1001)
+# mod$names <- c("Intcpt", "1970", "1980", "1990", "2000")
+# summary(mod)
+
