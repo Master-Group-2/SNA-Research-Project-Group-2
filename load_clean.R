@@ -11,12 +11,29 @@ migration_data <- setNames(migration_data, c("Year", "Country", "Belarus", "Czec
 
 write_xlsx(migration_data, "migration_data.xlsx")
 
+
 migration_1960 <- migration_data %>% filter(Year == 1960)
 migration_1970 <- migration_data %>% filter(Year == 1970)
 migration_1980 <- migration_data %>% filter(Year == 1980)
 migration_1990 <- migration_data %>% filter(Year == 1990)
 migration_2000 <- migration_data %>% filter(Year == 2000)
+migration_data_list <- list()
+migration_data_list[[1]] <- migration_1960
+migration_data_list[[2]] <- migration_1970
+migration_data_list[[3]] <- migration_1980
+migration_data_list[[4]] <- migration_1990
+migration_data_list[[5]] <- migration_2000
 
+length(migration_data_list[5])
+class(migration_data_list[[5]])
+class(migration_2000)
+migration_list <- list()
+for (migration in migration_data_list) {
+  migration <- migration$Year <- NULL
+  migration <- migration$Country <- NULL
+  migration_list <- append(migration_list, migration)  
+}
+migration_list
 countries <- migration_1960$Country
 
 migration_1960_test <- migration_1960
@@ -89,7 +106,6 @@ test <- igraph::set.vertex.attribute(test, 'region', index = 37, 'West')
 test <- igraph::set.vertex.attribute(test, 'region', index = 38, 'East')
 test <- igraph::set.vertex.attribute(test, 'region', index = 39, 'North')
 
-
 colrs <- c("South"="yellow", "West"="green", "East"="red", "North"="blue")
 igraph::V(test)$color <- colrs[igraph::V(test)$region]
 
@@ -131,4 +147,6 @@ plot(test,
      vertex.size = 10,
      vertex.label.color = 'black',
 )
+
+
 
