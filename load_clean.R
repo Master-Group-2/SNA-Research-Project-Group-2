@@ -124,4 +124,3 @@ plot(migration_networks[[1]],
 )
 
 migration_networks[[1]]
-
