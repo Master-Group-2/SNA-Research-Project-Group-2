@@ -24,31 +24,31 @@ migration_data_list[[3]] <- migration_1980
 migration_data_list[[4]] <- migration_1990
 migration_data_list[[5]] <- migration_2000
 
-length(migration_data_list[5])
-class(migration_data_list[[5]])
-class(migration_2000)
-migration_list <- list()
-for (migration in migration_data_list) {
-  migration <- migration$Year <- NULL
-  migration <- migration$Country <- NULL
-  migration_list <- append(migration_list, migration)  
+migration_networks <- list()
+
+for(i in 1:length(migration_data_list))
+{
+  migration_data_list[[i]]$Year <- NULL
+  countries <- migration_data_list[[i]]$Country
+  migration_data_list[[i]]$Country <- NULL
+  
+  placeholder <- migration_data_list[[i]]
+  placeholder <- placeholder[ ,sort(names(placeholder))]
+  rownames(placeholder) <- countries
+  
+  migration_test2 <- placeholder[sort(row.names(placeholder)), ]
+  
+  migration_matrix <- data.matrix(migration_test2)
+  migration_networks[[i]] <- igraph::graph_from_adjacency_matrix(migration_matrix,
+                                              mode = c('directed'),
+                                              weighted = TRUE)
 }
-migration_list
-countries <- migration_1960$Country
 
-migration_1960_test <- migration_1960
-migration_1960_test$Year <- NULL
-migration_1960_test$Country <- NULL
+migration_data_list
+migration_networks
 
-migration_1960_test <- migration_1960_test[ ,sort(names(migration_1960_test))]
-rownames(migration_1960_test) <- countries
 
-migration_1960_test2 <- migration_1960_test[sort(row.names(migration_1960_test)), ]
 
-migration_1960_matrix <- data.matrix(migration_1960_test2)
-test <- igraph::graph_from_adjacency_matrix(migration_1960_matrix,
-                                            mode = c('directed'),
-                                            weighted = TRUE)
 summary(test)
 igraph::edge.attributes(test)
 test <- igraph::delete.edges(test, which(igraph::E(test)$weight<10000))
