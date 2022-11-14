@@ -1,27 +1,11 @@
 ---
-title             : "The title"
-shorttitle        : "Title"
+title             : "Migration Network Analysis by Technological Revolution"
+shorttitle        : "Research Project Group 2 ~ SNA4DS"
 author: 
-  - name          : "First Author"
+  - name          : "Harm Booy, Summer van Dongen, Maud Groen, Koen van Hugten, Jeroen Wasser"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Postal address"
-    email         : "my@email.com"
-    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
-      - Conceptualization
-      - Writing - Original Draft Preparation
-      - Writing - Review & Editing
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
-    role:
-      - Writing - Review & Editing
-affiliation:
-  - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
-authornote: |
-  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
   Enter author note here.
 keywords          : "keywords"
 wordcount         : "X"
@@ -88,20 +72,59 @@ what are your results and the main conclusion?
 (about 1000 words) -- 0.5 POINTS Place your topic of choice within the
 existing literature and explain what you are going to address in this
 report and why.
-
 -   What is the main topic that is going to be studied in this paper?
-
 -   Why is it important?
 
--   What are the existing studies that address it already?
+Humanity has always moved a lot, for many different reasons, such as work or study opportunities, for safety of to join family. 
+Because there are so many factors that play a role in migration, a lot of research has already been performed on this topic. 
+However, at the same time, there are still a lot of thing unknown, which is why this paper will elaborate further on the topic of migration. 
+In this paper, the focus will be specifically on migration within Europe with the use of social network analysis. 
 
--   What are your questions and hypotheses? Why are they important? How
-    are they connected to previous work or to a problem you raised?
+Importance 
+As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. 
+In 2020, it was estimated that 281 million people live in a country that is not their country of birth (United Nations & Nations, 2019).
+This is over three times the estimated number in 1970. 
+With this increase in migration, come a lot of other changes, since migration has different effects on a country. 
+For example, research has shown that skilled migrants have a positive effect on innovation (Fassio et al., 2019). 
+Besides that there are effects on the economy, since migration “boosts the working-age population” and “contributes to technological progress” (OECD, 2014). 
 
--   Which methods are you using? Why?
+Since it migration has many different effects, it is important to know why people move. 
+This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. 
+In line with this reasoning, Dustmann and Frattini (2011) found differences in the rate of European born immigrants between different European nations. 
+An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe. 
 
--   How is your work going to contribute to the field/or to whom (e.g.,
-    industry)?
+Current research 
+Some researchers have already looked at the reasons why people migrate to other countries. The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors (Exploring Migration Causes - Why People Migrate | News | European Parliament, 2020).  
+
+Socio-political factors can be described as persecution, politics (Lam, 2002) or culture (Kontuly & Smith, 1995). Davenport et al. (2003) indeed find that threats to personal integrity are the most important reason why people migrate. 
+Demographic and economic factors are labor standards, unemployment (DaVanzo, 1978) and the country's overall economic health (Czaika, 2014). Finally environmental factors can be fleeing of natural disasters (Drabo & Mbaye, 2014; Berlemann & Steinhardt, 2017) and possibly in the future climate change. 
+-	Technical developments
+
+Hypothesis 
+To be able to answer the question of why people migrate, two different questions need to be answered. First, it needs to be determined through which people migrate and whether this changes over time. With this information, possible travel paths can be determined, which can in turn help in explaining why and how people migrate. 
+Research has determined that “physical distance and border effects are significant predictors of migration flows among OECD countries” (Tranos et al., 2015). Here physical distance refers to how close countries are to each other. When looking at Europe, this would mean that most migrants would travel to our via the middle point of Europe, which is Belarus or Lithuania. 
+Based on boarder effect, Austria would be an interesting node for centrality, since it shares borders with eight different countries. 
+Another interesting approach is looking at the migration routes and flows in Europe, such as the Western African Route, Western Mediterranean Route, Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and the The Channel Route (Western Mediterranean Route, n.d.). Based on these migration routes, it appears that Austria plays an important role for migration within Europe (Guggenheim, 2019, Ambrosini, 2016).
+Based on this information the following hypothesis can be formulated:
+
+Austria has a high centrality in the social network of Europe's migration
+
+Besides looking at the network itself, it is important to also take into account endogenous and exogenous variables. 
+As mentioned before, many different factors have been found that impact migration. In this research all of these factors will be considered, and since technical development is becoming more and more important, we hypothesize that: 
+
+The technical development of a country will have a more positive effect on the level of migration to that country with time
+
+Methods 
+As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights are amount of people migrating from one country to another. 
+-	First method
+-	Second method: ERGM
+
+Contributions 
+So far, the approach used in this research has not been used. 
+By combining network analysis with many different variables, the impact of the variables can be compared and a most important factor can be determined. 
+As mentioned in the introduction, the results from this research can help countries understand how many migrants are coming to this country, and possibly also why they are coming. 
+With this information, appropriate accommodations can be made for them and the impact of having these migrants can be determined. 
+
 
 -   What does the rest of the report look like? In one short paragraph,
     list the topics of the following sections.
