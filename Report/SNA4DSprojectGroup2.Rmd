@@ -120,6 +120,42 @@ o How was the data collected?
 
 -   What is the potential bias in the data? How does this affect your results?
 
+The data used for the research project consists out of several publicly accessible
+datasets retrieved from the World Bank (<https://databank.worldbank.org/source/world-development-indicators>). These datasets are:
+
+o **Global Bilateral Migration:** Global matrices of bilateral migrant stocks spanning the period 1960-2000, disaggregated by gender and based primarily on the foreign-born
+concept. Gathered through various censuses. Last updated on 06-28-2011.
+
+o **World Development Indicators:** World development indicators, compiled from
+officially recognized international sources spanning the period 1960-2000. Last
+updated on 09-16-2022.
+
+![](images/paste-14146F3D.png)
+
+To answer the research question data regarding migration patterns between European
+nations are necessary. Additional information which might possibly influence
+said migration is also required. The combined dataset contains information
+about multiple nations including all European nations. As seen in table various characteristics of the European nations throughout the decades in the late 20^th^
+century are also available. This provides the opportunity to analyse the effect
+of changes within the European nations over the years on migration.
+
+![](images/paste-07E883B1.png)
+
+![](images/paste-894EEB01.png)
+
+![](images/paste-FA63D36D.png)
+
+The oldest data points stem from 1960, from 1960 onwards European nations have seen quite
+a number of changes. Some nations within the dataset did not exist in their
+current condition across all of the years existent in the dataset, Germany for
+example only exists as Germany whereas for most of the time period represented
+in the dataset Germany was actually two countries (West Germany and East
+Germany). This could mean that for some nations the data itself is not
+completely accurate as the numbers existent in the dataset are a sum of the
+numbers for both nations. This might skew the data and results.
+
+![](images/paste-CE7AF01C.png)
+
 ### Data analysis (Research Rationale)
 
 (about 500 words) -- 1 POINTS \* Why are these two methods suitable for your data?
