@@ -2,9 +2,36 @@
 title             : "Migration Network Analysis by Technological Revolution"
 shorttitle        : "Research Project Group 2 ~ SNA4DS"
 author: 
-  - name          : "Harm Booy, Summer van Dongen, Maud Groen, Koen van Hugten, Jeroen Wasser"
+  - name          : "Maud Groen"
     affiliation   : "1"
-    corresponding : yes    # Define only one corresponding author
+    corresponding : yes
+    email         : "m.groen@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Harm Booy"
+    affiliation   : "1"
+    corresponding : no
+    email         : "h.booy@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Summer van Dongen"
+    affiliation   : "1"
+    corresponding : no
+    email         : "s.m.vandongen@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Jeroen Wasser"
+    affiliation   : "1"
+    corresponding : no
+    email         : "j.j.m.wasser@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Koen van Hugten"
+    affiliation   : "1"
+    corresponding : no
+    email         : "k.w.m.g.vanhugten@tilburguniversity.edu"
+    role          : "Student"   
+affiliation       :
+  - id            : "1"
+    institution   : "Jheronimus Academy of Data Science"
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
 
   Enter author note here.
 keywords          : "keywords"
@@ -21,7 +48,7 @@ mask              : no
 draft             : no
 documentclass     : "apa6"
 classoption       : "man"
-output            : word_document
+output            : html_document
 editor_options: 
   markdown: 
     wrap: 72
@@ -68,35 +95,55 @@ what are your results and the main conclusion?
 
 (about 1000 words) -- 0.5 POINTS Place your topic of choice within the existing literature and explain what you are going to address in this report and why. - What is the main topic that is going to be studied in this paper? - Why is it important?
 
+::: {style="text-align: justify"}
 Humanity has always moved a lot, for many different reasons, such as work or study opportunities, for safety of to join family. Because there are so many factors that play a role in migration, a lot of research has already been performed on this topic. However, at the same time, there are still a lot of thing unknown, which is why this paper will elaborate further on the topic of migration. In this paper, the focus will be specifically on migration within Europe with the use of social network analysis.
+:::
 
-### Importance 
-As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. In 2020, it was estimated that 281 million people live in a country that is not their country of birth (United Nations & Nations, 2019). This is over three times the estimated number in 1970. With this increase in migration, come a lot of other changes, since migration has different effects on a country. For example, research has shown that skilled migrants have a positive effect on innovation (Fassio et al., 2019). Besides that there are effects on the economy, since migration "boosts the working-age population" and "contributes to technological progress" (OECD, 2014).
+### Importance
 
-Since it migration has many different effects, it is important to know why people move. This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. In line with this reasoning, Dustmann and Frattini (2011) found differences in the rate of European born immigrants between different European nations. An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe.
+::: {style="text-align: justify"}
+As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. In 2020, it was estimated that 281 million people live in a country that is not their country of birth [@united2019world]. This is over three times the estimated number in 1970. With this increase in migration, come a lot of other changes, since migration has different effects on a country. For example, research has shown that skilled migrants have a positive effect on innovation [@fassio2019skilled]. Besides that there are effects on the economy, since migration "boosts the working-age population" and "contributes to technological progress" [@oecd2014is].
 
-### Current research 
-Some researchers have already looked at the reasons why people migrate to other countries. The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors (Exploring Migration Causes - Why People Migrate \| News \| European Parliament, 2020).
+Since it migration has many different effects, it is important to know why people move. This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. In line with this reasoning, Dustmann and Frattini [-@dustmann2011immigration] found differences in the rate of European born immigrants between different European nations. An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe.
+:::
 
-Socio-political factors can be described as persecution, politics (Lam, 2002) or culture (Kontuly & Smith, 1995). Davenport et al. (2003) indeed find that threats to personal integrity are the most important reason why people migrate. Demographic and economic factors are labor standards, unemployment (DaVanzo, 1978) and the country's overall economic health (Czaika, 2014). Finally environmental factors can be fleeing of natural disasters (Drabo & Mbaye, 2014; Berlemann & Steinhardt, 2017) and possibly in the future climate change. 
-Finally an important factor to keep in mind is technology, and technological development. Because of technological progress, jobs are created as well as destructed (Mortensen & Pissarides, 1998). According to Hillmann et al. (2022) this loss of jobs in certain segments of the labor market can cause people to move elsewhere. Moreover, when the country of origin lacks technological progress, outmigration is more attractive. 
+### Current research
 
-### Hypothesis 
-To be able to answer the question of why people migrate, two different questions need to be answered. First, it needs to be determined through which people migrate and whether this changes over time. With this information, possible travel paths can be determined, which can in turn help in explaining why and how people migrate. Research has determined that "physical distance and border effects are significant predictors of migration flows among OECD countries" (Tranos et al., 2015). Here physical distance refers to how close countries are to each other. When looking at Europe, this would mean that most migrants would travel to our via the middle point of Europe, which is Belarus or Lithuania. Based on boarder effect, Austria would be an interesting node for centrality, since it shares borders with eight different countries. Another interesting approach is looking at the migration routes and flows in Europe, such as the Western African Route, Western Mediterranean Route, Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and the The Channel Route (Western Mediterranean Route, n.d.). Based on these migration routes, it appears that Austria plays an important role for migration within Europe (Guggenheim, 2019, Ambrosini, 2016). Based on this information the following hypothesis can be formulated:
+::: {style="text-align: justify"}
+Some researchers have already looked at the reasons why people migrate to other countries. The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors [@europe2020exloring].
 
-Austria has a high centrality in the social network of Europe's migration
+Socio-political factors can be described as persecution, politics  [@lam2002interaction] or culture [@kontuly1995culture]. Davenport et al. [-@davenport2003sometimes] indeed find that threats to personal integrity are the most important reason why people migrate. Demographic and economic factors are labor standards, unemployment [@davanzo1978does] and the country's overall economic health [@czaika2015migration]. Finally environmental factors can be fleeing of natural disasters [@drabo2015natural; @berlemann2017climate] and possibly in the future climate change. Finally an important factor to keep in mind is technology, and technological development. Because of technological progress, jobs are created as well as destructed [@mortensen1998technological]. According to Hillmann et al. [-@hillmann2022technological] this loss of jobs in certain segments of the labor market can cause people to move elsewhere. Moreover, when the country of origin lacks technological progress, outmigration is more attractive.
+:::
+
+### Hypothesis
+
+::: {style="text-align: justify"}
+To be able to answer the question of why people migrate, two different questions need to be answered. First, it needs to be determined through which people migrate and whether this changes over time. With this information, possible travel paths can be determined, which can in turn help in explaining why and how people migrate. Research has determined that "physical distance and border effects are significant predictors of migration flows among OECD countries" [@tranos2015international]. Here physical distance refers to how close countries are to each other. When looking at Europe, this would mean that most migrants would travel to our via the middle point of Europe, which is Belarus or Lithuania. Based on boarder effect, Austria would be an interesting node for centrality, since it shares borders with eight different countries. Another interesting approach is looking at the migration routes and flows in Europe, such as the Western African Route, Western Mediterranean Route, Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and the The Channel Route [@westernroute]. Based on these migration routes, it appears that Austria plays an important role for migration within Europe [@guggenheim2019what; @ambrosini2016europe]. Based on this information the following hypothesis can be formulated:
+
+- Hypothesis 1: Austria has a high centrality in the social network of Europe's migration
 
 Besides looking at the network itself, it is important to also take into account endogenous and exogenous variables. As mentioned before, many different factors have been found that impact migration. In this research all of these factors will be considered, and since technical development is becoming more and more important, we hypothesize that:
 
-The technical development of a country will have a more positive effect on the level of migration to that country with time
+- Hypothesis 2: The technical development of a country will have a more positive effect on the level of migration to that country with time
+:::
 
-### Methods 
-As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights are amount of people migrating from one country to another. - First method - Second method: ERGM
+### Methods
 
-### Contributions 
+::: {style="text-align: justify"}
+As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights represent the amount of people migrating from one country to another. 
+
+- First method: Centrality/CUG 
+- Second method: GERGM
+
+**Still need to explain why we use these methods right?**
+:::
+
+### Contributions
+::: {style="text-align: justify"}
 So far, the approach used in this research has not been used. By combining network analysis with many different variables, the impact of the variables can be compared and a most important factor can be determined. As mentioned in the introduction, the results from this research can help countries understand how many migrants are coming to this country, and possibly also why they are coming. With this information, appropriate accommodations can be made for them and the impact of having these migrants can be determined.
 
--   What does the rest of the report look like? In one short paragraph, list the topics of the following sections.
+-   **What does the rest of the report look like? In one short paragraph, list the topics of the following sections.**
+:::
 
 ## Methodology
 
@@ -126,24 +173,16 @@ o How was the data collected?
 
 -   What is the potential bias in the data? How does this affect your results?
 
-The data used for the research project consists out of several publicly accessible
-datasets retrieved from the World Bank (<https://databank.worldbank.org/source/world-development-indicators>). These datasets are:
+::: {style="text-align: justify"}
+The data used for the research project consists out of several publicly accessible datasets retrieved from the World Bank [@world_bank_data]. These datasets are:
 
-o **Global Bilateral Migration:** Global matrices of bilateral migrant stocks spanning the period 1960-2000, disaggregated by gender and based primarily on the foreign-born
-concept. Gathered through various censuses. Last updated on 06-28-2011.
+- **Global Bilateral Migration:** Global matrices of bilateral migrant stocks spanning the period 1960-2000, disaggregated by gender and based primarily on the foreign-born concept. Gathered through various censuses. Last updated on 06-28-2011.
 
-o **World Development Indicators:** World development indicators, compiled from
-officially recognized international sources spanning the period 1960-2000. Last
-updated on 09-16-2022.
+- **World Development Indicators:** World development indicators, compiled from officially recognized international sources spanning the period 1960-2000. Last updated on 09-16-2022.
 
 ![](images/paste-14146F3D.png)
 
-To answer the research question data regarding migration patterns between European
-nations are necessary. Additional information which might possibly influence
-said migration is also required. The combined dataset contains information
-about multiple nations including all European nations. As seen in table various characteristics of the European nations throughout the decades in the late 20^th^
-century are also available. This provides the opportunity to analyse the effect
-of changes within the European nations over the years on migration.
+To answer the research question data regarding migration patterns between European nations are necessary. Additional information which might possibly influence said migration is also required. The combined dataset contains information about multiple nations including all European nations. As seen in table various characteristics of the European nations throughout the decades in the late 20^th^ century are also available. This provides the opportunity to analyse the effect of changes within the European nations over the years on migration.
 
 ![](images/paste-07E883B1.png)
 
@@ -151,16 +190,10 @@ of changes within the European nations over the years on migration.
 
 ![](images/paste-FA63D36D.png)
 
-The oldest data points stem from 1960, from 1960 onwards European nations have seen quite
-a number of changes. Some nations within the dataset did not exist in their
-current condition across all of the years existent in the dataset, Germany for
-example only exists as Germany whereas for most of the time period represented
-in the dataset Germany was actually two countries (West Germany and East
-Germany). This could mean that for some nations the data itself is not
-completely accurate as the numbers existent in the dataset are a sum of the
-numbers for both nations. This might skew the data and results.
+The oldest data points stem from 1960, from 1960 onwards European nations have seen quite a number of changes. Some nations within the dataset did not exist in their current condition across all of the years existent in the dataset, Germany for example only exists as Germany whereas for most of the time period represented in the dataset Germany was actually two countries (West Germany and East Germany). This could mean that for some nations the data itself is not completely accurate as the numbers existent in the dataset are a sum of the numbers for both nations. This might skew the data and results.
 
 ![](images/paste-CE7AF01C.png)
+:::
 
 ### Data analysis (Research Rationale)
 
