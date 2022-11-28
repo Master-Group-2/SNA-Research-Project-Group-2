@@ -91,3 +91,70 @@ class(test[[1]])
 # layout_with_mds
 # layout_with_sugiyama
 
+#### CUG Test
+year = c()
+country = c()
+centrality = c()
+
+# Find maximum centrality per year
+for (i in 1:length(years)){
+  index = match(max(central_data[i + 1]), central_data[[i + 1]])
+  year = c(year, years[i])
+  country = c(country, central_data$Country[index])
+  centrality = c(centrality, central_data[[i + 1]][index])
+}
+
+# Create dataframe of maximum centralities
+max_centrality_year <- data.frame(country, year, centrality)
+
+# Function for CUG test --> Finds maximum centrality
+max_centrality <- function(graph, directed = TRUE){
+  x <- snafun::fix_cug_input(graph, directed = directed)
+  stress_centrality <- snafun::v_stress(x)
+  max_stress_cen <- max(stress_centrality)
+  max_stress_cen
+}
+
+# CUG Tests
+P_X_greater_than_Obs <- c()
+P_X_smaller_than_Obs <- c()
+
+for (i in 1:length(years)){
+  cug_test <- sna::cug.test(migration_networks_network[[i]],
+                            FUN = max_centrality,
+                            mode = 'digraph',
+                            cmode = 'edges',
+                            reps = 1500)
+  P_X_smaller_than_Obs <- c(P_X_smaller_than_Obs, cug_test[["plteobs"]])
+  P_X_greater_than_Obs <- c(P_X_greater_than_Obs, cug_test[["pgteobs"]])
+}
+max_centrality_year['P_X_greater_than_Obs'] <- P_X_greater_than_Obs
+max_centrality_year['P_X_smaller_than_Obs'] <- P_X_smaller_than_Obs
+
+# Is v_stress the right method? The Shapley method can consider weights
+# However, this method uses Dijkstra to find shortest paths. Dijkstra
+# will find the lowest weights, which is not working in our case.
+
+stress_test <- function(graph, directed = TRUE){
+  x <- snafun::fix_cug_input(graph, directed = directed)
+  snafun::v_stress(x)
+}
+
+shapley_test <- function(graph, directed = TRUE){
+  x <- snafun::fix_cug_input(graph, directed = directed)
+  snafun::v_shapley(x)
+}
+
+stress_cug <- sna::cug.test(migration_networks_network[[5]],
+                            FUN = stress_test,
+                            mode = 'digraph',
+                            cmode = 'edges',
+                            reps = 1500)
+
+shapley_cug <- sna::cug.test(migration_networks_network[[5]],
+                             FUN = stress_test,
+                             mode = 'digraph',
+                             cmode = 'edges',
+                             reps = 1500)
+stress_cug
+shapley_cug
