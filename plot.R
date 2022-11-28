@@ -11,7 +11,7 @@ migration_data <- setNames(migration_data, c("Year", "Country", "Belarus", "Czec
 migration_data
 #migration_data[migration_data == 0] <- NA
 
-write_xlsx(migration_data, "migration_data.xlsx")
+#write_xlsx(migration_data, "migration_data.xlsx")
 
 my_data
 netherlands <- my_data %>% filter(Country == 'Netherlands')

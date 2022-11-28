@@ -184,6 +184,10 @@ The data used for the research project consists out of several publicly accessib
 
 To answer the research question data regarding migration patterns between European nations are necessary. Additional information which might possibly influence said migration is also required. The combined dataset contains information about multiple nations including all European nations. As seen in table various characteristics of the European nations throughout the decades in the late 20^th^ century are also available. This provides the opportunity to analyse the effect of changes within the European nations over the years on migration.
 
+```{exploration_plots, echo = FALSE, warning = FALSE, message = FALSE}
+
+```
+
 ![](images/paste-07E883B1.png)
 
 ![](images/paste-894EEB01.png)
