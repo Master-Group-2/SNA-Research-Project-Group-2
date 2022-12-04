@@ -121,7 +121,7 @@ migration_networks
      #vertex.color = igraph::V(migration_networks[[1]])$color,
      #vertex.size = 10,
      #vertex.label.color = 'black',
-)
+#)
 
 ## Centrality Analysis
 centrality_analysis <- function(igraph_graphs, years){
