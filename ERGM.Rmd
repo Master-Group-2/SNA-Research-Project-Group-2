@@ -1,0 +1,78 @@
+---
+title: "ERGM"
+author: "Maud Groen"
+date: "2022-12-04"
+output: html_document
+---
+
+# Very first decenium
+```{r}
+# Mobilesubscriptions
+# Load the data in 
+library(igraph)
+my_data <- read_excel("full_data.xlsx")
+
+# Split the data on year 
+tech1960 <-  my_data %>% filter(Year == 1960)
+tech1960$Mobilesubscriptions <- as.numeric(tech1960$Mobilesubscriptions)
+tech1960$Mobilesubscriptions[is.na(tech1960$Mobilesubscriptions)] = 0
+
+# Create the node attribute
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mobilesubscriptions', index = V(migration_networks[[1]]), tech1960$Mobilesubscriptions)
+
+#migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
+migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
+```
+```{r}
+# Very basic model
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges)
+summary(tech1) 
+```
+
+
+```{r}
+tech2 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual)
+summary(tech2) 
+```
+
+```{r}
+model3 <- ergm::ergm(migration_networks[[1]] ~ edges + nodematch('Mobilesubscriptions'), 
+                      control = ergm::control.ergm(MCMC.burnin = 5000,
+                                                   MCMC.samplesize = 10000,
+                                                   seed = 123456,
+                                                   MCMLE.maxit = 5))
+
+summary(model3)
+```
+
+# Second decenium
+```{r}
+# Mobilesubscriptions
+# Load the data in 
+library(igraph)
+my_data <- read_excel("full_data.xlsx")
+
+# Split the data on year 
+tech1970 <-  my_data %>% filter(Year == 1970)
+tech1970$Mobilesubscriptions <- as.numeric(tech1970$Mobilesubscriptions)
+tech1970$Mobilesubscriptions[is.na(tech1970$Mobilesubscriptions)] = 0
+
+# Create the node attribute
+migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Mobilesubscriptions', index = V(migration_networks[[2]]), tech1970$Mobilesubscriptions)
+
+migration_networks[[2]] <- delete_edge_attr(migration_networks[[2]], 'weightscaled')
+migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
+```
+
+```{r}
+# Very basic model
+tech2.1 <- ergm::ergm(migration_networks[[2]] ~ edges)
+summary(tech2.1) 
+```
+
+```{r}
+# Very basic model
+
+tech2.2 <- ergm::ergm(migration_networks[[2]] ~ edges + nodecov('Mobilesubscriptions'))
+summary(tech2.2)
+```

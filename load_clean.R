@@ -97,7 +97,7 @@ for(i in 1:length(migration_data_list))
   migration_networks[[i]] <- add_region_attribute(migration_networks[[i]])
   
   weightscaled <- fun_range(x = igraph::edge.attributes(migration_networks[[i]])$weight)
-  migration_networks[[i]] <- igraph::set.edge.attribute(migration_networks[[i]], "weight.scaled", index = igraph::E(migration_networks[[i]]), weightscaled)
+  migration_networks[[i]] <- igraph::set.edge.attribute(migration_networks[[i]], "weightscaled", index = igraph::E(migration_networks[[i]]), weightscaled)
   
 }
 
@@ -112,15 +112,15 @@ migration_networks
 #eastWest2 <- igraph::delete.vertices(eastWest, which(igraph::V(eastWest)$region=='South'))
 
 # Plotting the network 
-plot(migration_networks[[1]],
-     vertex.shape="circle",
-     layout = igraph::layout_randomly,
-     main= "Migrations between EU countries 1960",
-     edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
-     edge.arrow.size = 0.1,
-     vertex.color = igraph::V(migration_networks[[1]])$color,
-     vertex.size = 10,
-     vertex.label.color = 'black',
+#plot(migration_networks[[1]],
+ #    vertex.shape="circle",
+  #   layout = igraph::layout_randomly,
+   #  main= "Migrations between EU countries 1960",
+    # edge.width = igraph::E(migration_networks[[1]])$weightscaled*15,
+     #edge.arrow.size = 0.1,
+     #vertex.color = igraph::V(migration_networks[[1]])$color,
+     #vertex.size = 10,
+     #vertex.label.color = 'black',
 )
 
 ## Centrality Analysis
