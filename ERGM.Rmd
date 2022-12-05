@@ -16,9 +16,13 @@ my_data <- read_excel("full_data.xlsx")
 tech1960 <-  my_data %>% filter(Year == 1960)
 tech1960$Mobilesubscriptions <- as.numeric(tech1960$Mobilesubscriptions)
 tech1960$Mobilesubscriptions[is.na(tech1960$Mobilesubscriptions)] = 0
+tech1960$Mortalityfemale <- as.numeric(tech1960$Mortalityfemale)
+tech1960$Mortalityfemale[is.na(tech1960$Mortalityfemale)] = 0
+
 
 # Create the node attribute
 migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mobilesubscriptions', index = V(migration_networks[[1]]), tech1960$Mobilesubscriptions)
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mortalityfemale', index = V(migration_networks[[1]]), tech1960$Mortalityfemale)
 
 #migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
 migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
@@ -36,14 +40,14 @@ summary(tech2)
 ```
 
 ```{r}
-tech3 <- ergm::ergm(migration_networks[[1]] ~ edges + nodecov('Mobilesubscriptions'), 
+tech3 <- ergm::ergm(migration_networks[[1]] ~ edges + nodecov('Mobilesubscriptions') + nodecov('Mortalityfemale'), 
                       control = ergm::control.ergm(MCMC.burnin = 5000,
                                                    MCMC.samplesize = 10000,
                                                    seed = 123456,
                                                    MCMLE.maxit = 5))
-
 summary(tech3)
 ```
+
 
 # Second decenium
 ```{r}
@@ -166,3 +170,31 @@ summary(tech5.1)
 tech5.2 <- ergm::ergm(migration_networks[[5]] ~ edges + nodecov('Mobilesubscriptions'))
 summary(tech5.2) 
 ```
+
+# Temporal Models
+```{r}
+#Basic model
+
+# Split the data on year 
+my_data <- read_excel("full_data.xlsx")
+my_data$Mobilesubscriptions[is.na(my_data$Mobilesubscriptions)] = 0
+years <- list(1960,1970,1980,1990,2000)
+
+# Create the node attributes
+for (network_no in 1:length(migration_networks)){
+  
+  my_data  <-  my_data %>% filter(Year == years[network_no])
+  my_data$Mobilesubscriptions <- as.numeric(my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_igraph(migration_networks[[network_no]])
+  
+  migration_networks[[network_no]] <- igraph::set.vertex.attribute(migration_networks[[network_no]], 'Mobilesubscriptions', index = V(migration_networks[[network_no]]), my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_network(migration_networks[[network_no]])
+}
+
+temporal_model <- btergm::btergm(migration_networks ~ edges + nodecov('Mobilesubscriptions'), R = 10)
+btergm::summary(temporal_model)
+```
+
+
+```
+
