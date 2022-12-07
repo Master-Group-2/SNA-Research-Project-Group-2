@@ -110,7 +110,7 @@ for (i in 1:length(countries)) {
   med_mobile_subscriptions_country <- median(as.numeric(data_1960_country$"Mobile cellular subscriptions [IT.CEL.SETS]"), na.rm = TRUE)
   lst_mobile_subscriptions_1960 <- append(lst_mobile_subscriptions_1960, med_mobile_subscriptions_country)
   
-  med_internet_subscriptions_country <- median(as.numeric(data_1960_country$"Fixed telephone subscriptions [IT.MLT.MAIN]"), na.rm = TRUE)
+  med_internet_subscriptions_country <- median(as.numeric(data_1960_country$"Individuals using the Internet (% of population) [IT.NET.USER.ZS]"), na.rm = TRUE)
   lst_internet_subscriptions_1960 <- append(lst_internet_subscriptions_1960, med_internet_subscriptions_country)
   
   avg_mediumhightech_exports_country <- mean(as.numeric(data_1960_country$"Medium and high-tech exports (% manufactured exports) [TX.MNF.TECH.ZS.UN]"), na.rm = TRUE)
@@ -150,7 +150,7 @@ for (i in 1:length(countries)) {
   med_mobile_subscriptions_country <- median(as.numeric(data_1970_country$"Mobile cellular subscriptions [IT.CEL.SETS]"), na.rm = TRUE)
   lst_mobile_subscriptions_1970 <- append(lst_mobile_subscriptions_1970, med_mobile_subscriptions_country)
   
-  med_internet_subscriptions_country <- median(as.numeric(data_1970_country$"Fixed telephone subscriptions [IT.MLT.MAIN]"), na.rm = TRUE)
+  med_internet_subscriptions_country <- median(as.numeric(data_1970_country$"Individuals using the Internet (% of population) [IT.NET.USER.ZS]"), na.rm = TRUE)
   lst_internet_subscriptions_1970 <- append(lst_internet_subscriptions_1970, med_internet_subscriptions_country)
   
   avg_mediumhightech_exports_country <- mean(as.numeric(data_1970_country$"Medium and high-tech exports (% manufactured exports) [TX.MNF.TECH.ZS.UN]"), na.rm = TRUE)
@@ -190,7 +190,7 @@ for (i in 1:length(countries)) {
   med_mobile_subscriptions_country <- median(as.numeric(data_1980_country$"Mobile cellular subscriptions [IT.CEL.SETS]"), na.rm = TRUE)
   lst_mobile_subscriptions_1980 <- append(lst_mobile_subscriptions_1980, med_mobile_subscriptions_country)
   
-  med_internet_subscriptions_country <- median(as.numeric(data_1980_country$"Fixed telephone subscriptions [IT.MLT.MAIN]"), na.rm = TRUE)
+  med_internet_subscriptions_country <- median(as.numeric(data_1980_country$"Individuals using the Internet (% of population) [IT.NET.USER.ZS]"), na.rm = TRUE)
   lst_internet_subscriptions_1980 <- append(lst_internet_subscriptions_1980, med_internet_subscriptions_country)
   
   avg_mediumhightech_exports_country <- mean(as.numeric(data_1980_country$"Medium and high-tech exports (% manufactured exports) [TX.MNF.TECH.ZS.UN]"), na.rm = TRUE)
@@ -230,7 +230,7 @@ for (i in 1:length(countries)) {
   med_mobile_subscriptions_country <- median(as.numeric(data_1990_country$"Mobile cellular subscriptions [IT.CEL.SETS]"), na.rm = TRUE)
   lst_mobile_subscriptions_1990 <- append(lst_mobile_subscriptions_1990, med_mobile_subscriptions_country)
   
-  med_internet_subscriptions_country <- median(as.numeric(data_1990_country$"Fixed telephone subscriptions [IT.MLT.MAIN]"), na.rm = TRUE)
+  med_internet_subscriptions_country <- median(as.numeric(data_1990_country$"Individuals using the Internet (% of population) [IT.NET.USER.ZS]"), na.rm = TRUE)
   lst_internet_subscriptions_1990 <- append(lst_internet_subscriptions_1990, med_internet_subscriptions_country)
   
   avg_mediumhightech_exports_country <- mean(as.numeric(data_1990_country$"Medium and high-tech exports (% manufactured exports) [TX.MNF.TECH.ZS.UN]"), na.rm = TRUE)
@@ -269,7 +269,7 @@ for (i in 1:length(countries)) {
   med_mobile_subscriptions_country <- median(as.numeric(data_2000_country$"Mobile cellular subscriptions [IT.CEL.SETS]"), na.rm = TRUE)
   lst_mobile_subscriptions_2000 <- append(lst_mobile_subscriptions_2000, med_mobile_subscriptions_country)
   
-  med_internet_subscriptions_country <- median(as.numeric(data_2000_country$"Fixed telephone subscriptions [IT.MLT.MAIN]"), na.rm = TRUE)
+  med_internet_subscriptions_country <- median(as.numeric(data_2000_country$"Individuals using the Internet (% of population) [IT.NET.USER.ZS]"), na.rm = TRUE)
   lst_internet_subscriptions_2000 <- append(lst_internet_subscriptions_2000, med_internet_subscriptions_country)
   
   avg_mediumhightech_exports_country <- mean(as.numeric(data_2000_country$"Medium and high-tech exports (% manufactured exports) [TX.MNF.TECH.ZS.UN]"), na.rm = TRUE)
@@ -315,5 +315,7 @@ full_data_v1$`Medium_High_Tech_Exports` <- col_mediumhightech_exports
 col_technicians_rd <- c(lst_technicians_rd_1960, lst_technicians_rd_1970, lst_technicians_rd_1980, lst_technicians_rd_1990, lst_technicians_rd_2000)
 full_data_v1$`Technicians_RD` <- col_technicians_rd
 
+full_data_v2 <- full_data_v1
+
 library("writexl")
-write_xlsx(full_data_v1, "full_data_v2.xlsx")
+write_xlsx(full_data_v2, "full_data_v2.xlsx")
