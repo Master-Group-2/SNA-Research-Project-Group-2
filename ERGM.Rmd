@@ -7,47 +7,62 @@ output: html_document
 
 # Very first decenium
 ```{r}
-# Mobilesubscriptions
 # Load the data in 
-library(igraph)
-my_data <- read_excel("full_data.xlsx")
+library("igraph")
+library("stringi")
 
+# Telephone subscriptions
 # Split the data on year 
-tech1960 <-  my_data %>% filter(Year == 1960)
-tech1960$Mobilesubscriptions <- as.numeric(tech1960$Mobilesubscriptions)
-tech1960$Mobilesubscriptions[is.na(tech1960$Mobilesubscriptions)] = 0
-tech1960$Mortalityfemale <- as.numeric(tech1960$Mortalityfemale)
-tech1960$Mortalityfemale[is.na(tech1960$Mortalityfemale)] = 0
-
+tech1960 <-  full_data_v2 %>% filter(Year == 1960)
+tech1960$Telephone_Subscriptions <- as.integer(as.character(tech1960$Telephone_Subscriptions))
+tech1960$Telephone_Subscriptions[is.na(tech1960$Telephone_Subscriptions)] = 0
 
 # Create the node attribute
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mobilesubscriptions', index = V(migration_networks[[1]]), tech1960$Mobilesubscriptions)
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mortalityfemale', index = V(migration_networks[[1]]), tech1960$Mortalityfemale)
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Telephonesubscriptions', index = V(migration_networks[[1]]), tech1960$Telephone_Subscriptions)
+
+# Lifeexpectancy 
+# Split the data on year 
+tech1960$Lifeexpectancy <- as.integer(as.character(tech1960$Lifeexpectancy))
+tech1960$Lifeexpectancy[is.na(tech1960$Lifeexpectancy)] = 0
+
+# Create the node attribute
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Life Expectancy', index = V(migration_networks[[1]]), tech1960$Lifeexpectancy)
+
+# Electrical power 
+# Split the data on year 
+tech1960$Electrical_Power <- as.integer(as.character(tech1960$Electrical_Power))
+tech1960$Electrical_Power[is.na(tech1960$Electrical_Power)] = 0
+
+# Create the node attribute
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Electrical Power', index = V(migration_networks[[1]]), tech1960$Electrical_Power)
+
+# Mortality Rate Female
+# Split the data on year 
+tech1960$Mortality_Rate_Female <- as.integer(as.character(tech1960$Mortality_Rate_Female))
+tech1960$Mortality_Rate_Female[is.na(tech1960$Mortality_Rate_Female)] = 0
+
+# Create the node attribute
+migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mortality Rate Female', index = V(migration_networks[[1]]), tech1960$Mortality_Rate_Female)
 
 #migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
 migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
 ```
+
 ```{r}
 # Very basic model
-tech1 <- ergm::ergm(migration_networks[[1]] ~ edges)
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual + gwesp(decay=0.03, fixed = TRUE) + nodecov('Telephonesubscriptions') + nodecov('Life Expectancy') + nodecov('Electrical Power') + nodecov('Mortality Rate Female'),  
+                   control = ergm::control.ergm(MCMC.burnin = 5000,
+                                              MCMC.samplesize = 1000,
+                                              seed = 123456,
+                                              MCMLE.maxit = 10,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
+save(tech1, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1.rda")
+```
+
+```{r}
 summary(tech1) 
 ```
-
-
-```{r}
-tech2 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual)
-summary(tech2) 
-```
-
-```{r}
-tech3 <- ergm::ergm(migration_networks[[1]] ~ edges + nodecov('Mobilesubscriptions') + nodecov('Mortalityfemale'), 
-                      control = ergm::control.ergm(MCMC.burnin = 5000,
-                                                   MCMC.samplesize = 10000,
-                                                   seed = 123456,
-                                                   MCMLE.maxit = 5))
-summary(tech3)
-```
-
 
 # Second decenium
 ```{r}
@@ -56,22 +71,47 @@ summary(tech3)
 library(igraph)
 my_data <- read_excel("full_data.xlsx")
 
+# Telephone subscriptions
 # Split the data on year 
-tech1970 <-  my_data %>% filter(Year == 1970)
-tech1970$Mobilesubscriptions <- as.numeric(tech1970$Mobilesubscriptions)
-tech1970$Mobilesubscriptions[is.na(tech1970$Mobilesubscriptions)] = 0
+tech1970 <-  full_data_v1 %>% filter(Year == 1970)
+tech1970$telephonesubscriptions <- as.integer(as.character(tech1970$telephonesubscriptions))
+tech1970$telephonesubscriptions[is.na(tech1970$telephonesubscriptions)] = 0
 
 # Create the node attribute
-migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Mobilesubscriptions', index = V(migration_networks[[2]]), tech1970$Mobilesubscriptions)
+migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Telephonesubscriptions', index = V(migration_networks[[2]]), tech1960$Mobilesubscriptions)
 
-migration_networks[[2]] <- delete_edge_attr(migration_networks[[2]], 'weightscaled')
+# Lifeexpectancy 
+# Split the data on year 
+tech1970$Lifeexpectancy <- as.integer(as.character(tech1970$Lifeexpectancy))
+tech1970$Lifeexpectancy[is.na(tech1970$Lifeexpectancy)] = 0
+
+# Create the node attribute
+migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Life Expectancy', index = V(migration_networks[[2]]), tech1970$Lifeexpectancy)
+
+# Electrical power 
+# Split the data on year 
+tech1970$Electrical_Power <- as.integer(as.character(tech1970$Electrical_Power))
+tech1970$Electrical_Power[is.na(tech1970$Electrical_Power)] = 0
+
+# Create the node attribute
+migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Electrical Power', index = V(migration_networks[[2]]), tech1970$Electrical_Power)
+
+#migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
 migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
 ```
 
 ```{r}
 # Very basic model
-tech2.1 <- ergm::ergm(migration_networks[[2]] ~ edges)
+tech2.1 <- ergm::ergm(migration_networks[[2]] ~ edges + mutual
++ gwesp(decay=0.03, fixed = TRUE) + nodematch('Telephonesubscriptions') + nodecov('Electrical Power') + nodecov('Life Expectancy'), 
+                   control = ergm::control.ergm(MCMC.burnin = 5000,
+                                              MCMC.samplesize = 1000,
+                                              seed = 123456,
+                                              MCMLE.maxit = 6,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
 summary(tech2.1) 
+ergm::mcmc.diagnostics(tech2.1)
 ```
 
 ```{r}
@@ -102,7 +142,13 @@ migration_networks[[3]] <- snafun::to_network(migration_networks[[3]])
 
 ```{r}
 # Very basic model
-tech3.1 <- ergm::ergm(migration_networks[[3]] ~ edges)
+tech3.1 <- ergm::ergm(migration_networks[[3]] ~ edges + gwesp(decay=0.03, fixed = TRUE), 
+                   control = ergm::control.ergm(MCMC.burnin = 5000,
+                                              MCMC.samplesize = 5000,
+                                              seed = 123456,
+                                              MCMLE.maxit = 20,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
 summary(tech3.1) 
 ```
 
@@ -132,8 +178,16 @@ migration_networks[[4]] <- snafun::to_network(migration_networks[[4]])
 
 ```{r}
 # Very basic model
-tech4.1 <- ergm::ergm(migration_networks[[4]] ~ edges)
+tech4.1 <- ergm::ergm(migration_networks[[4]] ~ edges + nodecov('Mobilesubscriptions') + gwesp(decay=0.03, fixed = TRUE), 
+                   control = ergm::control.ergm(MCMC.burnin = 5000,
+                                              MCMC.samplesize = 1000,
+                                              seed = 123456,
+                                              MCMLE.maxit = 20,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
 summary(tech4.1) 
+ergm::mcmc.diagnostics(tech4.1)
+ergm::gof(tech4.1)
 ```
 
 ```{r}
@@ -162,7 +216,13 @@ migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
 
 ```{r}
 # Very basic model
-tech5.1 <- ergm::ergm(migration_networks[[5]] ~ edges)
+tech5.1 <- ergm::ergm(migration_networks[[5]] ~ edges + gwesp(decay=0.03, fixed = TRUE), 
+                   control = ergm::control.ergm(MCMC.burnin = 5000,
+                                              MCMC.samplesize = 1000,
+                                              seed = 123456,
+                                              MCMLE.maxit = 20,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
 summary(tech5.1) 
 ```
 
@@ -194,7 +254,3 @@ for (network_no in 1:length(migration_networks)){
 temporal_model <- btergm::btergm(migration_networks ~ edges + nodecov('Mobilesubscriptions'), R = 10)
 btergm::summary(temporal_model)
 ```
-
-
-```
-
