@@ -1,5 +1,6 @@
 library(dplyr)
-library(tidyr)
+library(readxl)
+#library(tidyr)
 
 full_data <- read_excel("full_data.xlsx")
 attributes_data <- read_excel('attributes_data.xlsx')
@@ -317,6 +318,8 @@ full_data_v1$`Technicians_RD` <- col_technicians_rd
 
 full_data_v2 <- full_data_v1
 
-library("writexl")
-write_xlsx(full_data_v2, "full_data_v2.xlsx")
+#library("writexl")
+#write_xlsx(full_data_v2, "full_data_v2.xlsx")
+
+
 
