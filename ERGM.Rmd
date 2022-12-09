@@ -104,7 +104,7 @@ migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
 ```
 
 ```{r}
-tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_1990),  
+tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_1990) + dyadcov(technicians_rd_df_2000),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
