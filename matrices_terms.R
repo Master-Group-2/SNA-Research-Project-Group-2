@@ -1,6 +1,12 @@
 n_countries <- length(countries)
 
-#full_data_v1$'Medium_High_Tech_Subscriptions'[is.nan(full_data_v1$'Medium_High_Tech_Subscriptions')]<-NA
+
+full_data_v1$'Electrical_Power'[is.na(full_data_v1$'Electrical_Power')] = 0
+full_data_v1$'Mobile_Subscriptions'[is.na(full_data_v1$'Mobile_Subscriptions')] = 0 
+full_data_v1$'Internet_Subscriptions'[is.na(full_data_v1$'Internet_Subscriptions')] = 0
+full_data_v1$'Medium_High_Tech_Exports'[is.na(full_data_v1$'Medium_High_Tech_Exports')] = 0 
+full_data_v1$'Technicians_RD'[is.na(full_data_v1$'Technicians_RD')] = 0 
+
 
 data_1960_total <- full_data_v1 %>% filter(Year == 1960)
 data_2000_total <- full_data_v1 %>% filter(Year == 2000)
@@ -9,6 +15,17 @@ data_1990_total <- full_data_v1 %>% filter(Year == 1990)
 data_2000_total <- full_data_v1 %>% filter(Year == 2000)
 
 ######################### 1960
+
+med_life_expectancy_1960 <- median(unlist(data_1960_total$"Life_Expectancy"), na.rm = TRUE)
+data_1960_total$"Life_Expectancy"[is.na(data_1960_total$"Life_Expectancy")] = list(med_life_expectancy_1960)
+med_mortality_rate_female_1960 <- median(unlist(data_1960_total$"Mortality_Rate_Female"), na.rm = TRUE)
+data_1960_total$"Mortality_Rate_Female"[is.na(data_1960_total$"Mortality_Rate_Female")] = list(med_mortality_rate_female_1960)
+med_mortality_rate_male_1960 <- median(unlist(data_1960_total$"Mortality_Rate_Male"), na.rm = TRUE)
+data_1960_total$"Mortality_Rate_Male"[is.na(data_1960_total$"Mortality_Rate_Male")] = list(med_mortality_rate_male_1960)
+med_survival_rate_female_1960 <- median(unlist(data_1960_total$"Survival_Rate_Female"), na.rm = TRUE)
+data_1960_total$"Survival_Rate_Female"[is.na(data_1960_total$"Survival_Rate_Female")] = list(med_survival_rate_female_1960)
+med_survival_rate_male_1960 <- median(unlist(data_1960_total$"Survival_Rate_Male"), na.rm = TRUE)
+data_1960_total$"Survival_Rate_Male"[is.na(data_1960_total$"Survival_Rate_Male")] = list(med_survival_rate_male_1960)
 
 life_expectancy_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_female_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
@@ -21,7 +38,6 @@ mobile_subscriptions_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countrie
 internet_subscriptions_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mediumhightech_exports_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 technicians_rd_matrix_1960 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
-
 
 for (r in 1:length(countries)) {
   
@@ -55,6 +71,17 @@ mediumhightech_exports_df_1960 <- as.data.frame(mediumhightech_exports_matrix_19
 technicians_rd_df_1960 <- as.data.frame(technicians_rd_matrix_1960)
 
 ######################### 1970
+
+med_life_expectancy_1970 <- median(unlist(data_1970_total$"Life_Expectancy"), na.rm = TRUE)
+data_1970_total$"Life_Expectancy"[is.na(data_1970_total$"Life_Expectancy")] = list(med_life_expectancy_1970)
+med_mortality_rate_female_1970 <- median(unlist(data_1970_total$"Mortality_Rate_Female"), na.rm = TRUE)
+data_1970_total$"Mortality_Rate_Female"[is.na(data_1970_total$"Mortality_Rate_Female")] = list(med_mortality_rate_female_1970)
+med_mortality_rate_male_1970 <- median(unlist(data_1970_total$"Mortality_Rate_Male"), na.rm = TRUE)
+data_1970_total$"Mortality_Rate_Male"[is.na(data_1970_total$"Mortality_Rate_Male")] = list(med_mortality_rate_male_1970)
+med_survival_rate_female_1970 <- median(unlist(data_1970_total$"Survival_Rate_Female"), na.rm = TRUE)
+data_1970_total$"Survival_Rate_Female"[is.na(data_1970_total$"Survival_Rate_Female")] = list(med_survival_rate_female_1970)
+med_survival_rate_male_1970 <- median(unlist(data_1970_total$"Survival_Rate_Male"), na.rm = TRUE)
+data_1970_total$"Survival_Rate_Male"[is.na(data_1970_total$"Survival_Rate_Male")] = list(med_survival_rate_male_1970)
 
 life_expectancy_matrix_1970 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_female_matrix_1970 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
@@ -102,6 +129,17 @@ technicians_rd_df_1970 <- as.data.frame(technicians_rd_matrix_1970)
 
 ######################### 1980
 
+med_life_expectancy_1980 <- median(unlist(data_1980_total$"Life_Expectancy"), na.rm = TRUE)
+data_1980_total$"Life_Expectancy"[is.na(data_1980_total$"Life_Expectancy")] = list(med_life_expectancy_1980)
+med_mortality_rate_female_1980 <- median(unlist(data_1980_total$"Mortality_Rate_Female"), na.rm = TRUE)
+data_1980_total$"Mortality_Rate_Female"[is.na(data_1980_total$"Mortality_Rate_Female")] = list(med_mortality_rate_female_1980)
+med_mortality_rate_male_1980 <- median(unlist(data_1980_total$"Mortality_Rate_Male"), na.rm = TRUE)
+data_1980_total$"Mortality_Rate_Male"[is.na(data_1980_total$"Mortality_Rate_Male")] = list(med_mortality_rate_male_1980)
+med_survival_rate_female_1980 <- median(unlist(data_1980_total$"Survival_Rate_Female"), na.rm = TRUE)
+data_1980_total$"Survival_Rate_Female"[is.na(data_1980_total$"Survival_Rate_Female")] = list(med_survival_rate_female_1980)
+med_survival_rate_male_1980 <- median(unlist(data_1980_total$"Survival_Rate_Male"), na.rm = TRUE)
+data_1980_total$"Survival_Rate_Male"[is.na(data_1980_total$"Survival_Rate_Male")] = list(med_survival_rate_male_1980)
+
 life_expectancy_matrix_1980 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_female_matrix_1980 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_male_matrix_1980 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
@@ -148,6 +186,17 @@ technicians_rd_df_1980 <- as.data.frame(technicians_rd_matrix_1980)
 
 ######################### 1990
 
+med_life_expectancy_1990 <- median(unlist(data_1990_total$"Life_Expectancy"), na.rm = TRUE)
+data_1990_total$"Life_Expectancy"[is.na(data_1990_total$"Life_Expectancy")] = list(med_life_expectancy_1990)
+med_mortality_rate_female_1990 <- median(unlist(data_1990_total$"Mortality_Rate_Female"), na.rm = TRUE)
+data_1990_total$"Mortality_Rate_Female"[is.na(data_1990_total$"Mortality_Rate_Female")] = list(med_mortality_rate_female_1990)
+med_mortality_rate_male_1990 <- median(unlist(data_1990_total$"Mortality_Rate_Male"), na.rm = TRUE)
+data_1990_total$"Mortality_Rate_Male"[is.na(data_1990_total$"Mortality_Rate_Male")] = list(med_mortality_rate_male_1990)
+med_survival_rate_female_1990 <- median(unlist(data_1990_total$"Survival_Rate_Female"), na.rm = TRUE)
+data_1990_total$"Survival_Rate_Female"[is.na(data_1990_total$"Survival_Rate_Female")] = list(med_survival_rate_female_1990)
+med_survival_rate_male_1990 <- median(unlist(data_1990_total$"Survival_Rate_Male"), na.rm = TRUE)
+data_1990_total$"Survival_Rate_Male"[is.na(data_1990_total$"Survival_Rate_Male")] = list(med_survival_rate_male_1990)
+
 life_expectancy_matrix_1990 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_female_matrix_1990 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_male_matrix_1990 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
@@ -193,6 +242,17 @@ mediumhightech_exports_df_1990 <- as.data.frame(mediumhightech_exports_matrix_19
 technicians_rd_df_1990 <- as.data.frame(technicians_rd_matrix_1990)
 
 ######################### 2000
+
+med_life_expectancy_2000 <- median(unlist(data_2000_total$"Life_Expectancy"), na.rm = TRUE)
+data_2000_total$"Life_Expectancy"[is.na(data_2000_total$"Life_Expectancy")] = list(med_life_expectancy_2000)
+med_mortality_rate_female_2000 <- median(unlist(data_2000_total$"Mortality_Rate_Female"), na.rm = TRUE)
+data_2000_total$"Mortality_Rate_Female"[is.na(data_2000_total$"Mortality_Rate_Female")] = list(med_mortality_rate_female_2000)
+med_mortality_rate_male_2000 <- median(unlist(data_2000_total$"Mortality_Rate_Male"), na.rm = TRUE)
+data_2000_total$"Mortality_Rate_Male"[is.na(data_2000_total$"Mortality_Rate_Male")] = list(med_mortality_rate_male_2000)
+med_survival_rate_female_2000 <- median(unlist(data_2000_total$"Survival_Rate_Female"), na.rm = TRUE)
+data_2000_total$"Survival_Rate_Female"[is.na(data_2000_total$"Survival_Rate_Female")] = list(med_survival_rate_female_2000)
+med_survival_rate_male_2000 <- median(unlist(data_2000_total$"Survival_Rate_Male"), na.rm = TRUE)
+data_2000_total$"Survival_Rate_Male"[is.na(data_2000_total$"Survival_Rate_Male")] = list(med_survival_rate_male_2000)
 
 life_expectancy_matrix_2000 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
 mortality_rate_female_matrix_2000 <- matrix(nrow = n_countries, ncol = n_countries, dimnames = list(countries, countries))
