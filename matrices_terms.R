@@ -1,6 +1,6 @@
 n_countries <- length(countries)
 
-
+full_data_v1$'Telephone_Subscriptions'[is.na(full_data_v1$'Telephone_Subscriptions')] = 0
 full_data_v1$'Electrical_Power'[is.na(full_data_v1$'Electrical_Power')] = 0
 full_data_v1$'Mobile_Subscriptions'[is.na(full_data_v1$'Mobile_Subscriptions')] = 0 
 full_data_v1$'Internet_Subscriptions'[is.na(full_data_v1$'Internet_Subscriptions')] = 0
@@ -9,7 +9,7 @@ full_data_v1$'Technicians_RD'[is.na(full_data_v1$'Technicians_RD')] = 0
 
 
 data_1960_total <- full_data_v1 %>% filter(Year == 1960)
-data_2000_total <- full_data_v1 %>% filter(Year == 2000)
+data_1970_total <- full_data_v1 %>% filter(Year == 1970)
 data_1980_total <- full_data_v1 %>% filter(Year == 1980)
 data_1990_total <- full_data_v1 %>% filter(Year == 1990)
 data_2000_total <- full_data_v1 %>% filter(Year == 2000)
