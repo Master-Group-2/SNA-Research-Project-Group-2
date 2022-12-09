@@ -64,7 +64,7 @@ tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
-                                              MCMLE.maxit = 2,
+                                              MCMLE.maxit = 10,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
 save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
