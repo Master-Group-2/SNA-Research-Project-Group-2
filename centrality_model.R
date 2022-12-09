@@ -115,15 +115,21 @@ max_centrality <- function(graph, directed = TRUE){
   max_stress_cen
 }
 
+aus_centrality <- function(graph, directed = TRUE){
+  x <- snafun::fix_cug_input(graph, directed = directed)
+  stress_centrality <- snafun::v_stress(x, vids = 2)
+  stress_centrality
+}
+
 # CUG Tests
 P_X_greater_than_Obs <- c()
 P_X_smaller_than_Obs <- c()
 
 for (i in 1:length(years)){
   cug_test <- sna::cug.test(migration_networks_network[[i]],
-                            FUN = max_centrality,
+                            FUN = aus_centrality,
                             mode = 'digraph',
-                            cmode = 'edges',
+                            cmode = 'size',
                             reps = 1500)
   P_X_smaller_than_Obs <- c(P_X_smaller_than_Obs, cug_test[["plteobs"]])
   P_X_greater_than_Obs <- c(P_X_greater_than_Obs, cug_test[["pgteobs"]])
@@ -131,6 +137,12 @@ for (i in 1:length(years)){
 max_centrality_year['P_X_greater_than_Obs'] <- P_X_greater_than_Obs
 max_centrality_year['P_X_smaller_than_Obs'] <- P_X_smaller_than_Obs
 
+cug_test <- sna::cug.test(migration_networks_network[[5]],
+                          FUN = max_centrality,
+                          mode = 'digraph',
+                          cmode = 'edges',
+                          reps = 1500)
+plot(cug_test)
 # Is v_stress the right method? The Shapley method can consider weights
 # However, this method uses Dijkstra to find shortest paths. Dijkstra
 # will find the lowest weights, which is not working in our case.
@@ -152,9 +164,73 @@ stress_cug <- sna::cug.test(migration_networks_network[[5]],
                             reps = 1500)
 
 shapley_cug <- sna::cug.test(migration_networks_network[[5]],
-                             FUN = stress_test,
+                             FUN = shapley_test,
                              mode = 'digraph',
                              cmode = 'edges',
                              reps = 1500)
 stress_cug
 shapley_cug
+igraph::E(migration_networks[[5]])$weight
+weight_invert <- migration_networks[[5]]
+class(weight_invert)
+
+igraph::E(weight_invert)$weigth <- 1 / igraph::E(migration_networks[[5]])$weight 
+igraph::E(weight_invert)$weigth[1]
+igraph::E(migration_networks[[5]])$weight[1]
+weight_invert <- snafun::to_network(weight_invert)
+class(weight_invert)
+sna::cug.test(weight_invert,
+              FUN = shapley_test,
+              mode = 'digraph',
+              cmode = 'edges',
+              reps = 1500)
+shapley_cug
+
+## CUG Test Manually
+# Find centrality scores of Austria
+aus_stress <- central_data[central_data$Country == 'Austria',]
+
+# Count edges and vertices per year
+edges <- c()
+vertices <- c()
+
+for (i in 1:length(years)){
+  edges <- c(edges, snafun::count_edges(migration_networks[[i]]))
+  vertices <- c(vertices, snafun::count_vertices(migration_networks[[i]]))
+}
+
+# Create manual simulation
+sim_manual <- function(simulations, edges, vertices){
+  sim_results <- c()
+  for (i in 1:simulations){
+    sim <- snafun::create_random_graph(n_vertices = vertices,
+                                       strategy = "gnm",
+                                       m = edges,
+                                       directed = TRUE,
+                                       graph = "network")
+    max_stress <- mean(snafun::v_stress(sim))
+    sim_results <- c(sim_results, max_stress)
+  }
+  sim_results
+}
+
+cug_tests <- list()
+for (i in 1:length(years)){
+  cug_tests[[i]] <- sim_manual(2000, edges[i], vertices[i])
+}
+# xlim = c(aus_stress[[i + 1]] - 10, max(density(cug_tests[[i]])[['x']] + 10)
+# test <- sim_manual(2000, edges[1], vertices[1])
+for (i in 1:length(cug_tests)){
+  plot(density(cug_tests[[i]]), xlim = c(aus_stress[[i + 1]] - 10, max(density(cug_tests[[i]])[['x']] + 10)),
+       main = 'Centrality of Austria compared to average centrality of simulations')
+  abline(v = aus_stress[[i + 1]], lty = 'dashed')
+  mean(cug_tests[[i]] > aus_stress[[i + 1]])
+}
+
+
+# plot(density(test), xlim = c(aus_stress[[2]] - 10, max(density(test)[['x']] + 10)))
+# abline(v = aus_stress[[2]], lty = 'dashed')
+# 
+# mean(test > aus_stress[[2]])
+# max(density(test)[['x']])
+# density(cug_tests[[1]])
