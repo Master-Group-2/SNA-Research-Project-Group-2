@@ -7,50 +7,15 @@ output: html_document
 
 # Very first decenium
 ```{r}
-# Load the data in 
 library("igraph")
 library("stringi")
 
-# Telephone subscriptions
-# Split the data on year 
-tech1960 <-  full_data_v2 %>% filter(Year == 1960)
-tech1960$Telephone_Subscriptions <- as.integer(as.character(tech1960$Telephone_Subscriptions))
-tech1960$Telephone_Subscriptions[is.na(tech1960$Telephone_Subscriptions)] = 0
-
-# Create the node attribute
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Telephonesubscriptions', index = V(migration_networks[[1]]), tech1960$Telephone_Subscriptions)
-
-# Lifeexpectancy 
-# Split the data on year 
-tech1960$Lifeexpectancy <- as.integer(as.character(tech1960$Lifeexpectancy))
-tech1960$Lifeexpectancy[is.na(tech1960$Lifeexpectancy)] = 0
-
-# Create the node attribute
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Life Expectancy', index = V(migration_networks[[1]]), tech1960$Lifeexpectancy)
-
-# Electrical power 
-# Split the data on year 
-tech1960$Electrical_Power <- as.integer(as.character(tech1960$Electrical_Power))
-tech1960$Electrical_Power[is.na(tech1960$Electrical_Power)] = 0
-
-# Create the node attribute
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Electrical Power', index = V(migration_networks[[1]]), tech1960$Electrical_Power)
-
-# Mortality Rate Female
-# Split the data on year 
-tech1960$Mortality_Rate_Female <- as.integer(as.character(tech1960$Mortality_Rate_Female))
-tech1960$Mortality_Rate_Female[is.na(tech1960$Mortality_Rate_Female)] = 0
-
-# Create the node attribute
-migration_networks[[1]] <- igraph::set.vertex.attribute(migration_networks[[1]], 'Mortality Rate Female', index = V(migration_networks[[1]]), tech1960$Mortality_Rate_Female)
-
-#migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
+migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
 migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
 ```
 
 ```{r}
-# Very basic model
-tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual + gwesp(decay=0.03, fixed = TRUE) + nodecov('Telephonesubscriptions') + nodecov('Life Expectancy') + nodecov('Electrical Power') + nodecov('Mortality Rate Female'),  
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1960) + dyadcov(life_expectancy__df_1960) + dyadcov(telephone_subscriptions_df_1960) + dyadcov(electrical_power_df_1960),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
@@ -60,175 +25,98 @@ tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual + gwesp(decay=0.03,
 save(tech1, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1.rda")
 ```
 
+
 ```{r}
-summary(tech1) 
+summary(tech1)
+ergm::mcmc.diagnostics(tech1)
 ```
 
 # Second decenium
 ```{r}
-# Mobilesubscriptions
-# Load the data in 
-library(igraph)
-my_data <- read_excel("full_data.xlsx")
-
-# Telephone subscriptions
-# Split the data on year 
-tech1970 <-  full_data_v1 %>% filter(Year == 1970)
-tech1970$telephonesubscriptions <- as.integer(as.character(tech1970$telephonesubscriptions))
-tech1970$telephonesubscriptions[is.na(tech1970$telephonesubscriptions)] = 0
-
-# Create the node attribute
-migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Telephonesubscriptions', index = V(migration_networks[[2]]), tech1960$Mobilesubscriptions)
-
-# Lifeexpectancy 
-# Split the data on year 
-tech1970$Lifeexpectancy <- as.integer(as.character(tech1970$Lifeexpectancy))
-tech1970$Lifeexpectancy[is.na(tech1970$Lifeexpectancy)] = 0
-
-# Create the node attribute
-migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Life Expectancy', index = V(migration_networks[[2]]), tech1970$Lifeexpectancy)
-
-# Electrical power 
-# Split the data on year 
-tech1970$Electrical_Power <- as.integer(as.character(tech1970$Electrical_Power))
-tech1970$Electrical_Power[is.na(tech1970$Electrical_Power)] = 0
-
-# Create the node attribute
-migration_networks[[2]] <- igraph::set.vertex.attribute(migration_networks[[2]], 'Electrical Power', index = V(migration_networks[[2]]), tech1970$Electrical_Power)
-
-#migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
+migration_networks[[2]] <- delete_edge_attr(migration_networks[[2]], 'weightscaled')
 migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
 ```
 
 ```{r}
-# Very basic model
-tech2.1 <- ergm::ergm(migration_networks[[2]] ~ edges + mutual
-+ gwesp(decay=0.03, fixed = TRUE) + nodematch('Telephonesubscriptions') + nodecov('Electrical Power') + nodecov('Life Expectancy'), 
+tech2 <- ergm::ergm(migration_networks[[2]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1970) + dyadcov(life_expectancy__df_1970) + dyadcov(telephone_subscriptions_df_1970) + dyadcov(electrical_power_df_1970),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
-                                              MCMLE.maxit = 6,
+                                              MCMLE.maxit = 10,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
-summary(tech2.1) 
-ergm::mcmc.diagnostics(tech2.1)
+save(tech2, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2.rda")
 ```
 
 ```{r}
-# Very basic model
-
-tech2.2 <- ergm::ergm(migration_networks[[2]] ~ edges + nodecov('Mobilesubscriptions'))
-summary(tech2.2)
+summary(tech2)
+ergm::mcmc.diagnostics(tech2)
 ```
 
 # Third decenium
 ```{r}
-# Mobilesubscriptions
-# Load the data in 
-library(igraph)
-my_data <- read_excel("full_data.xlsx")
-
-# Split the data on year 
-tech1980 <-  my_data %>% filter(Year == 1980)
-tech1980$Mobilesubscriptions <- as.numeric(tech1980$Mobilesubscriptions)
-tech1980$Mobilesubscriptions[is.na(tech1980$Mobilesubscriptions)] = 0
-
-# Create the node attribute
-migration_networks[[3]] <- igraph::set.vertex.attribute(migration_networks[[3]], 'Mobilesubscriptions', index = V(migration_networks[[3]]), tech1980$Mobilesubscriptions)
-
 migration_networks[[3]] <- delete_edge_attr(migration_networks[[3]], 'weightscaled')
 migration_networks[[3]] <- snafun::to_network(migration_networks[[3]])
 ```
 
 ```{r}
-# Very basic model
-tech3.1 <- ergm::ergm(migration_networks[[3]] ~ edges + gwesp(decay=0.03, fixed = TRUE), 
+tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1980) + dyadcov(mortality_rate_female_df_1980) + dyadcov(telephone_subscriptions_df_1980) + dyadcov(electrical_power_df_1980) + dyadcov(internet_subscriptions_df_1980) + dyadcov(mobile_subscriptions_df_1980),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 5000,
+                                              MCMC.samplesize = 1000,
                                               seed = 123456,
-                                              MCMLE.maxit = 20,
+                                              MCMLE.maxit = 2,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
-summary(tech3.1) 
+save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
 ```
 
 ```{r}
-tech3.2 <- ergm::ergm(migration_networks[[3]] ~ edges + nodecov('Mobilesubscriptions'))
-summary(tech3.2)
+summary(tech3)
+ergm::mcmc.diagnostics(tech3)
 ```
 
 # Fourth decenium
 ```{r}
-# Mobilesubscriptions
-# Load the data in 
-library(igraph)
-my_data <- read_excel("full_data.xlsx")
-
-# Split the data on year 
-tech1990 <-  my_data %>% filter(Year == 1990)
-tech1990$Mobilesubscriptions <- as.numeric(tech1990$Mobilesubscriptions)
-tech1990$Mobilesubscriptions[is.na(tech1990$Mobilesubscriptions)] = 0
-
-# Create the node attribute
-migration_networks[[4]] <- igraph::set.vertex.attribute(migration_networks[[4]], 'Mobilesubscriptions', index = V(migration_networks[[4]]), tech1990$Mobilesubscriptions)
-
 migration_networks[[4]] <- delete_edge_attr(migration_networks[[4]], 'weightscaled')
 migration_networks[[4]] <- snafun::to_network(migration_networks[[4]])
 ```
 
 ```{r}
-# Very basic model
-tech4.1 <- ergm::ergm(migration_networks[[4]] ~ edges + nodecov('Mobilesubscriptions') + gwesp(decay=0.03, fixed = TRUE), 
+tech4 <- ergm::ergm(migration_networks[[4]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1990) + dyadcov(mortality_rate_female_df_1990) + dyadcov(mediumhightech_exports_df_1990) + dyadcov(electrical_power_df_1990) + dyadcov(internet_subscriptions_df_1990) + dyadcov(mobile_subscriptions_df_1990),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
-                                              MCMLE.maxit = 20,
+                                              MCMLE.maxit = 10,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
-summary(tech4.1) 
-ergm::mcmc.diagnostics(tech4.1)
-ergm::gof(tech4.1)
+save(tech4, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4.rda")
 ```
 
 ```{r}
-tech4.2 <- ergm::ergm(migration_networks[[4]] ~ edges + nodecov('Mobilesubscriptions'))
-summary(tech4.2) 
+summary(tech4)
+ergm::mcmc.diagnostics(tech4)
 ```
 
 # Fifth decenium
 ```{r}
-# Mobilesubscriptions
-# Load the data in 
-library(igraph)
-my_data <- read_excel("full_data.xlsx")
-
-# Split the data on year 
-tech2000 <-  my_data %>% filter(Year == 2000)
-tech2000$Mobilesubscriptions <- as.numeric(tech2000$Mobilesubscriptions)
-tech2000$Mobilesubscriptions[is.na(tech2000$Mobilesubscriptions)] = 0
-
-# Create the node attribute
-migration_networks[[5]] <- igraph::set.vertex.attribute(migration_networks[[5]], 'Mobilesubscriptions', index = V(migration_networks[[5]]), tech2000$Mobilesubscriptions)
-
 migration_networks[[5]] <- delete_edge_attr(migration_networks[[5]], 'weightscaled')
 migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
 ```
 
 ```{r}
-# Very basic model
-tech5.1 <- ergm::ergm(migration_networks[[5]] ~ edges + gwesp(decay=0.03, fixed = TRUE), 
+tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_1990),  
                    control = ergm::control.ergm(MCMC.burnin = 5000,
                                               MCMC.samplesize = 1000,
                                               seed = 123456,
-                                              MCMLE.maxit = 20,
+                                              MCMLE.maxit = 10,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
-summary(tech5.1) 
+save(tech5, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5.rda")
 ```
 
 ```{r}
-tech5.2 <- ergm::ergm(migration_networks[[5]] ~ edges + nodecov('Mobilesubscriptions'))
-summary(tech5.2) 
+summary(tech5)
+ergm::mcmc.diagnostics(tech5)
 ```
 
 # Temporal Models

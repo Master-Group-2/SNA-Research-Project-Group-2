@@ -59,12 +59,21 @@ for (r in 1:length(countries)) {
 }
 
 life_expectancy__df_1960 <- as.data.frame(life_expectancy_matrix_1960)
+life_expectancy__df_1960 <- as.matrix(life_expectancy__df_1960)
+
 mortality_rate_female_df_1960 <- as.data.frame(mortality_rate_female_matrix_1960)
+mortality_rate_female_df_1960 <- as.matrix(mortality_rate_female_matrix_1960)
+
 mortality_rate_male_df_1960 <- as.data.frame(mortality_rate_male_matrix_1960)
 survival_rate_female_df_1960 <- as.data.frame(survival_rate_female_matrix_1960)
 survival_rate_male_df_1960 <- as.data.frame(survival_rate_male_matrix_1960)
+
 telephone_subscriptions_df_1960 <- as.data.frame(telephone_subscriptions_matrix_1960)
+telephone_subscriptions_df_1960 <- as.matrix(telephone_subscriptions_matrix_1960)
+
 electrical_power_df_1960 <- as.data.frame(electrical_power_matrix_1960)
+electrical_power_df_1960 <- as.matrix(electrical_power_matrix_1960)
+
 mobile_subscriptions_df_1960 <- as.data.frame(mobile_subscriptions_matrix_1960)
 internet_subscriptions_df_1960 <- as.data.frame(internet_subscriptions_matrix_1960)
 mediumhightech_exports_df_1960 <- as.data.frame(mediumhightech_exports_matrix_1960)
@@ -116,12 +125,21 @@ for (r in 1:length(countries)) {
 }
 
 life_expectancy__df_1970 <- as.data.frame(life_expectancy_matrix_1970)
+life_expectancy__df_1970 <- as.matrix(life_expectancy__df_1970)
+
 mortality_rate_female_df_1970 <- as.data.frame(mortality_rate_female_matrix_1970)
+mortality_rate_female_df_1970 <- as.matrix(mortality_rate_female_df_1970)
+
 mortality_rate_male_df_1970 <- as.data.frame(mortality_rate_male_matrix_1970)
 survival_rate_female_df_1970 <- as.data.frame(survival_rate_female_matrix_1970)
 survival_rate_male_df_1970 <- as.data.frame(survival_rate_male_matrix_1970)
+
 telephone_subscriptions_df_1970 <- as.data.frame(telephone_subscriptions_matrix_1970)
+telephone_subscriptions_df_1970 <- as.matrix(telephone_subscriptions_df_1970)
+
 electrical_power_df_1970 <- as.data.frame(electrical_power_matrix_1970)
+electrical_power_df_1970 <- as.matrix(electrical_power_df_1970)
+
 mobile_subscriptions_df_1970 <- as.data.frame(mobile_subscriptions_matrix_1970)
 internet_subscriptions_df_1970 <- as.data.frame(internet_subscriptions_matrix_1970)
 mediumhightech_exports_df_1970 <- as.data.frame(mediumhightech_exports_matrix_1970)
@@ -173,14 +191,27 @@ for (r in 1:length(countries)) {
 }
 
 life_expectancy__df_1980 <- as.data.frame(life_expectancy_matrix_1980)
+life_expectancy__df_1980 <- as.matrix(life_expectancy__df_1980)
+
 mortality_rate_female_df_1980 <- as.data.frame(mortality_rate_female_matrix_1980)
+mortality_rate_female_df_1980 <- as.matrix(mortality_rate_female_df_1980)
+
 mortality_rate_male_df_1980 <- as.data.frame(mortality_rate_male_matrix_1980)
 survival_rate_female_df_1980 <- as.data.frame(survival_rate_female_matrix_1980)
 survival_rate_male_df_1980 <- as.data.frame(survival_rate_male_matrix_1980)
+
 telephone_subscriptions_df_1980 <- as.data.frame(telephone_subscriptions_matrix_1980)
+telephone_subscriptions_df_1980 <- as.matrix(telephone_subscriptions_df_1980)
+
 electrical_power_df_1980 <- as.data.frame(electrical_power_matrix_1980)
+electrical_power_df_1980 <- as.matrix(electrical_power_df_1980)
+
 mobile_subscriptions_df_1980 <- as.data.frame(mobile_subscriptions_matrix_1980)
+mobile_subscriptions_df_1980 <- as.matrix(mobile_subscriptions_df_1980)
+
 internet_subscriptions_df_1980 <- as.data.frame(internet_subscriptions_matrix_1980)
+internet_subscriptions_df_1980 <- as.matrix(internet_subscriptions_df_1980)
+
 mediumhightech_exports_df_1980 <- as.data.frame(mediumhightech_exports_matrix_1980)
 technicians_rd_df_1980 <- as.data.frame(technicians_rd_matrix_1980)
 
@@ -230,15 +261,30 @@ for (r in 1:length(countries)) {
 }
 
 life_expectancy__df_1990 <- as.data.frame(life_expectancy_matrix_1990)
+life_expectancy__df_1990 <- as.matrix(life_expectancy__df_1990)
+
 mortality_rate_female_df_1990 <- as.data.frame(mortality_rate_female_matrix_1990)
+mortality_rate_female_df_1990 <- as.matrix(mortality_rate_female_df_1990)
+
 mortality_rate_male_df_1990 <- as.data.frame(mortality_rate_male_matrix_1990)
 survival_rate_female_df_1990 <- as.data.frame(survival_rate_female_matrix_1990)
 survival_rate_male_df_1990 <- as.data.frame(survival_rate_male_matrix_1990)
+
 telephone_subscriptions_df_1990 <- as.data.frame(telephone_subscriptions_matrix_1990)
+telephone_subscriptions_df_1990 <- as.matrix(telephone_subscriptions_df_1990)
+
 electrical_power_df_1990 <- as.data.frame(electrical_power_matrix_1990)
+electrical_power_df_1990 <- as.matrix(electrical_power_df_1990)
+
 mobile_subscriptions_df_1990 <- as.data.frame(mobile_subscriptions_matrix_1990)
+mobile_subscriptions_df_1990 <- as.matrix(mobile_subscriptions_df_1990)
+
 internet_subscriptions_df_1990 <- as.data.frame(internet_subscriptions_matrix_1990)
+internet_subscriptions_df_1990 <- as.matrix(internet_subscriptions_df_1990)
+
 mediumhightech_exports_df_1990 <- as.data.frame(mediumhightech_exports_matrix_1990)
+mediumhightech_exports_df_1990 <- as.matrix(mediumhightech_exports_matrix_1990)
+
 technicians_rd_df_1990 <- as.data.frame(technicians_rd_matrix_1990)
 
 ######################### 2000
@@ -287,13 +333,27 @@ for (r in 1:length(countries)) {
 }
 
 life_expectancy__df_2000 <- as.data.frame(life_expectancy_matrix_2000)
+life_expectancy__df_2000 <- as.matrix(life_expectancy__df_2000)
+
 mortality_rate_female_df_2000 <- as.data.frame(mortality_rate_female_matrix_2000)
+mortality_rate_female_df_2000 <- as.matrix(mortality_rate_female_df_2000)
+
 mortality_rate_male_df_2000 <- as.data.frame(mortality_rate_male_matrix_2000)
 survival_rate_female_df_2000 <- as.data.frame(survival_rate_female_matrix_2000)
 survival_rate_male_df_2000 <- as.data.frame(survival_rate_male_matrix_2000)
 telephone_subscriptions_df_2000 <- as.data.frame(telephone_subscriptions_matrix_2000)
+
 electrical_power_df_2000 <- as.data.frame(electrical_power_matrix_2000)
+electrical_power_df_2000 <- as.matrix(electrical_power_df_2000)
+
 mobile_subscriptions_df_2000 <- as.data.frame(mobile_subscriptions_matrix_2000)
+mobile_subscriptions_df_2000 <- as.matrix(mobile_subscriptions_df_2000)
+
 internet_subscriptions_df_2000 <- as.data.frame(internet_subscriptions_matrix_2000)
+internet_subscriptions_df_2000 <- as.matrix(internet_subscriptions_df_2000)
+
 mediumhightech_exports_df_2000 <- as.data.frame(mediumhightech_exports_matrix_2000)
+mediumhightech_exports_df_2000 <- as.matrix(mediumhightech_exports_df_2000)
+
 technicians_rd_df_2000 <- as.data.frame(technicians_rd_matrix_2000)
+
