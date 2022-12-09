@@ -132,10 +132,10 @@ Besides looking at the network itself, it is important to also take into account
 ::: {style="text-align: justify"}
 As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights represent the amount of people migrating from one country to another. 
 
-- First method: Centrality/CUG 
-- Second method: GERGM
+To decide whether Austria has a high centrality, the stress centrality measure was used. This measure defines the number of geodesics that pass through a country. The country with the highest number will be the most central country. To check hypothesis 1, the research has focused on the stress centrality of Austria in each decade. With that measure, a CUG test with 2000 simulations was done. This helps to define whether the centrality of Austria is significant compared to what one would expect in a network with the same number of vertices and edges as in the observed network. 
 
-**Still need to explain why we use these methods right?**
+- **Second method: GERGM**
+
 :::
 
 ### Contributions
@@ -242,14 +242,18 @@ The oldest data points stem from 1960, from 1960 onwards European nations have s
 -   Are there other methods to address these questions? If yes, why are the methods you chose better for this case?
 
 ::: {style="text-align: justify"}
-For determining the most central country in Europe regarding migrant streams, the stress centrality measure was used. This method determines the number of shortest paths through a node -- excluding the paths to and from that node -- for every node in the network. With that, the country with the highest stress centrality can be considered as a 'bridge' for migrant streams within Europe. This country will be the most central player in migrant streams in Europe. This method fits the dataset because it considers incoming as well as outgoing edges. So, the migrant streams pass through a country. The stress centrality measure was used to determine the most central country per decade.
+The stress centrality measure in combination with the CUG tests help to find an answer on whether Austria is a central country in Europe's migrant streams or not. The stress centrality measure fits this purpose because it considers incoming as well as outgoing edges. So, in that way, it simulates migrant streams through a country. Furthermore, this measure does not consider streams that end or start in Austria. Therefore, one can really see whether Austria is the central player, or in other words, the country that 'divides' all migrants through Europe and the country that incoming migrants use to get to other countries in Europe. The CUG tests help to see how a network with a similar number of edges and vertices would 'normally' look like, compared to the observed network. Therefore, one can argue whether Austria is a more central country than expected or not.  
 
-One could also choose to use the eccentricity measure to determine the centrality of a country. The eccentricity measure determines the maximum number of steps needed to reach anyone else for every node. Therefore, the country with the minimum eccentricity would be the most central country. However, this method does not fit to the purpose of this research. This method will only consider outgoing edges from a specific country, whereas this research also wants to account for incoming edges because of migrant streams. Next to eccentricity, there are many other methods. For instance, betweenness centralization, closeness centralization or eigenvector centralization. However, these methods either result in a graph level score or do not fit the problem at hand.
+Looking at the stress centrality measure, one could also have chosen for numerous other centrality measures. For instance, the eccentricity measure determines the maximum number of steps needed to reach any other country in the network. The country with the minimum eccentricity would be the most central country. However, this does not fit the purpose of this research since the measure only considers outgoing edges. The Shapley centrality would have been a good measure since it can also consider the weights, so the intensity of a migrant stream [@michalak2013efficient]. However, this method is currently not applied in R. 
 :::
 
 ## Results
 
 (about 2000 words)
+
+::: {style="text-align: justify"}
+This research has taken two different approaches to check the hypotheses. Therefore, two models were created. The models and their results are presented and discussed in the sections below.
+:::
 
 ### Model 1
 
@@ -258,6 +262,12 @@ One could also choose to use the eccentricity measure to determine the centralit
 -   Present your results appropriately (plots, tables...) and discuss your findings in plain English
 
 -   Discuss the meaning of your findings in relation to your hypothesis. (half of the points evaluated in this other part)
+
+::: {style="text-align: justify"}
+The centrality of Austria was estimated by the stress centrality measure. The centrality was calculated for every country in the network, in each decade that is represented in the dataset. 
+
+**Show table with centrality measures**
+:::
 
 ```{r echo = FALSE, results = 'asis'}
 # table example
