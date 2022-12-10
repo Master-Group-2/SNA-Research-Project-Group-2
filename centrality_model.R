@@ -32,17 +32,18 @@ for (network_no in 1:length(migration_networks)){
 # summary(mod)
 
 color <- rep('red', snafun::count_vertices(migration_networks[[1]]))
-central_countries_1960 <- which(central_data['Centrality_1960'] > 50)
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1960']
+central_countries_1960 <- which(central_data['Centrality_1960'] >= austria_centrality)
 color[central_countries_1960] <- 'green'
 
-plot(migration_networks[[1]],
-     vertex.shape = 'circle',
-     vertex.color = color, 
-     vertex.size = sqrt(central_data[['Centrality_1960']]),
-     edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
-     edge.arrow.size = 0.2,
-     vertex.label.color = 'black',
-     layout = igraph::layout_in_circle)
+snafun::plot(migration_networks[[1]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1960']]),
+             edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             layout = igraph::layout_in_circle)
 
 
 plot_centralities <- function(networks, years){
@@ -218,6 +219,8 @@ cug_tests <- list()
 for (i in 1:length(years)){
   cug_tests[[i]] <- sim_manual(2000, edges[i], vertices[i])
 }
+
+save(cug_tests, file = 'cug_tests.RData')
 # xlim = c(aus_stress[[i + 1]] - 10, max(density(cug_tests[[i]])[['x']] + 10)
 # test <- sim_manual(2000, edges[1], vertices[1])
 for (i in 1:length(cug_tests)){

@@ -242,7 +242,7 @@ The oldest data points stem from 1960, from 1960 onwards European nations have s
 -   Are there other methods to address these questions? If yes, why are the methods you chose better for this case?
 
 ::: {style="text-align: justify"}
-The stress centrality measure in combination with the CUG tests help to find an answer on whether Austria is a central country in Europe's migrant streams or not. The stress centrality measure fits this purpose because it considers incoming as well as outgoing edges. So, in that way, it simulates migrant streams through a country. Furthermore, this measure does not consider streams that end or start in Austria. Therefore, one can really see whether Austria is the central player, or in other words, the country that 'divides' all migrants through Europe and the country that incoming migrants use to get to other countries in Europe. The CUG tests help to see how a network with a similar number of edges and vertices would 'normally' look like, compared to the observed network. Therefore, one can argue whether Austria is a more central country than expected or not.  
+The stress centrality measure in combination with the CUG tests help to find an answer on whether Austria is a central country in Europe's migrant streams or not. The stress centrality measure fits this purpose because it considers incoming as well as outgoing edges. So, in that way, it simulates migrant streams through a country. Furthermore, this measure does not consider streams that end or start in Austria. Therefore, one can really see whether Austria is the central player, or in other words, the country that 'divides' all migrants through Europe and the country that incoming migrants use to get to other countries in Europe. The CUG tests help to see how high the average centrality in a network with a similar number of edges and vertices would 'normally' be, compared to the observed network. Therefore, one can argue whether Austria is a more central country than expected or not.  
 
 Looking at the stress centrality measure, one could also have chosen for numerous other centrality measures. For instance, the eccentricity measure determines the maximum number of steps needed to reach any other country in the network. The country with the minimum eccentricity would be the most central country. However, this does not fit the purpose of this research since the measure only considers outgoing edges. The Shapley centrality would have been a good measure since it can also consider the weights, so the intensity of a migrant stream [@michalak2013efficient]. However, this method is currently not applied in R. 
 :::
@@ -264,22 +264,164 @@ This research has taken two different approaches to check the hypotheses. Theref
 -   Discuss the meaning of your findings in relation to your hypothesis. (half of the points evaluated in this other part)
 
 ::: {style="text-align: justify"}
-The centrality of Austria was estimated by the stress centrality measure. The centrality was calculated for every country in the network, in each decade that is represented in the dataset. 
-
-**Show table with centrality measures**
+The centrality of Austria was estimated by the stress centrality measure. The centrality was calculated for every country in the network, in each decade that is represented in the dataset. The results of those centrality calculations for every country can be seen in the table below.  
 :::
 
-```{r echo = FALSE, results = 'asis'}
-# table example
-cn <- c("age", "gender", "eyes_col")
-one <- c(7, "M", "BLUE")
-two <- c(8, "F", "BROWN")
-three <- c(8, "M", "GREEN")
-four <- c(7, "F", "PINK")
+```{r, centrality_table, echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+## Load cleaned data
+load('../migration_networks.RData')
 
-tab <- rbind(cn, one, two, three, four)
-rownames(tab) <- NULL
-knitr::kable(tab)
+## Centrality Analysis
+centrality_analysis <- function(igraph_graphs, years){
+  countries <- igraph::get.vertex.attribute(igraph_graphs[[1]], 'name')
+  central_data <- data.frame(countries)
+  colnames(central_data) <- 'Country'
+  
+  for (index in 1:length(years)){
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[[index]])
+  }
+  central_data
+}
+
+years <- c(1960, 1970, 1980, 1990, 2000)
+central_data <- centrality_analysis(migration_networks, years)
+
+## Show dataset head
+knitr::kable(central_data)
+```
+
+::: {style="text-align: justify"}
+The results for Austria, compared to other countries, show that Austria was at the higher end of the most central countries in Europe in 1960 and 1970. In later decades, Austria seems to have an average stress centrality in Europe. The results from to the table are plotted below to get a better view on the (most) central countries for migrant streams in Europe. The vertex size corresponds with the stress centrality of a country (vertex). The edge width corresponds with the edge weight, i.e., the number of migrants in that decade. 
+:::
+
+```{r, centrality_plots, echo = FALSE, results = 'asis', warning = FALSE, out.width= '100%', message = FALSE, fig.height = 27}
+par(mfrow=c(5,1))
+
+### 1960
+color <- rep('red', snafun::count_vertices(migration_networks[[1]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1960']
+central_countries_1960 <- which(central_data['Centrality_1960'] >= austria_centrality)
+color[central_countries_1960] <- 'green'
+
+snafun::plot(migration_networks[[1]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1960']]),
+             edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1960',
+             layout = igraph::layout_in_circle,
+             label.cex = 0.6)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1970
+color <- rep('red', snafun::count_vertices(migration_networks[[2]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1970']
+central_countries_1970 <- which(central_data['Centrality_1970'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[2]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1970']]),
+             edge.width = igraph::E(migration_networks[[2]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1970',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1980
+color <- rep('red', snafun::count_vertices(migration_networks[[3]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1980']
+central_countries_1970 <- which(central_data['Centrality_1980'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[3]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1980']]),
+             edge.width = igraph::E(migration_networks[[3]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1980',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1990
+color <- rep('red', snafun::count_vertices(migration_networks[[4]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1990']
+central_countries_1970 <- which(central_data['Centrality_1990'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[4]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1990']]),
+             edge.width = igraph::E(migration_networks[[4]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1990',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 2000
+color <- rep('red', snafun::count_vertices(migration_networks[[5]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_2000']
+central_countries_1970 <- which(central_data['Centrality_2000'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[5]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_2000']]),
+             edge.width = igraph::E(migration_networks[[5]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 2000',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+```
+
+::: {style="text-align: justify"}
+The plots show indeed that as of 1980, there are more countries within Europe that are more central than Austria regarding migrant streams. Poland seems to have the highest stress centrality in all decades except for 2000. In that decade, the differences are not that clear. In every decade, Poland has clear links with Germany (and France) and with Ukraine (and Belarus). That shows that Poland acts as a central player in the migrant stream from east to west or west to east. For Austria, those links are not that clear from the plot. The only clear link is the one with Germany but that doesn't show centrality of Austria. The migration routes that were shown by Guggenheim [-@guggenheim2019what], cannot be seen in these observations. However, looking at the color distributions of all plots, Austria is always a country that has a higher centrality than many other countries in Europe. All in all, the plots give an indication that Austria is not the country with the highest stress centrality in Europe, but does not belong to the lower end either. 
+
+However, the plots do not give a statistically decisive judgement about the significance of Austria's centrality. To get a better view of on that, the CUG tests are used. For each decade, the stress centrality of Austria is compared with the average expected centrality for a network with the same number of vertices and edges. Each CUG test has simulated 2000 similar networks. The average stress centrality was stored for every simulation. The empirical results can be seen below for every decade, where the simulations are represented by the density plot and the stress centrality of Austria is represented by the dashed line.
+:::
+
+```{r, cug_plots, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.height = 7}
+load('../cug_tests.RData')
+aus_stress <- central_data[central_data$Country == 'Austria',]
+
+par(mfrow=c(3,2))
+
+### Plots
+plot(density(cug_tests[[1]]), xlim = c(aus_stress[[2]] - 10, max(density(cug_tests[[1]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1960', xlab = 'stress centrality')
+  abline(v = aus_stress[[2]], lty = 'dashed')
+  
+
+plot(density(cug_tests[[2]]), xlim = c(aus_stress[[3]] - 10, max(density(cug_tests[[2]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1970', xlab = 'Stress centrality')
+  abline(v = aus_stress[[3]], lty = 'dashed')
+  
+plot(density(cug_tests[[3]]), xlim = c(aus_stress[[4]] - 10, max(density(cug_tests[[3]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1980', xlab = 'stress centrality')
+  abline(v = aus_stress[[4]], lty = 'dashed')
+  
+plot(density(cug_tests[[4]]), xlim = c(aus_stress[[5]] - 10, max(density(cug_tests[[4]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1990', xlab = 'stress centrality')
+  abline(v = aus_stress[[5]], lty = 'dashed')
+  
+plot(density(cug_tests[[5]]), xlim = c(aus_stress[[6]] - 10, max(density(cug_tests[[5]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 2000', xlab = 'stress centrality')
+  abline(v = aus_stress[[6]], lty = 'dashed')
 ```
 
 ### ERGM
