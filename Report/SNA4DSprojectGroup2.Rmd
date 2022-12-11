@@ -403,7 +403,7 @@ par(mfrow=c(3,2))
 
 ### Plots
 plot(density(cug_tests[[1]]), xlim = c(aus_stress[[2]] - 10, max(density(cug_tests[[1]])[['x']] + 10)),
-       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1960', xlab = 'stress centrality')
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1960', xlab = 'Stress centrality')
   abline(v = aus_stress[[2]], lty = 'dashed')
   
 
@@ -412,17 +412,39 @@ plot(density(cug_tests[[2]]), xlim = c(aus_stress[[3]] - 10, max(density(cug_tes
   abline(v = aus_stress[[3]], lty = 'dashed')
   
 plot(density(cug_tests[[3]]), xlim = c(aus_stress[[4]] - 10, max(density(cug_tests[[3]])[['x']] + 10)),
-       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1980', xlab = 'stress centrality')
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1980', xlab = 'Stress centrality')
   abline(v = aus_stress[[4]], lty = 'dashed')
   
 plot(density(cug_tests[[4]]), xlim = c(aus_stress[[5]] - 10, max(density(cug_tests[[4]])[['x']] + 10)),
-       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1990', xlab = 'stress centrality')
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1990', xlab = 'Stress centrality')
   abline(v = aus_stress[[5]], lty = 'dashed')
   
 plot(density(cug_tests[[5]]), xlim = c(aus_stress[[6]] - 10, max(density(cug_tests[[5]])[['x']] + 10)),
-       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 2000', xlab = 'stress centrality')
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 2000', xlab = 'Stress centrality')
   abline(v = aus_stress[[6]], lty = 'dashed')
 ```
+
+::: {style="text-align: justify"}
+In every decade, the stress centrality of Austria seems to be exceptionally lower than networks with a similar number of vertices and directed edges. To quantify how exceptional this difference is, the proportion of stress centralities that are higher than the stress centrality of Austria were calculated for every decade. The results can be seen below. 
+:::
+
+```{r, quantification, echo = FALSE, warning = FALSE, message = FALSE}
+Year <- c(1960, 1970, 1980, 1990, 2000)
+Prop <- c()
+for (i in 1:length(Year)){
+  Prop <- c(Prop, mean(aus_stress[[i + 1]] < cug_tests[[i]]))
+}
+quantification <- cbind(Year, Prop)
+colnames(quantification) <- c('Year', 'Proportion of centralities higher than Austria')
+
+knitr::kable(quantification)
+```
+
+::: {style="text-align: justify"}
+So, 100% of all networks with the same number of vertices and directed edges have a higher stress centrality than Austria has, in every decade that has been analyzed. With that, it can be said that the stress centrality of Austria is statistically significantly lower than what would have been expected for a network with this number of vertices and directed edges. Hypothesis 1 predicted that Austria has a high centrality in the social network of Europe's migration. The results in the table above do not support this hypothesis. Therefore, this hypothesis is rejected. Whereas Austria belongs to the higher end of the centralities of European countries, considering the stress centrality plots, the number is expected to be higher for a network that is similar to the European migrant network. 
+
+Note that the weights of the edges are not included in the analyses, since that was not possible in the current implementation of the theory in R. Including the weights of the edges in the centrality analysis might give different results for the centrality of Austria. The weights might give a better indication of how many migrants 'pass' through a country to get to their destination within Europe. 
+:::
 
 ### ERGM
 
