@@ -478,9 +478,29 @@ knitr::kable(texreg::matrixreg(tech4))
 load("tech5.rda")
 knitr::kable(texreg::matrixreg(tech5))
 ```
-
+::: {style="text-align: justify"}
 To be able to answer the hypothesis, both the coefficients as well as the significance need to be taken into account. 
 For the technological development, the focus first needs to be on the telephone subscriptions variable, after that the mobile subscriptions and the internet subscriptions are more representative. For these variables, the three different dyad states are displayed, namely mutual, upper-triangular asymmetric, and lower-triangular asymmetric dyads. 
+
+Besides these results, it is also important to have a look at the diagnostics of the model. Firstly, the MCMC diagnostics will be displayed, after that the GOF diagnostics. 
+:::
+
+```{r, echo=FALSE, warning=FALSE, out.width= '100%', fig.height = 7}
+tech1.mcmc <- ergm::mcmc.diagnostics(tech1)
+knitr::kable(tech1.mcmc)
+
+tech2.mcmc <- ergm::mcmc.diagnostics(tech2)
+knitr::kable(tech2.mcmc)
+
+tech3.mcmc <- ergm::mcmc.diagnostics(tech3)
+knitr::kable(tech3.mcmc)
+
+tech4.mcmc <- ergm::mcmc.diagnostics(tech4)
+knitr::kable(tech4.mcmc)
+
+tech5.mcmc <- ergm::mcmc.diagnostics(tech5)
+knitr::kable(tech5.mcmc)
+```
 
 Option 3
 
