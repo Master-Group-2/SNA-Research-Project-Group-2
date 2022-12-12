@@ -458,41 +458,29 @@ Note that the weights of the edges are not included in the analyses, since that 
 
 -   Discuss the meaning of your findings in relation to your hypothesis. (half of the points evaluated in this other part)
 
-Option 1:
+::: {style="text-align: justify"}
+As mentioned in the method section of this paper, five different ERGM models have been created to be able to answer the second hypothesis, one model for every decennium in the data. For every model, the appropriate endogenous and exogenous variables have been added. To give an example, in the 1960's mobile phones and the internet did not exist, so here the amount of telephone subscriptions is more appropriate as a measure for technological progress. Below, the summary statistics for each of these models are displayed.  
+:::
 
-```{r model 1, echo = FALSE}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
+```{r, echo=FALSE}
+load("tech1.rda")
+knitr::kable(texreg::matrixreg(tech1))
 
-# install.packages("texreg")
+load("tech2.rda")
+knitr::kable(texreg::matrixreg(tech2))
 
-knitr::kable(texreg::matrixreg(lm.D9))
+load("tech3.rda")
+knitr::kable(texreg::matrixreg(tech3))
 
+load("tech4.rda")
+knitr::kable(texreg::matrixreg(tech4))
 
+load("tech5.rda")
+knitr::kable(texreg::matrixreg(tech5))
 ```
 
-Option 2
-
-```{r model 2, echo = FALSE, results = 'asis'}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
-
-# install.packages("texreg")
-
-knitr::kable(texreg::matrixreg(list(lm.D9, lm.D90)))
-
-
-```
+To be able to answer the hypothesis, both the coefficients as well as the significance need to be taken into account. 
+For the technological development, the focus first needs to be on the telephone subscriptions variable, after that the mobile subscriptions and the internet subscriptions are more representative. For these variables, the three different dyad states are displayed, namely mutual, upper-triangular asymmetric, and lower-triangular asymmetric dyads. 
 
 Option 3
 
