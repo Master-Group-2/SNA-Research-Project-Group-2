@@ -356,4 +356,5 @@ mediumhightech_exports_df_2000 <- as.data.frame(mediumhightech_exports_matrix_20
 mediumhightech_exports_df_2000 <- as.matrix(mediumhightech_exports_df_2000)
 
 technicians_rd_df_2000 <- as.data.frame(technicians_rd_matrix_2000)
+technicians_rd_df_2000 <- as.matrix(technicians_rd_df_2000)
 

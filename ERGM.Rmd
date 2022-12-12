@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # Very first decenium
-```{r}
+```{r,warning=FALSE, message=FALSE}
 library("igraph")
 library("stringi")
 
@@ -16,19 +16,13 @@ migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
 
 ```{r}
 tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1960) + dyadcov(life_expectancy__df_1960) + dyadcov(telephone_subscriptions_df_1960) + dyadcov(electrical_power_df_1960),  
-                   control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 1000,
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
                                               seed = 123456,
-                                              MCMLE.maxit = 10,
-                                              parallel = 4,
+                                              MCMLE.maxit = 2,
+                                              parallel = 3,
                                               parallel.type = "PSOCK"))
 save(tech1, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1.rda")
-```
-
-
-```{r}
-summary(tech1)
-ergm::mcmc.diagnostics(tech1)
 ```
 
 # Second decenium
@@ -39,18 +33,13 @@ migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
 
 ```{r}
 tech2 <- ergm::ergm(migration_networks[[2]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1970) + dyadcov(life_expectancy__df_1970) + dyadcov(telephone_subscriptions_df_1970) + dyadcov(electrical_power_df_1970),  
-                   control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 1000,
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
                                               seed = 123456,
-                                              MCMLE.maxit = 10,
+                                              MCMLE.maxit = 2,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
 save(tech2, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2.rda")
-```
-
-```{r}
-summary(tech2)
-ergm::mcmc.diagnostics(tech2)
 ```
 
 # Third decenium
@@ -60,19 +49,18 @@ migration_networks[[3]] <- snafun::to_network(migration_networks[[3]])
 ```
 
 ```{r}
-tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1980) + dyadcov(mortality_rate_female_df_1980) + dyadcov(telephone_subscriptions_df_1980) + dyadcov(electrical_power_df_1980) + dyadcov(internet_subscriptions_df_1980) + dyadcov(mobile_subscriptions_df_1980),  
-                   control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 1000,
+tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1980) + dyadcov(mortality_rate_female_df_1980) + dyadcov(electrical_power_df_1980) + dyadcov(mobile_subscriptions_df_1980) + dyadcov(telephone_subscriptions_df_1980),  
+                   control = ergm::control.ergm(MCMC.burnin = 400,
+                                              MCMC.samplesize = 800,
                                               seed = 123456,
-                                              MCMLE.maxit = 10,
+                                              MCMLE.maxit = 2,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
-save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
-```
 
-```{r}
-summary(tech3)
-ergm::mcmc.diagnostics(tech3)
+save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
+
+# Removed internet subscriptions because it caused the summary to return NaN values
+#+ dyadcov(internet_subscriptions_df_1980)
 ```
 
 # Fourth decenium
@@ -82,19 +70,14 @@ migration_networks[[4]] <- snafun::to_network(migration_networks[[4]])
 ```
 
 ```{r}
-tech4 <- ergm::ergm(migration_networks[[4]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1990) + dyadcov(mortality_rate_female_df_1990) + dyadcov(mediumhightech_exports_df_1990) + dyadcov(electrical_power_df_1990) + dyadcov(internet_subscriptions_df_1990) + dyadcov(mobile_subscriptions_df_1990),  
-                   control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 1000,
+tech4 <- ergm::ergm(migration_networks[[4]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1990) + dyadcov(mortality_rate_female_df_1990) + dyadcov(mediumhightech_exports_df_1990) + dyadcov(electrical_power_df_1990) + dyadcov(mobile_subscriptions_df_1990),  
+                   control = ergm::control.ergm(MCMC.burnin = 100,
+                                              MCMC.samplesize = 200,
                                               seed = 123456,
                                               MCMLE.maxit = 10,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
 save(tech4, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4.rda")
-```
-
-```{r}
-summary(tech4)
-ergm::mcmc.diagnostics(tech4)
 ```
 
 # Fifth decenium
@@ -104,19 +87,14 @@ migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
 ```
 
 ```{r}
-tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_1990) + dyadcov(technicians_rd_df_2000),  
-                   control = ergm::control.ergm(MCMC.burnin = 5000,
-                                              MCMC.samplesize = 1000,
+tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_2000) + dyadcov(technicians_rd_df_2000),  
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
                                               seed = 123456,
-                                              MCMLE.maxit = 10,
+                                              MCMLE.maxit = 2,
                                               parallel = 4,
                                               parallel.type = "PSOCK"))
 save(tech5, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5.rda")
-```
-
-```{r}
-summary(tech5)
-ergm::mcmc.diagnostics(tech5)
 ```
 
 # Temporal Models
@@ -142,3 +120,4 @@ for (network_no in 1:length(migration_networks)){
 temporal_model <- btergm::btergm(migration_networks ~ edges + nodecov('Mobilesubscriptions'), R = 10)
 btergm::summary(temporal_model)
 ```
+
