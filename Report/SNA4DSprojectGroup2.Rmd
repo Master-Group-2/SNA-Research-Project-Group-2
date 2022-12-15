@@ -65,51 +65,20 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
-# Citations in papaja, detele appropriately later
 
-Add the bibtex entry in the .bib file. You can find the entries in
-Google scholar, but double check since it is not always correct.
-
-Call the citations in the text:
-
-Citation within parentheses [@R-papaja]
-
-Multiple citations [@R-papaja; @R-base]
-
-In-text citations @R-papaja
-
-Year only [-@R-base]
-
-Only if your citation appears in the text it will also show up in the
-Reference list. Don't manually modify the Reference list.
+::: {style="text-align: justify"}
+All the data and code can be found on the following GitHub repository: https://github.com/Master-Group-2/SNA-Research-Project-Group-2. For each part of the process, a different branch has been created.
+:::
 
 ## Executive Summary
 
 ::: {style="text-align: justify"}
-A social network analysis of the migration in Europe from 1960 to 2000
-has been conducted to investigate the patterns and trends of migration
-during this period. The study focused on two main research questions:
-Does Austria have a high centrality in the social network of Europe's
-migration, and does the technical development of a country have a
-positive effect on the level of migration to that country over time? To
-investigate the research questions a CUG and ERGM models were created to
-proof our hypothesizes. The results of the study did not support the
-hypothesis that Austria has a high centrality in the social network of
-Europe's migration, and the hypothesis that the technical development of
-a country has a positive effect on the level of migration could not be
-proven. The lack of results raises questions about Europe migration
-reasons for future academic research. Overall, the study provides new
-insights into the trends of migration in Europe during the period under
-review.
+A social network analysis of migration in Europe from 1960 to 2000 has been conducted to investigate the patterns and trends of migration during this period. The study focused on two main research questions:
+"Does Austria have a high centrality in the social network of Europe's migration", and "does the technical development of a country have a positive effect on the level of migration to that country over time"? To investigate the research questions CUG and ERGM models were created to check the hypotheses. The results of the study did not support the hypothesis that Austria has a high centrality in the social network of Europe's migration. The hypothesis that the technical development of a country has a positive effect on the level of migration, also could not be proven. The lack of results raises questions about Europe migration
+reasons for future academic research. Overall, the study provides new insights into the trends of migration in Europe during the period under review.
 :::
 
 ## Introduction
-
-(about 1000 words) -- 0.5 POINTS Place your topic of choice within the
-existing literature and explain what you are going to address in this
-report and why. - What is the main topic that is going to be studied in
-this paper? - Why is it important?
-
 ::: {style="text-align: justify"}
 Humanity has always moved a lot, for many different reasons, such as
 work or study opportunities, for safety of to join family. Because there
@@ -281,40 +250,12 @@ this country, and possibly also why they are coming. With this
 information, appropriate accommodations can be made for them and the
 impact of having these migrants can be determined.
 
--   **What does the rest of the report look like? In one short
-    paragraph, list the topics of the following sections.**
+After this section, the methodology will be discussed, where the data is shown, as well as the approach used for the methods. Next will be the results, where model summaries, as well as model diagnostics, are discussed. These results will then be linked to the hypotheses created in the preceding sections. Finally, a conclusion will be drawn, where learnings from these models are presented, as well as some limitations and recommendations for future work. 
 :::
 
 ## Methodology
 
 ### Dataset
-
-(about 500 words) 1 POINT (+ BONUS) \* Which data set are you going to
-use? Three options:
-
-o Use readily/easily available data (0 bonus points)
-
-o Combine two or more existing datasets (max 0.5 bonus points)
-
-o Scrape or collect your own data (max. 1 bonus point)
-
--   Clearly explain where the data is coming from:
-
-o Who collected the data?
-
-o What is the source?
-
-o When was the data produced?
-
-o How was the data collected?
-
--   Provide descriptive measures of your data (tables, plots, etc.)
-
--   Why is this data useful to study your topic and answer your research
-    questions?
-
--   What is the potential bias in the data? How does this affect your
-    results?
 
 ::: {style="text-align: justify"}
 The data used for the research project consists out of several publicly
@@ -410,14 +351,6 @@ aggregated nations will have to backed up by literature research.
 
 ### Data analysis (Research Rationale)
 
-(about 500 words) -- 1 POINTS \* Why are these two methods suitable for
-your data?
-
--   Why are these two methods suitable for your research questions?
-
--   Are there other methods to address these questions? If yes, why are
-    the methods you chose better for this case?
-
 ::: {style="text-align: justify"}
 The stress centrality measure in combination with the CUG tests help to
 find an answer on whether Austria is a central country in Europe's
@@ -470,8 +403,6 @@ research regular ERGM's seem to be the best approach.
 
 ## Results
 
-(about 2000 words)
-
 ::: {style="text-align: justify"}
 This research has taken two different approaches to check the
 hypotheses. Therefore, two models were created. The models and their
@@ -479,15 +410,6 @@ results are presented and discussed in the sections below.
 :::
 
 ### Model 1
-
-(about 1000 words) -- 2.5 POINTS
-
--   Present your results appropriately (plots, tables...) and discuss
-    your findings in plain English
-
--   Discuss the meaning of your findings in relation to your hypothesis.
-    (half of the points evaluated in this other part)
-
 ::: {style="text-align: justify"}
 The centrality of Austria was estimated by the stress centrality
 measure. The centrality was calculated for every country in the network,
@@ -836,13 +758,13 @@ knitr::kable(tech1.mcmc)
 ```
 
 ::: {style="text-align: justify"}
-![](images/MCMC%20model%202.png) MCMC diagnostics: model 1970
+![MCMC diagnostics: model 1970](images/MCMC%20model%202.png)
 
-![](images/MCMC%20model%203.png) MCMC diagnostics: model 1980
+![MCMC diagnostics: model 1980](images/MCMC%20model%203.png)
 
-![](images/MCMC%20model%204.png) MCMC diagnostics: model 1990
+![MCMC diagnostics: model 1990](images/MCMC%20model%204.png) 
 
-![](images/MCMC%20model%205.png) MCMC diagnostics: model 2000
+![MCMC diagnostics: model 2000](images/MCMC%20model%205.png) 
 
 When looking at these diagnostics, the traces are all centered around
 zero, which is a good sign. However, they are not very 'fuzzy', probably
