@@ -134,7 +134,16 @@ As mentioned before, this study make use of social network analysis, so a networ
 
 To decide whether Austria has a high centrality, the stress centrality measure was used. This measure defines the number of geodesics that pass through a country. The country with the highest number will be the most central country. To check hypothesis 1, the research has focused on the stress centrality of Austria in each decade. With that measure, a CUG test with 2000 simulations was done. This helps to define whether the centrality of Austria is significant compared to what one would expect in a network with the same number of vertices and edges as in the observed network. 
 
-To be able to answer the second hypothesis, an ERGM model was created. The data gathered for this research consists of five networks on different decenniums, and for each decennium a different ERGM will be created. Since technological development changed over time, different attributes have been added to check for this effect. For example, in 1960’s telephone subscriptions were an important indicator, while in 2000’s the amount of internet subscriptions says more about technological development. Besides these exogenous variables, some control variables were also added. These other exogenous variables are the mortality rate for females, the life expectancy and the availability of electrical power. Asymmetry was added as endogenous variable, since rationale tells us that when a lot of people move from country A to country B, it does not make sense that people in country B want to move to country A. As mentioned in the theoretical framework, there are reasons why people migrate towards and away from countries, so there is a reason why people do not want to live in country A. This analysis will be run for all five decenniums, and after that the estimates and their significance can be used to answer the research question. If the estimate of the effect of technological development becomes larger and more significant, this could mean that technological development becomes more important with time.
+To be able to answer the second hypothesis, an ERGM model was created. The data gathered for this research consists of five networks on different decenniums, and for each decennium a different ERGM will be created. Since technological development changed over time, different attributes have been added to check for this effect. For example, in 1960’s telephone subscriptions were an important indicator, while in 2000’s the amount of internet and mobile subscriptions say more about technological development. Besides these exogenous variables, some control variables were also added. These other exogenous variables are the mortality rate for females, the life expectancy and the availability of electrical power. Asymmetry was added as endogenous variable, since rationale tells us that when a lot of people move from country A to country B, it does not make sense that people in country B want to move to country A. As mentioned in the theoretical framework, there are reasons why people migrate towards and away from countries, so there is a reason why people do not want to live in country A. This analysis will be run for all five decenniums, and after that the estimates and their significance can be used to answer the research question. If the estimate of the effect of technological development becomes larger and more significant, this could mean that technological development becomes more important with time.
+
+The overall hypothesis can be answered using all five ERGMs, however hypotheses also need to be answered for every individual variable included in the models. These hypothesis can be seen below:
+
+- People will move to countries with a lower mortality rate, compared to the country they are currently living in 
+- People will move to countries with a higher life expectancy for women, compared to the country they are currently living in 
+- People will move to countries with more access to electrical power, compared to the country they are currently living in  
+- People will move to countries with more technological progress (telephone, mobile and internet subscriptions depending on the model), compared to the country they are currently living in
+- If people move from country A to country B, it is not likely that people move from country B to country A
+
 
 :::
 
@@ -461,7 +470,8 @@ Note that the weights of the edges are not included in the analyses, since that 
 ::: {style="text-align: justify"}
 As mentioned in the method section of this paper, five different ERGM models have been created to be able to answer the second hypothesis, one model for every decennium in the data. For every model, the appropriate endogenous and exogenous variables have been added. To give an example, in the 1960's mobile phones and the internet did not exist, so here the amount of telephone subscriptions is more appropriate as a measure for technological progress. 
 A couple of different steps have been taken to get to the final model, starting with selecting these endogenous and exogenous variables. For the endogenous variables, the choice to include all of them immediately was made, since the theoretical framework showed that all these variables could have an influence on migration. However, in the first model, the measure `nodecov` was used for these exogenous variables. After trying, it appeared that this was not the most appropriate measure, and it was replaced with `dyadcov`. For the endogenous variables, `gwesp` was first used, based on the idea that there were triangles in the data. However after careful consideration, the conclusion was made that there was no theoretical proof as to why this would be true. Because of that, the measure was removed and replaced with `mutual`. After some discussion, it appeared that `asymmetric` would actually be a more appropriate measure. The goal of asymmetry is capture the fact that if a lot of people move from country A to country B, people are not likely to move from B to A. 
-After all these variables have been selected, the MCMC specifications were added. The first attempt used 1000 samples, a burn-in of 500 and 10 iterations. However, the laptops used in this research were not able to handle this much data, and after three days and nights, only 4 iterations were complete. After this, it was decided to reduce the amount of samples and iterations, to 500 samples, 250 burn-in and 4 iterations. However, after another day and night, this model got stuck around 3 iterations. Because of this, an even smaller sample size and number of iterations have been chosen, namely 200 samples, a burn-in of 100 and 2 iterations. With these specifications, the model was able to run, however the GOF will likely not be good. This will be discussed further on in this section, as well as in the limitation section of this paper. 
+After all these variables have been selected, the MCMC specifications were added. The first attempt used 1000 samples, a burn-in of 500 and 10 iterations. However, the laptops used in this research were not able to handle this much data, and after three days and nights, only 4 iterations were complete. After this, it was decided to reduce the amount of samples and iterations, to 500 samples, 250 burn-in and 4 iterations. However, after another day and night, this model got stuck around 3 iterations. Because of this, an even smaller sample size and number of iterations have been chosen, namely 100 samples, a burn-in of 50 and 2 iterations. Some models were not able too run because the sample size was too small, so for these models the sample size was set higher. With these specifications, all the models were able to run, however the GOF will likely not be good.
+This will be discussed further on in this section, as well as in the limitation section of this paper. 
 The summary of these five final models can be found below. 
 :::
 
@@ -492,8 +502,6 @@ For the MCMC diagnostics, the focus will be on the first four plots, the trace o
 ```{r, echo=FALSE, warning=FALSE, out.width= '100%', fig.height = 7}
 tech1.mcmc <- ergm::mcmc.diagnostics(tech1)
 knitr::kable(tech1.mcmc)
-
-
 ```
 
 ::: {style="text-align: justify"}
@@ -513,7 +521,29 @@ When looking at these diagnostics, the traces are all centered around zero, whic
 When looking at the density of the edges and asymmetric, they appear to be normally distributed, with the only exception being the second model. Especially the density of asymmetry is not completely normally distributed, probably due to the same limitations as before. 
 
 The goodness of fit can also be plotted for all the models, which can be seen below.
+:::
 
+
+```{r, error=TRUE, echo=FALSE, out.width= '100%', fig.height = 7}
+load("tech1gof.rda")
+
+knitr::kable(snafun:: stat_plot_gof(tech1.gof))
+
+load("tech2gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech2.gof))
+
+load("tech3gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech3.gof))
+
+load("tech4gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech4.gof))
+
+load("tech5gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech5.gof))
+```
+
+::: {style="text-align: justify"}
+As can be seen in these goodness of fit results, the models are not yet correct. For the fit of the model to be good, the black line needs to be close to the blue diamonds, which is not the case for any of the diagnostics. Because of this, the model interpretation is also limited, which will be discussed in the next section.
 :::
 
 ## Conclusion
