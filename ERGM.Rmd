@@ -1,0 +1,123 @@
+---
+title: "ERGM"
+author: "Maud Groen"
+date: "2022-12-04"
+output: html_document
+---
+
+# Very first decenium
+```{r,warning=FALSE, message=FALSE}
+library("igraph")
+library("stringi")
+
+migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
+migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
+```
+
+```{r}
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1960) + dyadcov(life_expectancy__df_1960) + dyadcov(telephone_subscriptions_df_1960) + dyadcov(electrical_power_df_1960),  
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
+                                              seed = 123456,
+                                              MCMLE.maxit = 2,
+                                              parallel = 3,
+                                              parallel.type = "PSOCK"))
+save(tech1, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1.rda")
+```
+
+# Second decenium
+```{r}
+migration_networks[[2]] <- delete_edge_attr(migration_networks[[2]], 'weightscaled')
+migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
+```
+
+```{r}
+tech2 <- ergm::ergm(migration_networks[[2]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1970) + dyadcov(life_expectancy__df_1970) + dyadcov(telephone_subscriptions_df_1970) + dyadcov(electrical_power_df_1970),  
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
+                                              seed = 123456,
+                                              MCMLE.maxit = 2,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
+save(tech2, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2.rda")
+```
+
+# Third decenium
+```{r}
+migration_networks[[3]] <- delete_edge_attr(migration_networks[[3]], 'weightscaled')
+migration_networks[[3]] <- snafun::to_network(migration_networks[[3]])
+```
+
+```{r}
+tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1980) + dyadcov(mortality_rate_female_df_1980) + dyadcov(electrical_power_df_1980) + dyadcov(mobile_subscriptions_df_1980) + dyadcov(telephone_subscriptions_df_1980),  
+                   control = ergm::control.ergm(MCMC.burnin = 400,
+                                              MCMC.samplesize = 800,
+                                              seed = 123456,
+                                              MCMLE.maxit = 2,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
+
+save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
+
+# Removed internet subscriptions because it caused the summary to return NaN values
+#+ dyadcov(internet_subscriptions_df_1980)
+```
+
+# Fourth decenium
+```{r}
+migration_networks[[4]] <- delete_edge_attr(migration_networks[[4]], 'weightscaled')
+migration_networks[[4]] <- snafun::to_network(migration_networks[[4]])
+```
+
+```{r}
+tech4 <- ergm::ergm(migration_networks[[4]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1990) + dyadcov(mortality_rate_female_df_1990) + dyadcov(mediumhightech_exports_df_1990) + dyadcov(electrical_power_df_1990) + dyadcov(mobile_subscriptions_df_1990),  
+                   control = ergm::control.ergm(MCMC.burnin = 100,
+                                              MCMC.samplesize = 200,
+                                              seed = 123456,
+                                              MCMLE.maxit = 10,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
+save(tech4, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4.rda")
+```
+
+# Fifth decenium
+```{r}
+migration_networks[[5]] <- delete_edge_attr(migration_networks[[5]], 'weightscaled')
+migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
+```
+
+```{r}
+tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_2000) + dyadcov(technicians_rd_df_2000),  
+                   control = ergm::control.ergm(MCMC.burnin = 50,
+                                              MCMC.samplesize = 100,
+                                              seed = 123456,
+                                              MCMLE.maxit = 2,
+                                              parallel = 4,
+                                              parallel.type = "PSOCK"))
+save(tech5, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5.rda")
+```
+
+# Temporal Models
+```{r}
+#Basic model
+
+# Split the data on year 
+my_data <- read_excel("full_data.xlsx")
+my_data$Mobilesubscriptions[is.na(my_data$Mobilesubscriptions)] = 0
+years <- list(1960,1970,1980,1990,2000)
+
+# Create the node attributes
+for (network_no in 1:length(migration_networks)){
+  
+  my_data  <-  my_data %>% filter(Year == years[network_no])
+  my_data$Mobilesubscriptions <- as.numeric(my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_igraph(migration_networks[[network_no]])
+  
+  migration_networks[[network_no]] <- igraph::set.vertex.attribute(migration_networks[[network_no]], 'Mobilesubscriptions', index = V(migration_networks[[network_no]]), my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_network(migration_networks[[network_no]])
+}
+
+temporal_model <- btergm::btergm(migration_networks ~ edges + nodecov('Mobilesubscriptions'), R = 10)
+btergm::summary(temporal_model)
+```
+

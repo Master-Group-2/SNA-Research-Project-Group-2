@@ -1,0 +1,86 @@
+---
+title: "ERGM performance"
+author: "Maud Groen"
+date: "2022-12-12"
+output: html_document
+---
+
+# First decennium
+```{r}
+load("tech1.rda")
+summary(tech1)
+```
+
+```{r}
+ergm::mcmc.diagnostics(tech1)
+```
+
+```{r fig.width=8, warning=FALSE}
+tech1.gof <- ergm::gof(tech1)
+save(tech1.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1gof.rda")
+snafun::stat_plot_gof(tech1.gof)
+```
+
+# Second decennium
+```{r}
+load("tech2.rda")
+summary(tech2)
+```
+
+```{r}
+ergm::mcmc.diagnostics(tech2)
+```
+
+```{r,warning=FALSE}
+tech2.gof <- ergm::gof(tech2)
+save(tech2.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2gof.rda")
+snafun::stat_plot_gof(tech2.gof)
+```
+
+# Third decennium
+```{r}
+load("tech3.rda")
+summary(tech3)
+```
+
+```{r}
+ergm::mcmc.diagnostics(tech3)
+```
+
+```{r,warning=FALSE}
+tech3.gof <- ergm::gof(tech3)
+save(tech3.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3gof.rda")
+snafun::stat_plot_gof(tech3.gof)
+```
+
+# Fourth decennium
+```{r}
+load("tech4.rda")
+summary(tech4)
+```
+
+```{r}
+ergm::mcmc.diagnostics(tech4)
+```
+
+```{r,warning=FALSE}
+tech4.gof <- ergm::gof(tech4)
+save(tech4.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4gof.rda")
+snafun::stat_plot_gof(tech4.gof)
+```
+
+# Fifth decennium
+```{r}
+load("tech5.rda")
+summary(tech5)
+```
+
+```{r}
+ergm::mcmc.diagnostics(tech5)
+```
+
+```{r,warning=FALSE}
+tech5.gof <- ergm::gof(tech5)
+save(tech5.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5gof.rda")
+snafun::stat_plot_gof(tech5.gof)
+```
