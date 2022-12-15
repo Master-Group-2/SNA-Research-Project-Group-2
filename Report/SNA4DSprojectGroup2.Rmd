@@ -159,10 +159,10 @@ Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and The
 Channel Route [@westernroute]. Based on these migration routes, it
 appears that Austria plays an important role in migration within Europe
 [@guggenheim2019what; @ambrosini2016europe]. Based on this information
-the following hypothesis can be formulated:
+the following research question can be formulated:
 
--   Research Question 1: What effects does the geographical location of
-    a nation have on the number of immigrants?
+-   Research Question 1: What effect does a central geographical
+    location have on the centrality within Europe's migration network?
 
 Besides looking at the network itself, it is important to also take into
 account endogenous and exogenous variables. As mentioned before, many
@@ -175,10 +175,26 @@ fact that technical development and migration are complex and
 multifaceted processes that can affect different aspects of society in
 different ways. Additionally, the field of technical development is
 rapidly evolving, making it interesting to investigate the role of
-migration in this area. So we hypothesize that:
+migration in this area. So we research question that:
 
 -   Research Question 2: What are the effects of technological
     development of a country on the level of migration?
+
+For research question 1 it is hypothesized that having a central
+geographical location may have an impact on a nation's number of
+immigrants. For example, countries located in the center of a region may
+experience higher levels of immigration due to their accessibility to
+surrounding countries. Additionally, being located in the center of a
+region may also make a country more attractive to immigrants due to its
+proximity to a variety of economic, cultural, and social opportunities.
+For research question 2 is hypothesized that the technological
+development of a country may have an impact on the level of migration it
+experiences. For example, countries with higher levels of technological
+development may attract more immigrants due to the pull factors that
+draw people to seek out opportunities in these countries. Additionally,
+the availability of technological resources in a country may also impact
+the ability of its citizens to migrate, as access to technology can
+facilitate communication and transportation.
 
 As mentioned before, this study makes use of social network analysis, so
 a network has been created for different countries in Europe. In the
