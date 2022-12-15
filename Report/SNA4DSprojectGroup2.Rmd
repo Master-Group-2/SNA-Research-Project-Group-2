@@ -158,7 +158,8 @@ So far, the approach used in this research has not been used. By combining netwo
 
 ### Dataset
 
-(about 500 words) 1 POINT (+ BONUS) \* Which data set are you going to use? Three options:
+(about 500 words) 1 POINT (+ BONUS) \* Which data set are you going to
+use? Three options:
 
 o Use readily/easily available data (0 bonus points)
 
@@ -178,16 +179,35 @@ o How was the data collected?
 
 -   Provide descriptive measures of your data (tables, plots, etc.)
 
--   Why is this data useful to study your topic and answer your research questions?
+-   Why is this data useful to study your topic and answer your research
+    questions?
 
--   What is the potential bias in the data? How does this affect your results?
+-   What is the potential bias in the data? How does this affect your
+    results?
 
 ::: {style="text-align: justify"}
-The data used for the research project consists out of several publicly accessible datasets retrieved from the World Bank [@world_bank_data]. These datasets are:
+The data used for the research project consists out of several publicly
+accessible datasets retrieved from the World Bank [@world_bank_data].
+These datasets are:
 
-- Global Bilateral Migration: Global matrices of bilateral migrant stocks spanning the period 1960-2000, disaggregated by gender and based primarily on the foreign-born concept. Gathered through various censuses. Last updated on 06-28-2011.
+-   Global Bilateral Migration: Global matrices of bilateral migrant
+    stocks spanning the period 1960-2000, disaggregated by gender and
+    based primarily on the foreign-born concept. Gathered through
+    various censuses. Last updated on 06-28-2011.
 
-- World Development Indicators: World development indicators, compiled from officially recognized international sources spanning the period 1960-2000. Last updated on 09-16-2022.
+-   World Development Indicators: World development indicators, compiled
+    from officially recognized international sources spanning the period
+    1960-2000. Last updated on 09-16-2022.
+:::
+
+::: {style="text-align: justify"}
+To answer the research question data regarding migration patterns
+between European nations are necessary. Additional information which
+might possibly influence said migration is also required. The combined
+dataset contains information about multiple nations including all
+European nations. As seen in the table below various characteristics of
+the European nations throughout the decades in the late 20^th^ century
+are also available.
 :::
 
 ```{r, column_names, warning = FALSE, echo = FALSE, message = FALSE}
@@ -204,7 +224,8 @@ knitr::kable(tab)
 ```
 
 ::: {style="text-align: justify"}
-To answer the research question data regarding migration patterns between European nations are necessary. Additional information which might possibly influence said migration is also required. The combined dataset contains information about multiple nations including all European nations. As seen in table various characteristics of the European nations throughout the decades in the late 20^th^ century are also available. This provides the opportunity to analyse the effect of changes within the European nations over the years on migration.
+This provides the opportunity to analyse the effect of changes within
+the European nations over the years on migration.
 
 ```{r, exploration_plots_prep, echo = FALSE, warning = FALSE, message = FALSE}
 library("writexl")
@@ -237,7 +258,21 @@ plot(poland$Year, poland$Telephonesubscriptions, type='l', main='Fixed telephone
 plot(ireland$Year, ireland$Mortalitymale, type='l', main='Male mortality rate in Ireland', xlab='Year', ylab='Mortality rate, adult, male (per 1,000 male adults)')
 ```
 
-The oldest data points stem from 1960, from 1960 onwards European nations have seen quite a number of changes. Some nations within the dataset did not exist in their current condition across all of the years existent in the dataset, Germany for example only exists as Germany whereas for most of the time period represented in the dataset Germany was actually two countries (West Germany and East Germany). This could mean that for some nations the data itself is not completely accurate as the numbers existent in the dataset are a sum of the numbers for both nations. This might skew the data and results.
+The oldest data points stem from 1960, from 1960 onwards European
+nations have seen quite a number of changes. Some nations within the
+dataset did not exist in their current condition across all of the years
+existent in the dataset, Germany for example only exists as Germany
+whereas for most of the time period represented in the dataset Germany
+was actually two countries (West Germany and East Germany). This could
+mean that for some nations the data itself is not completely accurate as
+the numbers existent in the dataset are a sum of the numbers for both
+nations. This might skew the data and results. This for example could
+show up as Germany being a immigration destination/source for many
+former Soviet nations and western European nations both. Whereas in
+reality East Germany was the immigration destination for Soviet nations
+and West Germany the immigration location for Western European nations.
+This will need to be taken into account and any findings regarding these
+aggregated nations will have to backed up by literature research.
 
 ![](images/paste-CE7AF01C.png)
 :::
@@ -461,12 +496,6 @@ Note that the weights of the edges are not included in the analyses, since that 
 
 ### ERGM
 
-(about 1000) -- 2.5 POINTS
-
--   Present your results appropriately (plots, tables...) and discuss your findings in plain English
-
--   Discuss the meaning of your findings in relation to your hypothesis. (half of the points evaluated in this other part)
-
 ::: {style="text-align: justify"}
 As mentioned in the method section of this paper, five different ERGM models have been created to be able to answer the second hypothesis, one model for every decennium in the data. For every model, the appropriate endogenous and exogenous variables have been added. To give an example, in the 1960's mobile phones and the internet did not exist, so here the amount of telephone subscriptions is more appropriate as a measure for technological progress. 
 A couple of different steps have been taken to get to the final model, starting with selecting these endogenous and exogenous variables. For the endogenous variables, the choice to include all of them immediately was made, since the theoretical framework showed that all these variables could have an influence on migration. However, in the first model, the measure `nodecov` was used for these exogenous variables. After trying, it appeared that this was not the most appropriate measure, and it was replaced with `dyadcov`. For the endogenous variables, `gwesp` was first used, based on the idea that there were triangles in the data. However after careful consideration, the conclusion was made that there was no theoretical proof as to why this would be true. Because of that, the measure was removed and replaced with `mutual`. After some discussion, it appeared that `asymmetric` would actually be a more appropriate measure. The goal of asymmetry is capture the fact that if a lot of people move from country A to country B, people are not likely to move from B to A. 
@@ -492,10 +521,20 @@ load("tech5.rda")
 knitr::kable(texreg::matrixreg(tech5))
 ```
 ::: {style="text-align: justify"}
-To be able to answer the hypothesis, both the coefficients as well as the significance need to be taken into account. 
-For the technological development, the focus first needs to be on the telephone subscriptions variable, after that the mobile subscriptions and the internet subscriptions are more representative. For these variables, the three different dyad states are displayed, namely mutual, upper-triangular asymmetric, and lower-triangular asymmetric dyads. 
+Both the overall hypothesis, as well as the hypotheses for the endogenous and exogenous variables need to be answered. In the model, the three different dyad states are displayed, namely mutual, upper-triangular asymmetric, and lower-triangular asymmetric dyads. 
 
-Besides these results, it is also important to have a look at the diagnostics of the model. Firstly, the MCMC diagnostics will be displayed, after that the GOF diagnostics. 
+For our hypotheses, we are only interested in people moving from the row country to the column country, which is captured with the lower-triangular asymmetric dyads. The first hypotheses was that “people will move to countries with a lower mortality rate, compared to the country they are currently living in”. For this we found a positive and significant effect for three of our models, and the others were negative and significant as well as non-significant. Because of this, this hypothesis is partially proven.
+
+The second hypothesis was that “people will move to countries with a higher life expectancy for women, compared to the country they are currently living in”. Two models show a positive and significant effect and two show a negative and significant effect, the last model had a non-significant effect. With this information, this hypothesis cannot be proven. 
+
+The third hypothesis was “people will move to countries with more access to electrical power, compared to the country they are currently living in”. All the models show a negative effect for this measure, so this hypothesis has been disproven. 
+The fourth hypothesis was on technological progress, which was “people will move to countries with more telephone, mobile and internet subscriptions (depending on the model), compared to the country they are currently living in”. The results for these variables are all significant, however both positive and negative correlations have been found. Because of this, this hypothesis cannot be proven. 
+
+Then the final hypothesis was “if people move from country A to country B, it is not likely that people move from country B to country A”. This was measured with asymmetry, for which four out of five results were positive. However, only two were significant, both of which captured a positive effect. Because of this, the hypothesis has been partially proven. 
+
+For the overall hypothesis, the coefficient and its significance need to be compared for all five models. When looking at the results, it does not appear that technological process becomes more important with time. The coefficients of the variables are all very close to each other, and there does not appear to be a change in significance. Because of this, the overall hypothesis cannot be proven. 
+
+Besides these results, it is also important to have a look at the diagnostics of the model. This will show us whether the models used were correct and appropriate for this analysis. Firstly, the MCMC diagnostics will be displayed, after that the GOF diagnostics. 
 For the MCMC diagnostics, the focus will be on the first four plots, the trace of edges, the density of the edges, the trace of asymmetric and the density of asymmetric. To save space, the full MCMC diagnostics will be displayed for the first model only. For the other models, only the first four plots will be displayed.
 :::
 
