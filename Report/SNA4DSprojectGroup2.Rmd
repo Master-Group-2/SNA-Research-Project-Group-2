@@ -2,9 +2,36 @@
 title             : "Migration Network Analysis by Technological Revolution"
 shorttitle        : "Research Project Group 2 ~ SNA4DS"
 author: 
-  - name          : "Harm Booy, Summer van Dongen, Maud Groen, Koen van Hugten, Jeroen Wasser"
+  - name          : "Maud Groen"
     affiliation   : "1"
-    corresponding : yes    # Define only one corresponding author
+    corresponding : yes
+    email         : "m.groen@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Harm Booy"
+    affiliation   : "1"
+    corresponding : no
+    email         : "h.booy@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Summer van Dongen"
+    affiliation   : "1"
+    corresponding : no
+    email         : "s.m.vandongen@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Jeroen Wasser"
+    affiliation   : "1"
+    corresponding : no
+    email         : "j.j.m.wasser@tilburguniversity.edu"
+    role          : "Student"
+  - name          : "Koen van Hugten"
+    affiliation   : "1"
+    corresponding : no
+    email         : "k.w.m.g.vanhugten@tilburguniversity.edu"
+    role          : "Student"  
+affiliation       :
+  - id            : "1"
+    institution   : "Jheronimus Academy of Data Science"
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
 
   Enter author note here.
 keywords          : "keywords"
@@ -13,7 +40,7 @@ bibliography      : ["r-references.bib"]
 toc               : yes
 toc_float         : yes
 floatsintext      : no
-figurelist        : no
+figurelist        : yes
 tablelist         : no
 footnotelist      : no
 linenumbers       : no
@@ -21,7 +48,7 @@ mask              : no
 draft             : no
 documentclass     : "apa6"
 classoption       : "man"
-output            : word_document
+output            : html_document
 editor_options: 
   markdown: 
     wrap: 72
@@ -38,260 +65,814 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
-# Citations in papaja, detele appropriately later
+::: {style="text-align: justify"}
+All the data and code can be found on the following GitHub repository:
+<https://github.com/Master-Group-2/SNA-Research-Project-Group-2>. For
+each part of the process, a different branch has been created.
+:::
 
-Add the bibtex entry in the .bib file. You can find the entries in
-Google scholar, but double check since it is not always correct.
+# Executive Summary
 
-Call the citations in the text:
+::: {style="text-align: justify"}
+A social network analysis of migration in Europe from 1960 to 2000 has
+been conducted to investigate the patterns and trends of migration
+during this period. The study focused on two main research questions:
+"Does Austria have a high centrality in the social network of Europe's
+migration", and "does the technical development of a country have a
+positive effect on the level of migration to that country over time"? To
+investigate the research questions CUG and ERGM models were created to
+check the hypotheses. The results of the study did not support the
+hypothesis that Austria has a high centrality in the social network of
+Europe's migration. The hypothesis, that the technical development of a
+country has a positive effect on the level of migration, also could not
+be proven. The lack of results raises questions about Europe migration
+reasons for future academic research. Overall, the study provides new
+insights into the trends of migration in Europe during the period under
+review.
+:::
 
-Citation within parentheses [@R-papaja]
+# Introduction
 
-Multiple citations [@R-papaja; @R-base]
+::: {style="text-align: justify"}
+Humanity has always moved a lot, for many different reasons, such as
+work or study opportunities, for safety or to join family. Because there
+are so many factors that play a role in migration, a lot of research has
+already been performed on this topic. However, at the same time, there
+are still a lot of things unknown, which is why this paper will
+elaborate further on the topic of migration. In this paper, the focus
+will be specifically on migration within Europe with the use of social
+network analysis.
 
-In-text citations @R-papaja
+The migration rate has increased with time. In 2020, it was estimated
+that 281 million people live in a country that is not their country of
+birth [@united2019world]. This is over three times the estimated number
+in 1970. With this increase in migration, comes a lot of other changes,
+since migration has different effects on a country. For example,
+research has shown that skilled migrants have a positive effect on
+innovation [@fassio2019skilled]. There are also effects on the economy
+since migration "boosts the working-age population" and "contributes to
+technological progress" [@oecd2014is]. Since then, migration had many
+different effects. It is important to know why people move. This way, it
+can be determined which countries will be more affected by migration and
+the effects of it can be anticipated. Dustmann and Frattini
+[-@dustmann2011immigration] found differences in the rate of
+European-born immigrants between different European nations. An example
+they give is Ireland, where 70% of the immigrants are from Europe,
+compared to the UK where only 21% are from Europe.
 
-Year only [-@R-base]
+Researchers have already looked at the reasons why people migrate to
+other countries. The European Parliament has determined three push and
+pull factors for leaving a country, namely the social-political,
+demographic-economic and environmental factors [@europe2020exloring].
+Socio-political factors can be described as persecution, politics
+[@lam2002interaction] or culture [@kontuly1995culture]. Davenport et
+al.[-@davenport2003sometimes] find that threats to personal integrity
+are the most important reason why people migrate. Demographic and
+economic factors are labor standards, unemployment [@davanzo1978does]
+and the country's overall economic health [@czaika2015migration].
+Environmental factors can be fleeing natural disasters
+[@drabo2015natural; @berlemann2017climate] and possible future climate
+changes. An important factor to keep in mind is technology and
+technological developments. Because of technological progress, jobs are
+created as well as destructed [@mortensen1998technological]. According
+to Hillmann et al. [-@hillmann2022technological] this loss of jobs in
+certain segments of the labor market can cause people to move elsewhere.
+Moreover, when the country of origin lacks technological progress,
+outmigration is more attractive.
 
-Only if your citation appears in the text it will also show up in the
-Reference list. Don't manually modify the Reference list.
+To be able to answer the question of why people migrate, two different
+questions need to be answered. First, it needs to be determined through
+which country people migrate and whether this changes over time. With
+this information, possible travel paths can be determined, which can in
+turn help in explaining why and how people migrate. Research has
+determined that "physical distance and border effects are significant
+predictors of migration flows among OECD countries"
+[@tranos2015international]. Here physical distance refers to how close
+countries are to each other. When looking at Europe, this would mean
+that most migrants would travel to our via the middle point of Europe,
+which is Belarus or Lithuania. Based on the border effect, Austria would
+be an interesting node for centrality, since it shares borders with
+eight different countries. Another interesting approach is looking at
+the migration routes and flows in Europe, such as the Western African
+Route, Western Mediterranean Route, Central Mediterranean Route, Western
+Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and The
+Channel Route [@westernroute]. Based on these migration routes, it
+appears that Austria plays an important role in migration within Europe
+[@guggenheim2019what; @ambrosini2016europe]. Based on this information
+the following research question can be formulated:
 
-## Executive Summary
+-   Research Question 1: What effect does a central geographical
+    location have on the centrality within Europe's migration network?
 
-(150 words) -- 0.3 POINTS Summarize the report. Write this as the very
-last thing.
+Besides looking at the network itself, it is important to also take into
+account endogenous and exogenous variables. As mentioned before, many
+different factors have been found that impact migration. In this
+research all of these factors will be considered. There is limited
+research on the impact of technical development on migration. This may
+be due to a variety of factors, such as the inherent challenges in
+studying the relationship between these two phenomena, as well as the
+fact that technical development and migration are complex and
+multifaceted processes that can affect different aspects of society in
+different ways. Additionally, the field of technical development is
+rapidly evolving, making it interesting to investigate the role of
+migration in this area. So we research question that:
 
-What is the main topic you are addressing?
+-   Research Question 2: What effect did the global technological
+    advances have on the migration rates between European countries over
+    time?
 
-what are your research questions and hypotheses?
+For research question 1 it is hypothesized that having a central
+geographical location may have an impact on a nation's number of
+immigrants. For example, countries located in the center of a region may
+experience higher levels of immigration due to their accessibility to
+surrounding countries. Additionally, being located in the center of a
+region may also make a country more attractive to immigrants due to its
+proximity to a variety of economic, cultural, and social opportunities.
+For research question 2 is hypothesized that the technological
+development of a country may have an impact on the level of migration it
+experiences. For example, countries with higher levels of technological
+development may attract more immigrants due to the pull factors that
+draw people to seek out opportunities in these countries. Additionally,
+the availability of technological resources in a country may also impact
+the ability of its citizens to migrate, as access to technology can
+facilitate communication and transportation.
 
-what are your results and the main conclusion?
+As mentioned before, this study makes use of social network analysis, so
+a network has been created for different countries in Europe. In the
+network, each country is a different node and each edge is a stream of
+migration. These edges are also weighted, where the weights represent
+the number of people migrating from one country to another. To decide
+whether Austria has a high centrality, the stress centrality measure was
+used. This measure defines the number of geodesics that pass through a
+country. The country with the highest number will be the most central
+country. To check hypothesis 1, the research has focused on the stress
+centrality of Austria in each decade. With that measure, a CUG test with
+2000 simulations was done. This helps to define whether the centrality
+of Austria is significant compared to what one would expect in a network
+with the same number of vertices and edges as in the observed network.
+To be able to answer the second hypothesis, an ERGM model was created.
+The data gathered for this research consists of five networks on
+different decades, and for each decade a different ERGM will be created.
+Since technological development changed over time, different attributes
+have been added to check for this effect. For example, in the 1960s
+telephone subscriptions were an important indicator, while in the 2000s
+amount of internet and mobile subscriptions tells more about
+technological development. Besides these exogenous variables, some
+control variables were also added. These other exogenous variables are
+the mortality rate for females, the life expectancy and the availability
+of electrical power. Asymmetry was added as an endogenous variable since
+rationale tells us that when a lot of people move from country A to
+country B, it does not make sense that people in country B want to move
+to country A. As mentioned in the theoretical framework, there are
+reasons why people migrate towards and away from countries, so there is
+a reason why people do not want to live in country A. This analysis will
+be run for all five decades, and after that, the estimates and their
+significance can be used to answer the research question. If the
+estimate of the effect of technological development becomes larger and
+more significant, this could mean that technological development becomes
+more important with time.
 
-## Introduction
+The overall hypothesis can be answered using all five ERGMs, however,
+hypotheses also need to be answered for every individual variable
+included in the models. These hypotheses can be seen below:
 
-(about 1000 words) -- 0.5 POINTS Place your topic of choice within the
-existing literature and explain what you are going to address in this
-report and why.
--   What is the main topic that is going to be studied in this paper?
--   Why is it important?
+-   People will move to countries with a lower mortality rate, compared
+    to the country they are currently living in,
+-   People will move to countries with a higher life expectancy for
+    women, compared to the country they are currently living in,
+-   People will move to countries with more access to electrical power,
+    compared to the country they are currently living in,
+-   People will move to countries with more technological progress
+    (telephone, mobile and internet subscriptions or medium high-tech
+    exports and the total amount of technicians depending on the model),
+    compared to the country they are currently living in,
+-   If people move from country A to country B, it is not likely that
+    people move from country B to country A.
 
-Humanity has always moved a lot, for many different reasons, such as work or study opportunities, for safety of to join family. 
-Because there are so many factors that play a role in migration, a lot of research has already been performed on this topic. 
-However, at the same time, there are still a lot of thing unknown, which is why this paper will elaborate further on the topic of migration. 
-In this paper, the focus will be specifically on migration within Europe with the use of social network analysis. 
+So far, the approach used in this research has not been used. By
+combining network analysis with many different variables, the impact of
+the variables can be compared and the most important factor can be
+determined. The results of this research will allow governments to
+better understand migration to and from their countries. With this
+information, governments will be able to better anticipate migration and
+as a result make appropriate preparations. Besides this contribution to
+the practical relevance, this research will also add to the academic
+understanding of migration. As mentioned, the impact of technological
+development on migration has not been measured extensively yet.
+Furthermore, using social network analysis for this research might steer
+researchers into a new approach for migration papers. This paper will
+add to both of these points.
 
-Importance 
-As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. 
-In 2020, it was estimated that 281 million people live in a country that is not their country of birth (United Nations & Nations, 2019).
-This is over three times the estimated number in 1970. 
-With this increase in migration, come a lot of other changes, since migration has different effects on a country. 
-For example, research has shown that skilled migrants have a positive effect on innovation (Fassio et al., 2019). 
-Besides that there are effects on the economy, since migration “boosts the working-age population” and “contributes to technological progress” (OECD, 2014). 
+After this section, the methodology will be discussed, where the data is
+shown, as well as the approach used for the methods. Next will be the
+results, where model summaries, as well as model diagnostics, are
+discussed. These results will then be linked to the hypotheses created
+in the preceding sections. Finally, a conclusion will be drawn, where
+learnings from these models are presented, as well as some limitations
+and recommendations for future work.
+:::
 
-Since it migration has many different effects, it is important to know why people move. 
-This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. 
-In line with this reasoning, Dustmann and Frattini (2011) found differences in the rate of European born immigrants between different European nations. 
-An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe. 
+# Methodology
 
-Current research 
-Some researchers have already looked at the reasons why people migrate to other countries. The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors (Exploring Migration Causes - Why People Migrate | News | European Parliament, 2020).  
+## Dataset
 
-Socio-political factors can be described as persecution, politics (Lam, 2002) or culture (Kontuly & Smith, 1995). Davenport et al. (2003) indeed find that threats to personal integrity are the most important reason why people migrate. 
-Demographic and economic factors are labor standards, unemployment (DaVanzo, 1978) and the country's overall economic health (Czaika, 2014). Finally environmental factors can be fleeing of natural disasters (Drabo & Mbaye, 2014; Berlemann & Steinhardt, 2017) and possibly in the future climate change. 
--	Technical developments
+::: {style="text-align: justify"}
+The data used for the research project consists out of several publicly
+accessible datasets retrieved from the World Bank [@world_bank_data].
+These datasets are:
 
-Hypothesis 
-To be able to answer the question of why people migrate, two different questions need to be answered. First, it needs to be determined through which people migrate and whether this changes over time. With this information, possible travel paths can be determined, which can in turn help in explaining why and how people migrate. 
-Research has determined that “physical distance and border effects are significant predictors of migration flows among OECD countries” (Tranos et al., 2015). Here physical distance refers to how close countries are to each other. When looking at Europe, this would mean that most migrants would travel to our via the middle point of Europe, which is Belarus or Lithuania. 
-Based on boarder effect, Austria would be an interesting node for centrality, since it shares borders with eight different countries. 
-Another interesting approach is looking at the migration routes and flows in Europe, such as the Western African Route, Western Mediterranean Route, Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and the The Channel Route (Western Mediterranean Route, n.d.). Based on these migration routes, it appears that Austria plays an important role for migration within Europe (Guggenheim, 2019, Ambrosini, 2016).
-Based on this information the following hypothesis can be formulated:
+-   Global Bilateral Migration: Global matrices of bilateral migrant
+    stocks spanning the period 1960-2000, disaggregated by gender and
+    based primarily on the foreign-born concept. Gathered through
+    various censuses. Last updated on 06-28-2011.
 
-Austria has a high centrality in the social network of Europe's migration
+-   World Development Indicators: World development indicators, compiled
+    from officially recognized international sources spanning the period
+    1960-2000. Last updated on 09-16-2022.
 
-Besides looking at the network itself, it is important to also take into account endogenous and exogenous variables. 
-As mentioned before, many different factors have been found that impact migration. In this research all of these factors will be considered, and since technical development is becoming more and more important, we hypothesize that: 
+To answer the research question, data regarding migration patterns
+between European nations are necessary. Additional information which
+might possibly influence said migration is also required. The combined
+dataset contains information about multiple nations including all
+European nations. As seen in the table below various characteristics of
+the European nations throughout the decades in the late 20^th^ century
+are also available.
+:::
 
-The technical development of a country will have a more positive effect on the level of migration to that country with time
+```{r, column_names, warning = FALSE, echo = FALSE, message = FALSE}
+library('readxl')
 
-Methods 
-As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights are amount of people migrating from one country to another. 
--	First method
--	Second method: ERGM
+my_data <- read_excel('../attributes_data.xlsx')
 
-Contributions 
-So far, the approach used in this research has not been used. 
-By combining network analysis with many different variables, the impact of the variables can be compared and a most important factor can be determined. 
-As mentioned in the introduction, the results from this research can help countries understand how many migrants are coming to this country, and possibly also why they are coming. 
-With this information, appropriate accommodations can be made for them and the impact of having these migrants can be determined. 
+names <- colnames(my_data)
+numbers <- c(1:length(names))
+tab <- data.frame(numbers, names)
+tab <- setNames(tab, c('Column Number', 'Column Name'))
 
-
--   What does the rest of the report look like? In one short paragraph,
-    list the topics of the following sections.
-
-## Methodology
-
-### Dataset
-
-(about 500 words) 1 POINT (+ BONUS) \* Which data set are you going to
-use? Three options:
-
-o Use readily/easily available data (0 bonus points)
-
-o Combine two or more existing datasets (max 0.5 bonus points)
-
-o Scrape or collect your own data (max. 1 bonus point)
-
--   Clearly explain where the data is coming from:
-
-o Who collected the data?
-
-o What is the source?
-
-o When was the data produced?
-
-o How was the data collected?
-
--   Provide descriptive measures of your data (tables, plots, etc.)
-
--   Why is this data useful to study your topic and answer your research
-    questions?
-
--   What is the potential bias in the data? How does this affect your
-    results?
-
-### Data analysis (Research Rationale)
-
-(about 500 words) -- 1 POINTS \* Why are these two methods suitable for
-your data?
-
--   Why are these two methods suitable for your research questions?
-
--   Are there other methods to address these questions? If yes, why are
-    the methods you chose better for this case?
-
-## Results
-
-(about 2000 words)
-
-### Model 1
-
-(about 1000 words) -- 2.5 POINTS
-
--   Present your results appropriately (plots, tables...) and discuss
-    your findings in plain English
-
--   Discuss the meaning of your findings in relation to your hypothesis.
-    (half of the points evaluated in this other part)
-
-```{r echo = FALSE, results = 'asis'}
-# table example
-cn <- c("age", "gender", "eyes_col")
-one <- c(7, "M", "BLUE")
-two <- c(8, "F", "BROWN")
-three <- c(8, "M", "GREEN")
-four <- c(7, "F", "PINK")
-
-tab <- rbind(cn, one, two, three, four)
-rownames(tab) <- NULL
 knitr::kable(tab)
 ```
 
-### ERGM
+::: {style="text-align: justify"}
+This provides the opportunity to analyse the effect of changes within
+the European nations over the years on migration.
+:::
 
-(about 1000) -- 2.5 POINTS
+```{r, exploration_plots_prep, echo = FALSE, warning = FALSE, message = FALSE}
+library("writexl")
+library("dplyr")
+library("ggplot2")
 
--   Present your results appropriately (plots, tables...) and discuss
-    your findings in plain English
+# Migration data
+migration_data <- read_excel('../migration_data.xlsx')
 
--   Discuss the meaning of your findings in relation to your hypothesis.
-    (half of the points evaluated in this other part)
+# Rename additional attributes
+drop <- c("Time Code", "Country Code")
+info_data = my_data[,!(names(my_data) %in% drop)]
+info_data <- setNames(info_data, c("Year", "Country", "Airtransport", "Energy", "Cereal", "Electricpower", "Employers", "Telephonesubscriptions", "GDP", "Internet", "Lifeexpectancy", "Techexports", "Techmanufacturing", "Mobilesubscriptions", "Mortalityfemale", "Mortalitymale", "Drinkingwater", "Journalarticles", "Internetservers", "Survival65female", "Survival65male", "Technicians"))
 
-Option 1:
-
-```{r model 1, echo = FALSE}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
-
-# install.packages("texreg")
-
-knitr::kable(texreg::matrixreg(lm.D9))
-
-
+# Filters for plots
+netherlands <- info_data %>% filter(Country == 'Netherlands')
+poland <- info_data %>% filter(Country == 'Poland')
+ireland <- info_data %>% filter(Country == 'Ireland')
 ```
 
-Option 2
-
-```{r model 2, echo = FALSE, results = 'asis'}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
-
-# install.packages("texreg")
-
-knitr::kable(texreg::matrixreg(list(lm.D9, lm.D90)))
-
-
+```{r, exploration_plot_one, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'GDP growth in the Netherlands'}
+plot(netherlands$Year, netherlands$GDP, type='l', main='GDP Growth for the Netherlands', xlab='Year', ylab='Growth in percentage')
 ```
 
-Option 3
-
-```{r model 3, echo = FALSE}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
-
-# install.packages("texreg")
-
-
-texreg::plotreg(lm.D9)
-
-
+```{r, exploration_plot_two, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'Telephone subscriptions in Poland'}
+plot(poland$Year, poland$Telephonesubscriptions, type='l', main='Fixed telephone subscriptions in Poland', xlab='Year', ylab='Amount of fixed telephone subscriptions')
 ```
 
-Option 4
-
-```{r model 4, echo = FALSE}
-# model results display example
-ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight <- c(ctl, trt)
-lm.D9 <- lm(weight ~ group)
-lm.D90 <- lm(weight ~ group - 1)
-
-# install.packages("texreg")
-
-texreg::plotreg(list(lm.D9, lm.D90))
-
+```{r, exploration_plot_three, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'Mortality rate of males in Ireland'}
+plot(ireland$Year, ireland$Mortalitymale, type='l', main='Male mortality rate in Ireland', xlab='Year', ylab='Mortality rate, adult, male (per 1,000 male adults)')
 ```
 
-## Conclusion
+::: {style="text-align: justify"}
+The oldest data points stem from 1960, from 1960 onwards European
+nations have seen quite a number of changes. Some nations within the
+dataset did not exist in their current condition across all of the years
+existent in the dataset, Germany for example only exists as Germany
+whereas for most of the time period represented in the dataset Germany
+was actually two countries (West Germany and East Germany). This could
+mean that for some nations the data itself is not completely accurate as
+the numbers existent in the dataset are a sum of the numbers for both
+nations. This might skew the data and results. This for example could
+show up as Germany being an immigration destination/source for many
+former Soviet nations and Western European nations both. Whereas in
+reality, East Germany was the immigration destination for Soviet nations
+and West Germany the immigration location for Western European nations.
+This will need to be taken into account and any findings regarding these
+aggregated nations will have to back up by literature research.
+:::
 
-(about 350 words) -- 0.7 POINTS What were your topic and research
-questions again? (1 sentence)
+![](images/paste-CE7AF01C.png)
 
-What did you learn from the two analysis you run? \*\*\* most important
-point to address 0.5 POINTS here
+# Research Rationale
 
-Who benefits from your findings?
+::: {style="text-align: justify"}
+The stress centrality measure in combination with the CUG tests helps to
+find an answer on whether Austria is a central country in Europe's
+migrant streams or not. The stress centrality measure fits this purpose
+because it considers incoming as well as outgoing edges. So, in that
+way, it simulates migrant streams through a country. Furthermore, this
+measure does not consider streams that end or start in Austria.
+Therefore, one can really see whether Austria is the central player, or
+in other words, the country that 'divides' all migrants through Europe
+and the country that incoming migrants use to get to other countries in
+Europe. The CUG tests help to see how high the average centrality in a
+network with a similar number of edges and vertices would 'normally' be,
+compared to the observed network. Therefore, one can argue whether
+Austria is a more central country than expected or not.
 
-What does remain an open problem?
+Looking at the stress centrality measure, one could also have chosen
+numerous other centrality measures. For instance, the eccentricity
+measure determines the maximum number of steps needed to reach any other
+country in the network. The country with the minimum eccentricity would
+be the most central country. However, this does not fit the purpose of
+this research since the measure only considers outgoing edges. The
+Shapley centrality would have been a good measure since it can also
+consider the weights, so the intensity of a migrant stream
+[@michalak2013efficient]. However, this method is currently not applied
+in R.
 
-Can you give suggestions for future work in this area?
+ERGM is used for the second hypothesis based on multiple reasons.
+Firstly, the data studied is network data as the focus of the project is
+on different countries and the relationships between them. Besides that,
+there are both network effects as well as effects coming outside of the
+network. Since ERGM can estimate the effect of both of these variables,
+it is the most suitable method for this research question. However,
+there are two other variations of ERGM that could address this research
+question. Firstly, the network can be seen as a temporal network,
+because it has data on five different decades. This means that another
+approach could be to use a TERGM, or temporal ERGM. However, as
+mentioned in the methods section, the attribute variables included vary
+over time. For example, internet access is zero in the first few
+decades, because it did not exist back then. Same for the number of
+telephone subscriptions, first this was a good indicator of
+technological progress, but now people only use mobiles. Because of
+this, TERGM cannot measure what happens over time, and what the effect
+of these variables is. Another option was weighted ERGM's, since the
+edge attributes are weighted. However, a weighted ERGM only works well
+when the network is dense enough. Statistics about the network showed
+that the network used in this research is not that dense, meaning that
+weighted ERGM's are also not appropriate. Overall, for this research
+regular ERGM's seem to be the best approach.
+:::
+
+# Results
+
+## Model 1
+
+::: {style="text-align: justify"}
+The centrality of Austria was estimated by the stress centrality
+measure. The centrality was calculated for every country in the network,
+in each decade that is represented in the dataset. The results of those
+centrality calculations for every country can be seen in the table
+below.
+:::
+
+```{r, centrality_table, echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+## Load cleaned data
+load('../migration_networks.RData')
+
+## Centrality Analysis
+centrality_analysis <- function(igraph_graphs, years){
+  countries <- igraph::get.vertex.attribute(igraph_graphs[[1]], 'name')
+  central_data <- data.frame(countries)
+  colnames(central_data) <- 'Country'
+  
+  for (index in 1:length(years)){
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[[index]])
+  }
+  central_data
+}
+
+years <- c(1960, 1970, 1980, 1990, 2000)
+central_data <- centrality_analysis(migration_networks, years)
+
+## Show dataset head
+knitr::kable(central_data)
+```
+
+::: {style="text-align: justify"}
+The results for Austria, compared to other countries, show that Austria
+was at the higher end of the most central countries in Europe in 1960
+and 1970. In later decades, Austria seems to have an average stress
+centrality in Europe. The results from to the table are plotted below to
+get a better view on the (most) central countries for migrant streams in
+Europe. The vertex size corresponds with the stress centrality of a
+country (vertex). The edge width corresponds with the edge weight, i.e.,
+the number of migrants in that decade.
+:::
+
+```{r, centrality_plots, echo = FALSE, results = 'asis', warning = FALSE, out.width= '100%', message = FALSE, fig.height = 27}
+par(mfrow=c(5,1))
+
+### 1960
+color <- rep('red', snafun::count_vertices(migration_networks[[1]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1960']
+central_countries_1960 <- which(central_data['Centrality_1960'] >= austria_centrality)
+color[central_countries_1960] <- 'green'
+
+snafun::plot(migration_networks[[1]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1960']]),
+             edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1960',
+             layout = igraph::layout_in_circle,
+             label.cex = 0.6)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1970
+color <- rep('red', snafun::count_vertices(migration_networks[[2]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1970']
+central_countries_1970 <- which(central_data['Centrality_1970'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[2]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1970']]),
+             edge.width = igraph::E(migration_networks[[2]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1970',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1980
+color <- rep('red', snafun::count_vertices(migration_networks[[3]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1980']
+central_countries_1970 <- which(central_data['Centrality_1980'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[3]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1980']]),
+             edge.width = igraph::E(migration_networks[[3]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1980',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1990
+color <- rep('red', snafun::count_vertices(migration_networks[[4]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1990']
+central_countries_1970 <- which(central_data['Centrality_1990'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[4]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1990']]),
+             edge.width = igraph::E(migration_networks[[4]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1990',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 2000
+color <- rep('red', snafun::count_vertices(migration_networks[[5]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_2000']
+central_countries_1970 <- which(central_data['Centrality_2000'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[5]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_2000']]),
+             edge.width = igraph::E(migration_networks[[5]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 2000',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+```
+
+::: {style="text-align: justify"}
+The plots show indeed that as of 1980, there are more countries within
+Europe that are more central than Austria regarding migrant streams.
+Poland seems to have the highest stress centrality in all decades except
+for 2000. In that decade, the differences are not that clear. In every
+decade, Poland has clear links with Germany (and France) and with
+Ukraine (and Belarus). That shows that Poland acts as a central player
+in the migrant stream from east to west or west to east. For Austria,
+those links are not that clear from the plot. The only clear link is the
+one with Germany but that doesn't show centrality of Austria. The
+migration routes that were shown by Guggenheim [-@guggenheim2019what],
+cannot be seen in these observations. However, looking at the color
+distributions of all plots, Austria is always a country that has a
+higher centrality than many other countries in Europe. All in all, the
+plots give an indication that Austria is not the country with the
+highest stress centrality in Europe, but does not belong to the lower
+end either.
+
+However, the plots do not give a statistically decisive judgement about
+the significance of Austria's centrality. To get a better view of on
+that, the CUG tests are used. For each decade, the stress centrality of
+Austria is compared with the average expected centrality for a network
+with the same number of vertices and edges. Each CUG test has simulated
+2000 similar networks. The average stress centrality was stored for
+every simulation. The empirical results can be seen below for every
+decade, where the simulations are represented by the density plot and
+the stress centrality of Austria is represented by the dashed line.
+:::
+
+```{r, cug_plots, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.height = 7}
+load('../cug_tests.RData')
+aus_stress <- central_data[central_data$Country == 'Austria',]
+
+par(mfrow=c(3,2))
+
+### Plots
+plot(density(cug_tests[[1]]), xlim = c(aus_stress[[2]] - 10, max(density(cug_tests[[1]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1960', xlab = 'Stress centrality')
+  abline(v = aus_stress[[2]], lty = 'dashed')
+  
+
+plot(density(cug_tests[[2]]), xlim = c(aus_stress[[3]] - 10, max(density(cug_tests[[2]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1970', xlab = 'Stress centrality')
+  abline(v = aus_stress[[3]], lty = 'dashed')
+  
+plot(density(cug_tests[[3]]), xlim = c(aus_stress[[4]] - 10, max(density(cug_tests[[3]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1980', xlab = 'Stress centrality')
+  abline(v = aus_stress[[4]], lty = 'dashed')
+  
+plot(density(cug_tests[[4]]), xlim = c(aus_stress[[5]] - 10, max(density(cug_tests[[4]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 1990', xlab = 'Stress centrality')
+  abline(v = aus_stress[[5]], lty = 'dashed')
+  
+plot(density(cug_tests[[5]]), xlim = c(aus_stress[[6]] - 10, max(density(cug_tests[[5]])[['x']] + 10)),
+       main = 'Empirical stress centrality distribution of networks \n similar to the one observed in 2000', xlab = 'Stress centrality')
+  abline(v = aus_stress[[6]], lty = 'dashed')
+```
+
+::: {style="text-align: justify"}
+In every decade, the stress centrality of Austria seems to be
+exceptionally lower than networks with a similar number of vertices and
+directed edges. To quantify how exceptional this difference is, the
+proportion of stress centralities that are higher than the stress
+centrality of Austria were calculated for every decade. The results can
+be seen below.
+:::
+
+```{r, quantification, echo = FALSE, warning = FALSE, message = FALSE}
+Year <- c(1960, 1970, 1980, 1990, 2000)
+Prop <- c()
+for (i in 1:length(Year)){
+  Prop <- c(Prop, mean(aus_stress[[i + 1]] < cug_tests[[i]]))
+}
+quantification <- cbind(Year, Prop)
+colnames(quantification) <- c('Year', 'Proportion of centralities higher than Austria')
+
+knitr::kable(quantification)
+```
+
+::: {style="text-align: justify"}
+So, 100% of all networks with the same number of vertices and directed
+edges have a higher stress centrality than Austria has, in every decade
+that has been analyzed. With that, it can be said that the stress
+centrality of Austria is statistically significantly lower than what
+would have been expected for a network with this number of vertices and
+directed edges.
+
+Hypothesis 1 predicted that Austria has a high centrality in the social
+network of Europe's migration. The results do not support this
+hypothesis. Therefore, this hypothesis is rejected. Whereas Austria
+belongs to the higher end of the centralities of European countries,
+considering the stress centrality plots, the number is expected to be
+higher for a network that is similar to the European migrant network.
+:::
+
+## ERGM
+
+::: {style="text-align: justify"}
+As mentioned in the method section of this paper, five different ERGM
+models have been created to be able to answer the second hypothesis, one
+model for every decennium in the data. For every model, the appropriate
+endogenous and exogenous variables have been added. To give an example,
+in the 1960's mobile phones and the internet did not exist, so here the
+amount of telephone subscriptions is more appropriate as a measure for
+technological progress. A couple of different steps have been taken to
+get to the final model, starting with selecting these endogenous and
+exogenous variables. For the endogenous variables, the choice to include
+all of them immediately was made, since the theoretical framework showed
+that all these variables could have an influence on migration. However,
+in the first model, the measure `nodecov` was used for these exogenous
+variables. After trying, it appeared that this was not the most
+appropriate measure, and it was replaced with `dyadcov`. For the
+endogenous variables, `gwesp` was first used, based on the idea that
+there were triangles in the data. However after careful consideration,
+the conclusion was made that there was no theoretical proof as to why
+this would be true. Because of that, the measure was removed and
+replaced with `mutual`. After some discussion, it appeared that
+`asymmetric` would actually be a more appropriate measure. The goal of
+asymmetry is capture the fact that if a lot of people move from country
+A to country B, people are not likely to move from B to A. After all
+these variables have been selected, the MCMC specifications were added.
+The first attempt used 1000 samples, a burn-in of 500 and 10 iterations.
+However, the laptops used in this research were not able to handle this
+much data, and after three days and nights, only 4 iterations were
+complete. After this, it was decided to reduce the amount of samples and
+iterations, to 500 samples, 250 burn-in and 4 iterations. However, after
+another day and night, this model got stuck around 3 iterations. Because
+of this, an even smaller sample size and number of iterations have been
+chosen, namely 100 samples, a burn-in of 50 and 2 iterations. Some
+models were not able too run because the sample size was too small, so
+for these models the sample size was set higher. With these
+specifications, all the models were able to run, however the GOF will
+likely not be good. This will be discussed further on in this section,
+as well as in the limitation section of this paper. The summary of these
+five final models can be found below.
+:::
+
+```{r, echo=FALSE}
+load("tech1.rda")
+knitr::kable(texreg::matrixreg(tech1))
+
+load("tech2.rda")
+knitr::kable(texreg::matrixreg(tech2))
+
+load("tech3.rda")
+knitr::kable(texreg::matrixreg(tech3))
+
+load("tech4.rda")
+knitr::kable(texreg::matrixreg(tech4))
+
+load("tech5.rda")
+knitr::kable(texreg::matrixreg(tech5))
+```
+
+::: {style="text-align: justify"}
+Both the overall hypothesis, as well as the hypotheses for the
+endogenous and exogenous variables need to be answered. In the model,
+the three different dyad states are displayed, namely mutual,
+upper-triangular asymmetric, and lower-triangular asymmetric dyads.
+
+For our hypotheses, we are only interested in people moving from the row
+country to the column country, which is captured with the
+lower-triangular asymmetric dyads. The first hypotheses was that "people
+will move to countries with a lower mortality rate, compared to the
+country they are currently living in". For this we found a positive and
+significant effect for three of our models, and the others were negative
+and significant as well as non-significant. Because of this, this
+hypothesis is partially proven.
+
+The second hypothesis was that "people will move to countries with a
+higher life expectancy for women, compared to the country they are
+currently living in". Two models show a positive and significant effect
+and two show a negative and significant effect, the last model had a
+non-significant effect. With this information, this hypothesis cannot be
+proven.
+
+The third hypothesis was "people will move to countries with more access
+to electrical power, compared to the country they are currently living
+in". All the models show a negative effect for this measure, so this
+hypothesis has been disproven. The fourth hypothesis was on
+technological progress, which was "people will move to countries with
+more telephone, mobile and internet subscriptions (depending on the
+model), compared to the country they are currently living in". The
+results for these variables are all significant, however both positive
+and negative correlations have been found. Because of this, this
+hypothesis cannot be proven.
+
+Then the final hypothesis was "if people move from country A to country
+B, it is not likely that people move from country B to country A". This
+was measured with asymmetry, for which four out of five results were
+positive. However, only two were significant, both of which captured a
+positive effect. Because of this, the hypothesis has been partially
+proven.
+
+For the overall hypothesis, the coefficient and its significance need to
+be compared for all five models. When looking at the results, it does
+not appear that technological process becomes more important with time.
+The coefficients of the variables are all very close to each other, and
+there does not appear to be a change in significance. Because of this,
+the overall hypothesis cannot be proven.
+
+Besides these results, it is also important to have a look at the
+diagnostics of the model. This will show us whether the models used were
+correct and appropriate for this analysis. Firstly, the MCMC diagnostics
+will be displayed, after that the GOF diagnostics. For the MCMC
+diagnostics, the focus will be on the first four plots, the trace of
+edges, the density of the edges, the trace of asymmetric and the density
+of asymmetric. To save space, the full MCMC diagnostics will be
+displayed for the first model only. For the other models, only the first
+four plots will be displayed.
+:::
+
+```{r, echo=FALSE, warning=FALSE, out.width= '100%', fig.height = 7}
+tech1.mcmc <- ergm::mcmc.diagnostics(tech1)
+knitr::kable(tech1.mcmc)
+```
+
+::: {style="text-align: justify"}
+![MCMC diagnostics: model 1970](images/MCMC%20model%202.png)
+
+![MCMC diagnostics: model 1980](images/MCMC%20model%203.png)
+
+![MCMC diagnostics: model 1990](images/MCMC%20model%204.png)
+
+![MCMC diagnostics: model 2000](images/MCMC%20model%205.png)
+
+When looking at these diagnostics, the traces are all centered around
+zero, which is a good sign. However, they are not very 'fuzzy', probably
+because of the low amount of samples and iterations. This will be
+further discussed in the limitations section. When looking at the
+density of the edges and asymmetric, they appear to be normally
+distributed, with the only exception being the second model. Especially
+the density of asymmetry is not completely normally distributed,
+probably due to the same limitations as before.
+
+The goodness of fit can also be plotted for all the models, which can be
+seen below.
+:::
+
+```{r, error=TRUE, echo=FALSE, out.width= '100%', fig.height = 7}
+load("tech1gof.rda")
+
+knitr::kable(snafun:: stat_plot_gof(tech1.gof))
+
+load("tech2gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech2.gof))
+
+load("tech3gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech3.gof))
+
+load("tech4gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech4.gof))
+
+load("tech5gof.rda")
+knitr::kable(snafun:: stat_plot_gof(tech5.gof))
+```
+
+::: {style="text-align: justify"}
+As can be seen in these goodness of fit results, the models are not yet
+correct. For the fit of the model to be good, the black line needs to be
+close to the blue diamonds, which is not the case for any of the
+diagnostics. Because of this, the model interpretation is also limited,
+which will be discussed in the next section.
+:::
+
+# Conclusion
+
+::: {style="text-align: justify"}
+People choose to immigrate for a variety of different reasons, in this
+paper the effect of technological development on European immigration
+was studied. The following research questions were formulated to help
+with this research:
+
+Research Question 1: What effect does a central geographical location
+have on the centrality within Europe's migration network?
+
+Research Question 2: What effect did the global technological advances
+have on the migration rates between European countries over time?
+
+The stress centrality of Austria as the most central European was taken
+to discern if the central geographical location had any significant
+effect on the stress level within the network. A CUG test was performed
+which showed that Austria had a lower than expected stress level for a
+network of this structure. As such it can be concluded that a central
+geographical location has no correlation with a higher stress
+centrality.
+
+When looking at the overall results of the different hypotheses per
+decade and comparing the significances and coefficients per decade, it
+did not appear that the technological processes became more important
+per decade. The MCMC diagnostics were all centered around zero. However,
+because of the low amount of samples and iterations the plots was not
+very 'fuzzy'. The GOF showed that our simulated networks did not
+represent our actual network and as such the models were found not
+usable. Because of this we could not use the results that we found to
+answer our research question. Possible stakeholders who could benefit
+from these findings are politicians and members of the European
+Parliament (EMP) who are trying to understand the migration patterns and
+underlying reasons of why people move between European nations to a
+greater extent.
+
+Since the models were not run using a proper sample size, burning and
+iterations, the results (MCMC diagnostics and GOF) might differ a lot
+when running them using a higher number. Due to hardware and time
+constraints this was not possible. This could be tackled by utilizing
+different optimization routines like stochastic approximation or by
+using more powerful hardware that is given more time to simulate the
+networks. At this moment we used non-ideal variables to estimate
+technological development. Future research could take into account other
+variables (e.g. amount of people employed in tech sector) to see if this
+better captures the effect of technological development.
+:::
 
 \newpage
 
@@ -307,4 +888,496 @@ Can you give suggestions for future work in this area?
 
 ```{=tex}
 \endgroup
+```
+# Appendix
+
+## Appendix 1: Data exploration
+
+```{r, exploration_plots_prep2, warning = FALSE, message = FALSE, eval=FALSE}
+library("writexl")
+library("dplyr")
+library("ggplot2")
+library("readxl")
+
+# Migration data
+migration_data <- read_excel('../migration_data.xlsx')
+
+# Rename additional attributes
+drop <- c("Time Code", "Country Code")
+info_data = my_data[,!(names(my_data) %in% drop)]
+info_data <- setNames(info_data, c("Year", "Country", "Airtransport", "Energy", "Cereal", "Electricpower", "Employers", "Telephonesubscriptions", "GDP", "Internet", "Lifeexpectancy", "Techexports", "Techmanufacturing", "Mobilesubscriptions", "Mortalityfemale", "Mortalitymale", "Drinkingwater", "Journalarticles", "Internetservers", "Survival65female", "Survival65male", "Technicians"))
+
+# Filters for plots
+netherlands <- info_data %>% filter(Country == 'Netherlands')
+poland <- info_data %>% filter(Country == 'Poland')
+ireland <- info_data %>% filter(Country == 'Ireland')
+```
+
+```{r, exploration_plot_one2, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'GDP growth in the Netherlands', eval=FALSE}
+plot(netherlands$Year, netherlands$GDP, type='l', main='GDP Growth for the Netherlands', xlab='Year', ylab='Growth in percentage')
+```
+
+```{r, exploration_plot_two2, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'Telephone subscriptions in Poland', eval=FALSE}
+plot(poland$Year, poland$Telephonesubscriptions, type='l', main='Fixed telephone subscriptions in Poland', xlab='Year', ylab='Amount of fixed telephone subscriptions')
+```
+
+```{r, exploration_plot_three2, warning = FALSE, message = FALSE, out.width= '100%', fig.cap = 'Mortality rate of males in Ireland', eval=FALSE}
+plot(ireland$Year, ireland$Mortalitymale, type='l', main='Male mortality rate in Ireland', xlab='Year', ylab='Mortality rate, adult, male (per 1,000 male adults)')
+```
+
+Example of a plot used to explore the structure of the network
+
+```{r, error=TRUE}
+load("network.rda")
+plot(migration_networks[[1]],
+     vertex.shape="circle",
+     layout = igraph::layout_randomly,
+     main= "Migrations between EU countries 1960",
+     edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+     edge.arrow.size = 0.1,
+     vertex.color = igraph::V(migration_networks[[1]])$color,
+     vertex.size = 10,
+     vertex.label.color = 'black',
+)
+
+plot(migration_networks[[1]],
+     vertex.shape="circle",
+     layout = igraph::layout.fruchterman.reingold,
+     main= "Migrations between EU countries 1960",
+     edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+     edge.arrow.size = 0.1,
+     vertex.color = igraph::V(migration_networks[[1]])$color,
+     vertex.size = 10,
+     vertex.label.color = 'black',
+)
+```
+
+A summary was created for every network to get some sense of the
+network's statistics
+
+```{r, error=TRUE}
+snafun::g_summary(migration_networks[[1]])
+snafun::g_summary(migration_networks[[2]])
+snafun::g_summary(migration_networks[[3]])
+snafun::g_summary(migration_networks[[4]])
+snafun::g_summary(migration_networks[[5]])
+```
+
+Example of statistics that have been run
+
+```{r, eval=FALSE}
+snafun::g_diameter(migration_networks[[1]])
+snafun::g_density(migration_networks[[1]])
+snafun::g_reciprocity(migration_networks[[1]])
+snafun::g_diameter(migration_networks[[1]])
+snafun::g_radius(migration_networks[[1]])
+```
+
+## Appendix 2: CUG exploration
+
+```{r, eval=FALSE}
+library(gridExtra)
+
+## Load cleaned data
+load('migration_networks.RData')
+
+## Centrality Analysis Function
+centrality_analysis <- function(igraph_graphs, years){
+  countries <- igraph::get.vertex.attribute(igraph_graphs[[1]], 'name')
+  central_data <- data.frame(countries)
+  colnames(central_data) <- 'Country'
+  
+  for (index in 1:length(years)){
+    central_data[sprintf('Centrality_%s', years[index])] <- snafun::v_stress(igraph_graphs[[index]])
+  }
+  central_data
+}
+
+## Centrality Analysis
+years <- c(1960, 1970, 1980, 1990, 2000)
+central_data <- centrality_analysis(migration_networks, years)
+
+## Centrality Plots
+
+### 1960
+color <- rep('red', snafun::count_vertices(migration_networks[[1]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1960']
+central_countries_1960 <- which(central_data['Centrality_1960'] >= austria_centrality)
+color[central_countries_1960] <- 'green'
+
+snafun::plot(migration_networks[[1]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1960']]),
+             edge.width = igraph::E(migration_networks[[1]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1960',
+             layout = igraph::layout_in_circle,
+             label.cex = 0.6)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1970
+color <- rep('red', snafun::count_vertices(migration_networks[[2]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1970']
+central_countries_1970 <- which(central_data['Centrality_1970'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[2]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1970']]),
+             edge.width = igraph::E(migration_networks[[2]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1970',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1980
+color <- rep('red', snafun::count_vertices(migration_networks[[3]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1980']
+central_countries_1970 <- which(central_data['Centrality_1980'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[3]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1980']]),
+             edge.width = igraph::E(migration_networks[[3]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1980',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 1990
+
+color <- rep('red', snafun::count_vertices(migration_networks[[4]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_1990']
+central_countries_1970 <- which(central_data['Centrality_1990'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[4]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_1990']]),
+             edge.width = igraph::E(migration_networks[[4]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 1990',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+### 2000
+
+color <- rep('red', snafun::count_vertices(migration_networks[[5]]))
+austria_centrality <- central_data[central_data['Country'] == 'Austria', 'Centrality_2000']
+central_countries_1970 <- which(central_data['Centrality_2000'] >= austria_centrality)
+color[central_countries_1970] <- 'green'
+
+snafun::plot(migration_networks[[5]],
+             vertex.shape = 'circle',
+             vertex.color = color,
+             vertex.size = sqrt(central_data[['Centrality_2000']]),
+             edge.width = igraph::E(migration_networks[[5]])$weight.scaled*15,
+             edge.arrow.size = 0.2,
+             vertex.label.color = 'black',
+             main = 'Stress centrality per country \n in 2000',
+             layout = igraph::layout_in_circle)
+
+graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = "#777777", pt.bg = c('green', 'red'), pt.cex = 2, cex = .8, bty = "n", ncol = 1)
+
+## CUG Test Manually
+
+### Find centrality scores of Austria
+aus_stress <- central_data[central_data$Country == 'Austria',]
+
+### Count edges and vertices per year
+edges <- c()
+vertices <- c()
+
+for (i in 1:length(years)){
+  edges <- c(edges, snafun::count_edges(migration_networks[[i]]))
+  vertices <- c(vertices, snafun::count_vertices(migration_networks[[i]]))
+}
+
+### Create manual simulation
+sim_manual <- function(simulations, edges, vertices){
+  sim_results <- c()
+  for (i in 1:simulations){
+    sim <- snafun::create_random_graph(n_vertices = vertices,
+                                       strategy = "gnm",
+                                       m = edges,
+                                       directed = TRUE,
+                                       graph = "network")
+    max_stress <- mean(snafun::v_stress(sim))
+    sim_results <- c(sim_results, max_stress)
+  }
+  sim_results
+}
+
+cug_tests <- list()
+for (i in 1:length(years)){
+  cug_tests[[i]] <- sim_manual(2000, edges[i], vertices[i])
+}
+
+### Plot Results
+for (i in 1:length(cug_tests)){
+  plot(density(cug_tests[[i]]), xlim = c(aus_stress[[i + 1]] - 10, max(density(cug_tests[[i]])[['x']] + 10)),
+       main = 'Centrality of Austria compared to average centrality of simulations')
+  abline(v = aus_stress[[i + 1]], lty = 'dashed')
+  mean(cug_tests[[i]] > aus_stress[[i + 1]])
+}
+
+### Store Results
+save(cug_tests, file = 'cug_tests.RData')
+```
+
+## Appendix 3: ERGM exploration
+
+The final models are displayed below: Very first decenium
+
+```{r,warning=FALSE, message=FALSE, eval=FALSE}
+library("igraph")
+library("stringi")
+
+# The weights were scaled to be able to visualize the plots, after this, it had to be removed
+migration_networks[[1]] <- delete_edge_attr(migration_networks[[1]], 'weightscaled')
+
+# To be able to work with ERGM, the igraph object is transformed to a network
+migration_networks[[1]] <- snafun::to_network(migration_networks[[1]])
+```
+
+```{r, eval=FALSE}
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1960) + dyadcov(life_expectancy__df_1960) + dyadcov(telephone_subscriptions_df_1960) + dyadcov(electrical_power_df_1960),  
+                    control = ergm::control.ergm(MCMC.burnin = 50,
+                                                 MCMC.samplesize = 100,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 2,
+                                                 parallel = 3,
+                                                 parallel.type = "PSOCK"))
+save(tech1, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1.rda")
+```
+
+Second decenium
+
+```{r, eval=FALSE}
+migration_networks[[2]] <- delete_edge_attr(migration_networks[[2]], 'weightscaled')
+migration_networks[[2]] <- snafun::to_network(migration_networks[[2]])
+```
+
+```{r, eval=FALSE}
+tech2 <- ergm::ergm(migration_networks[[2]] ~ edges + asymmetric + dyadcov(mortality_rate_female_df_1970) + dyadcov(life_expectancy__df_1970) + dyadcov(telephone_subscriptions_df_1970) + dyadcov(electrical_power_df_1970),  
+                    control = ergm::control.ergm(MCMC.burnin = 50,
+                                                 MCMC.samplesize = 100,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 2,
+                                                 parallel = 4,
+                                                 parallel.type = "PSOCK"))
+save(tech2, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2.rda")
+```
+
+Third decenium
+
+```{r, eval=FALSE}
+migration_networks[[3]] <- delete_edge_attr(migration_networks[[3]], 'weightscaled')
+migration_networks[[3]] <- snafun::to_network(migration_networks[[3]])
+```
+
+```{r, eval=FALSE}
+tech3 <- ergm::ergm(migration_networks[[3]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1980) + dyadcov(mortality_rate_female_df_1980) + dyadcov(electrical_power_df_1980) + dyadcov(mobile_subscriptions_df_1980) + dyadcov(telephone_subscriptions_df_1980),  
+                    control = ergm::control.ergm(MCMC.burnin = 400,
+                                                 MCMC.samplesize = 800,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 2,
+                                                 parallel = 4,
+                                                 parallel.type = "PSOCK"))
+
+save(tech3, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3.rda")
+
+# Removed internet subscriptions because it caused the summary to return NaN values
+#+ dyadcov(internet_subscriptions_df_1980)
+```
+
+Fourth decenium
+
+```{r, eval=FALSE}
+migration_networks[[4]] <- delete_edge_attr(migration_networks[[4]], 'weightscaled')
+migration_networks[[4]] <- snafun::to_network(migration_networks[[4]])
+```
+
+```{r, eval=FALSE}
+tech4 <- ergm::ergm(migration_networks[[4]] ~ edges + asymmetric + dyadcov(life_expectancy__df_1990) + dyadcov(mortality_rate_female_df_1990) + dyadcov(mediumhightech_exports_df_1990) + dyadcov(electrical_power_df_1990) + dyadcov(mobile_subscriptions_df_1990),  
+                    control = ergm::control.ergm(MCMC.burnin = 100,
+                                                 MCMC.samplesize = 200,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 10,
+                                                 parallel = 4,
+                                                 parallel.type = "PSOCK"))
+save(tech4, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4.rda")
+```
+
+Fifth decenium
+
+```{r, eval=FALSE}
+migration_networks[[5]] <- delete_edge_attr(migration_networks[[5]], 'weightscaled')
+migration_networks[[5]] <- snafun::to_network(migration_networks[[5]])
+```
+
+```{r, eval=FALSE}
+tech5 <- ergm::ergm(migration_networks[[5]] ~ edges + asymmetric + dyadcov(life_expectancy__df_2000) + dyadcov(mortality_rate_female_df_2000) + dyadcov(mediumhightech_exports_df_2000) + dyadcov(electrical_power_df_2000) + dyadcov(internet_subscriptions_df_2000) + dyadcov(mobile_subscriptions_df_2000) + dyadcov(technicians_rd_df_2000),  
+                    control = ergm::control.ergm(MCMC.burnin = 50,
+                                                 MCMC.samplesize = 100,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 2,
+                                                 parallel = 4,
+                                                 parallel.type = "PSOCK"))
+save(tech5, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5.rda")
+```
+
+Below, all the iterations made are displayed for the first model,
+starting with a model with `triangles` and `nodecov`
+
+```{r, eval=FALSE}
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + gwesp(0.25, fixed = FALSE) + nodecov(mortality_rate_female_df_1960) + nodecov(life_expectancy__df_1960) + nodecov(telephone_subscriptions_df_1960) + nodecov(electrical_power_df_1960),  
+                    control = ergm::control.ergm(MCMC.burnin = 500,
+                                                 MCMC.samplesize = 1000,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 10,
+                                                 parallel = 3,
+                                                 parallel.type = "PSOCK"))
+
+```
+
+Next, the triangles were replaced with mutual
+
+```{r, eval=FALSE}
+tech1 <- ergm::ergm(migration_networks[[1]] ~ edges + mutual + nodecov(mortality_rate_female_df_1960) + nodecov(life_expectancy__df_1960) + nodecov(telephone_subscriptions_df_1960) + nodecov(electrical_power_df_1960),  
+                    control = ergm::control.ergm(MCMC.burnin = 500,
+                                                 MCMC.samplesize = 1000,
+                                                 seed = 123456,
+                                                 MCMLE.maxit = 10,
+                                                 parallel = 3,
+                                                 parallel.type = "PSOCK"))
+
+```
+
+After this, the final model was created, but with more iterations, these
+were later on reduced. Besides this, some other models were also tested,
+such as a temporal ERGM
+
+```{r, eval=FALSE}
+#Basic model
+
+# Split the data on year 
+my_data <- read_excel("full_data.xlsx")
+my_data$Mobilesubscriptions[is.na(my_data$Mobilesubscriptions)] = 0
+years <- list(1960,1970,1980,1990,2000)
+
+# Create the node attributes
+for (network_no in 1:length(migration_networks)){
+  
+  my_data  <-  my_data %>% filter(Year == years[network_no])
+  my_data$Mobilesubscriptions <- as.numeric(my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_igraph(migration_networks[[network_no]])
+  
+  migration_networks[[network_no]] <- igraph::set.vertex.attribute(migration_networks[[network_no]], 'Mobilesubscriptions', index = V(migration_networks[[network_no]]), my_data$Mobilesubscriptions)
+  migration_networks[[network_no]] <- snafun::to_network(migration_networks[[network_no]])
+}
+
+temporal_model <- btergm::btergm(migration_networks ~ edges + nodecov('Mobilesubscriptions'), R = 10)
+btergm::summary(temporal_model)
+```
+
+## Appendix 4: ERGM performance
+
+For all the final ERGM models, a summary, MCMC diagnostics and GOF
+diagnostics have been performed First decennium
+
+```{r, eval=FALSE}
+load("tech1.rda")
+summary(tech1)
+```
+
+```{r, eval=FALSE}
+ergm::mcmc.diagnostics(tech1)
+```
+
+```{r fig.width=8, warning=FALSE, error=TRUE, eval=FALSE}
+tech1.gof <- ergm::gof(tech1)
+save(tech1.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech1gof.rda")
+snafun::stat_plot_gof(tech1.gof)
+```
+
+Second decennium
+
+```{r, eval=FALSE}
+load("tech2.rda")
+summary(tech2)
+```
+
+```{r, eval=FALSE}
+ergm::mcmc.diagnostics(tech2)
+```
+
+```{r,warning=FALSE, error=TRUE, eval=FALSE}
+tech2.gof <- ergm::gof(tech2)
+save(tech2.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech2gof.rda")
+snafun::stat_plot_gof(tech2.gof)
+```
+
+Third decennium
+
+```{r, eval=FALSE}
+load("tech3.rda")
+summary(tech3)
+```
+
+```{r, eval=FALSE}
+ergm::mcmc.diagnostics(tech3)
+```
+
+```{r,warning=FALSE, error=TRUE, eval=FALSE}
+tech3.gof <- ergm::gof(tech3)
+save(tech3.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech3gof.rda")
+snafun::stat_plot_gof(tech3.gof)
+```
+
+Fourth decennium
+
+```{r, eval=FALSE}
+load("tech4.rda")
+summary(tech4)
+```
+
+```{r, eval=FALSE}
+ergm::mcmc.diagnostics(tech4)
+```
+
+```{r,warning=FALSE, error=TRUE, eval=FALSE}
+tech4.gof <- ergm::gof(tech4)
+save(tech4.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech4gof.rda")
+snafun::stat_plot_gof(tech4.gof)
+```
+
+Fifth decennium
+
+```{r, eval=FALSE}
+load("tech5.rda")
+summary(tech5)
+```
+
+```{r, eval=FALSE}
+ergm::mcmc.diagnostics(tech5)
+```
+
+```{r,warning=FALSE, error=TRUE, eval=FALSE}
+tech5.gof <- ergm::gof(tech5)
+save(tech5.gof, file = "C:/Users/maud-/SNA-Research-Project-Group-2/tech5gof.rda")
+snafun::stat_plot_gof(tech5.gof)
 ```
