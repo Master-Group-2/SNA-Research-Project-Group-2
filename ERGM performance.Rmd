@@ -15,7 +15,7 @@ summary(tech1)
 ergm::mcmc.diagnostics(tech1)
 ```
 
-```{r,warning=FALSE}
+```{r fig.width=8, warning=FALSE}
 tech1.gof <- ergm::gof(tech1)
 snafun::stat_plot_gof(tech1.gof)
 ```
