@@ -67,7 +67,8 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 # Citations in papaja, detele appropriately later
 
-Add the bibtex entry in the .bib file. You can find the entries in Google scholar, but double check since it is not always correct.
+Add the bibtex entry in the .bib file. You can find the entries in
+Google scholar, but double check since it is not always correct.
 
 Call the citations in the text:
 
@@ -79,79 +80,209 @@ In-text citations @R-papaja
 
 Year only [-@R-base]
 
-Only if your citation appears in the text it will also show up in the Reference list. Don't manually modify the Reference list.
+Only if your citation appears in the text it will also show up in the
+Reference list. Don't manually modify the Reference list.
 
 ## Executive Summary
 
-(150 words) -- 0.3 POINTS Summarize the report. Write this as the very last thing.
-
-What is the main topic you are addressing?
-
-what are your research questions and hypotheses?
-
-what are your results and the main conclusion?
+::: {style="text-align: justify"}
+A social network analysis of the migration in Europe from 1960 to 2000
+has been conducted to investigate the patterns and trends of migration
+during this period. The study focused on two main research questions:
+Does Austria have a high centrality in the social network of Europe's
+migration, and does the technical development of a country have a
+positive effect on the level of migration to that country over time? To
+investigate the research questions a CUG and ERGM models were created to
+proof our hypothesizes. The results of the study did not support the
+hypothesis that Austria has a high centrality in the social network of
+Europe's migration, and the hypothesis that the technical development of
+a country has a positive effect on the level of migration could not be
+proven. The lack of results raises questions about Europe migration
+reasons for future academic research. Overall, the study provides new
+insights into the trends of migration in Europe during the period under
+review.
+:::
 
 ## Introduction
 
-(about 1000 words) -- 0.5 POINTS Place your topic of choice within the existing literature and explain what you are going to address in this report and why. - What is the main topic that is going to be studied in this paper? - Why is it important?
+(about 1000 words) -- 0.5 POINTS Place your topic of choice within the
+existing literature and explain what you are going to address in this
+report and why. - What is the main topic that is going to be studied in
+this paper? - Why is it important?
 
 ::: {style="text-align: justify"}
-Humanity has always moved a lot, for many different reasons, such as work or study opportunities, for safety of to join family. Because there are so many factors that play a role in migration, a lot of research has already been performed on this topic. However, at the same time, there are still a lot of thing unknown, which is why this paper will elaborate further on the topic of migration. In this paper, the focus will be specifically on migration within Europe with the use of social network analysis.
+Humanity has always moved a lot, for many different reasons, such as
+work or study opportunities, for safety of to join family. Because there
+are so many factors that play a role in migration, a lot of research has
+already been performed on this topic. However, at the same time, there
+are still a lot of thing unknown, which is why this paper will elaborate
+further on the topic of migration. In this paper, the focus will be
+specifically on migration within Europe with the use of social network
+analysis.
 :::
 
 ### Importance
 
 ::: {style="text-align: justify"}
-As mentioned, humanity has always moved a lot, however the amount of migration has increased with time. In 2020, it was estimated that 281 million people live in a country that is not their country of birth [@united2019world]. This is over three times the estimated number in 1970. With this increase in migration, come a lot of other changes, since migration has different effects on a country. For example, research has shown that skilled migrants have a positive effect on innovation [@fassio2019skilled]. Besides that there are effects on the economy, since migration "boosts the working-age population" and "contributes to technological progress" [@oecd2014is].
+As mentioned, humanity has always moved a lot, however the amount of
+migration has increased with time. In 2020, it was estimated that 281
+million people live in a country that is not their country of birth
+[@united2019world]. This is over three times the estimated number in
+1970. With this increase in migration, come a lot of other changes,
+since migration has different effects on a country. For example,
+research has shown that skilled migrants have a positive effect on
+innovation [@fassio2019skilled]. Besides that there are effects on the
+economy, since migration "boosts the working-age population" and
+"contributes to technological progress" [@oecd2014is].
 
-Since it migration has many different effects, it is important to know why people move. This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. In line with this reasoning, Dustmann and Frattini [-@dustmann2011immigration] found differences in the rate of European born immigrants between different European nations. An example they give is Ireland, where 70% of the immigrants are from Europe, compared to UK where only 21% are from Europe.
+Since it migration has many different effects, it is important to know
+why people move. This way, it can be determined which countries will be
+more affected by migration and the effects of it can be anticipated. In
+line with this reasoning, Dustmann and Frattini
+[-@dustmann2011immigration] found differences in the rate of European
+born immigrants between different European nations. An example they give
+is Ireland, where 70% of the immigrants are from Europe, compared to UK
+where only 21% are from Europe.
 :::
 
 ### Current research
 
 ::: {style="text-align: justify"}
-Some researchers have already looked at the reasons why people migrate to other countries. The European Parliament has determined three push and pull factors for leaving a country, namely the social-political factors, demographic and economic factors and environmental factors [@europe2020exloring].
+Some researchers have already looked at the reasons why people migrate
+to other countries. The European Parliament has determined three push
+and pull factors for leaving a country, namely the social-political
+factors, demographic and economic factors and environmental factors
+[@europe2020exloring].
 
-Socio-political factors can be described as persecution, politics  [@lam2002interaction] or culture [@kontuly1995culture]. Davenport et al. [-@davenport2003sometimes] indeed find that threats to personal integrity are the most important reason why people migrate. Demographic and economic factors are labor standards, unemployment [@davanzo1978does] and the country's overall economic health [@czaika2015migration]. Finally environmental factors can be fleeing of natural disasters [@drabo2015natural; @berlemann2017climate] and possibly in the future climate change. Finally an important factor to keep in mind is technology, and technological development. Because of technological progress, jobs are created as well as destructed [@mortensen1998technological]. According to Hillmann et al. [-@hillmann2022technological] this loss of jobs in certain segments of the labor market can cause people to move elsewhere. Moreover, when the country of origin lacks technological progress, outmigration is more attractive.
+Socio-political factors can be described as persecution, politics
+[@lam2002interaction] or culture [@kontuly1995culture]. Davenport et al.
+[-@davenport2003sometimes] indeed find that threats to personal
+integrity are the most important reason why people migrate. Demographic
+and economic factors are labor standards, unemployment
+[@davanzo1978does] and the country's overall economic health
+[@czaika2015migration]. Finally environmental factors can be fleeing of
+natural disasters [@drabo2015natural; @berlemann2017climate] and
+possibly in the future climate change. Finally an important factor to
+keep in mind is technology, and technological development. Because of
+technological progress, jobs are created as well as destructed
+[@mortensen1998technological]. According to Hillmann et al.
+[-@hillmann2022technological] this loss of jobs in certain segments of
+the labor market can cause people to move elsewhere. Moreover, when the
+country of origin lacks technological progress, outmigration is more
+attractive.
 :::
 
 ### Hypothesis
 
 ::: {style="text-align: justify"}
-To be able to answer the question of why people migrate, two different questions need to be answered. First, it needs to be determined through which people migrate and whether this changes over time. With this information, possible travel paths can be determined, which can in turn help in explaining why and how people migrate. Research has determined that "physical distance and border effects are significant predictors of migration flows among OECD countries" [@tranos2015international]. Here physical distance refers to how close countries are to each other. When looking at Europe, this would mean that most migrants would travel to our via the middle point of Europe, which is Belarus or Lithuania. Based on boarder effect, Austria would be an interesting node for centrality, since it shares borders with eight different countries. Another interesting approach is looking at the migration routes and flows in Europe, such as the Western African Route, Western Mediterranean Route, Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean Route, Eastern Borders Route and the The Channel Route [@westernroute]. Based on these migration routes, it appears that Austria plays an important role for migration within Europe [@guggenheim2019what; @ambrosini2016europe]. Based on this information the following hypothesis can be formulated:
+To be able to answer the question of why people migrate, two different
+questions need to be answered. First, it needs to be determined through
+which people migrate and whether this changes over time. With this
+information, possible travel paths can be determined, which can in turn
+help in explaining why and how people migrate. Research has determined
+that "physical distance and border effects are significant predictors of
+migration flows among OECD countries" [@tranos2015international]. Here
+physical distance refers to how close countries are to each other. When
+looking at Europe, this would mean that most migrants would travel to
+our via the middle point of Europe, which is Belarus or Lithuania. Based
+on boarder effect, Austria would be an interesting node for centrality,
+since it shares borders with eight different countries. Another
+interesting approach is looking at the migration routes and flows in
+Europe, such as the Western African Route, Western Mediterranean Route,
+Central Mediterranean Route, Western Balkan Route, Eastern Mediterranean
+Route, Eastern Borders Route and the The Channel Route [@westernroute].
+Based on these migration routes, it appears that Austria plays an
+important role for migration within Europe [@guggenheim2019what;
+@ambrosini2016europe]. Based on this information the following
+hypothesis can be formulated:
 
-- Research Question 1: Does Austria have a high centrality in the social network of Europe's migration?
+-   Research Question 1: Does Austria have a high centrality in the
+    social network of Europe's migration?
 
-Besides looking at the network itself, it is important to also take into account endogenous and exogenous variables. As mentioned before, many different factors have been found that impact migration. In this research all of these factors will be considered, and since technical development is becoming more and more important, we hypothesize that:
+Besides looking at the network itself, it is important to also take into
+account endogenous and exogenous variables. As mentioned before, many
+different factors have been found that impact migration. In this
+research all of these factors will be considered, and since technical
+development is becoming more and more important, we hypothesize that:
 
-- Research Question 2: Will the technical development of a country have more positive effect on the level of migration to that country with time?
+-   Research Question 2: Will the technical development of a country
+    have more positive effect on the level of migration to that country
+    with time?
 :::
 
 ### Methods
 
 ::: {style="text-align: justify"}
-As mentioned before, this study make use of social network analysis, so a network has been created for different countries in Europe. In the network, each country is a different node and each edge is a stream of migration. These edges are also weighted, where the weights represent the amount of people migrating from one country to another. 
+As mentioned before, this study make use of social network analysis, so
+a network has been created for different countries in Europe. In the
+network, each country is a different node and each edge is a stream of
+migration. These edges are also weighted, where the weights represent
+the amount of people migrating from one country to another.
 
-To decide whether Austria has a high centrality, the stress centrality measure was used. This measure defines the number of geodesics that pass through a country. The country with the highest number will be the most central country. To check hypothesis 1, the research has focused on the stress centrality of Austria in each decade. With that measure, a CUG test with 2000 simulations was done. This helps to define whether the centrality of Austria is significant compared to what one would expect in a network with the same number of vertices and edges as in the observed network. 
+To decide whether Austria has a high centrality, the stress centrality
+measure was used. This measure defines the number of geodesics that pass
+through a country. The country with the highest number will be the most
+central country. To check hypothesis 1, the research has focused on the
+stress centrality of Austria in each decade. With that measure, a CUG
+test with 2000 simulations was done. This helps to define whether the
+centrality of Austria is significant compared to what one would expect
+in a network with the same number of vertices and edges as in the
+observed network.
 
-To be able to answer the second hypothesis, an ERGM model was created. The data gathered for this research consists of five networks on different decades, and for each decade a different ERGM will be created. Since technological development changed over time, different attributes have been added to check for this effect. For example, in 1960’s telephone subscriptions were an important indicator, while in 2000’s the amount of internet and mobile subscriptions say more about technological development. Besides these exogenous variables, some control variables were also added. These other exogenous variables are the mortality rate for females, the life expectancy and the availability of electrical power. Asymmetry was added as endogenous variable, since rationale tells us that when a lot of people move from country A to country B, it does not make sense that people in country B want to move to country A. As mentioned in the theoretical framework, there are reasons why people migrate towards and away from countries, so there is a reason why people do not want to live in country A. This analysis will be run for all five decades, and after that the estimates and their significance can be used to answer the research question. If the estimate of the effect of technological development becomes larger and more significant, this could mean that technological development becomes more important with time.
+To be able to answer the second hypothesis, an ERGM model was created.
+The data gathered for this research consists of five networks on
+different decades, and for each decade a different ERGM will be created.
+Since technological development changed over time, different attributes
+have been added to check for this effect. For example, in 1960's
+telephone subscriptions were an important indicator, while in 2000's the
+amount of internet and mobile subscriptions say more about technological
+development. Besides these exogenous variables, some control variables
+were also added. These other exogenous variables are the mortality rate
+for females, the life expectancy and the availability of electrical
+power. Asymmetry was added as endogenous variable, since rationale tells
+us that when a lot of people move from country A to country B, it does
+not make sense that people in country B want to move to country A. As
+mentioned in the theoretical framework, there are reasons why people
+migrate towards and away from countries, so there is a reason why people
+do not want to live in country A. This analysis will be run for all five
+decades, and after that the estimates and their significance can be used
+to answer the research question. If the estimate of the effect of
+technological development becomes larger and more significant, this
+could mean that technological development becomes more important with
+time.
 
-The overall hypothesis can be answered using all five ERGMs, however hypotheses also need to be answered for every individual variable included in the models. These hypothesis can be seen below:
+The overall hypothesis can be answered using all five ERGMs, however
+hypotheses also need to be answered for every individual variable
+included in the models. These hypothesis can be seen below:
 
-- People will move to countries with a lower mortality rate, compared to the country they are currently living in 
-- People will move to countries with a higher life expectancy for women, compared to the country they are currently living in 
-- People will move to countries with more access to electrical power, compared to the country they are currently living in  
-- People will move to countries with more technological progress (telephone, mobile and internet subscriptions or medium high tech exports and the total amount of technicians depending on the model), compared to the country they are currently living in
-- If people move from country A to country B, it is not likely that people move from country B to country A
-
-
+-   People will move to countries with a lower mortality rate, compared
+    to the country they are currently living in
+-   People will move to countries with a higher life expectancy for
+    women, compared to the country they are currently living in
+-   People will move to countries with more access to electrical power,
+    compared to the country they are currently living in\
+-   People will move to countries with more technological progress
+    (telephone, mobile and internet subscriptions or medium high tech
+    exports and the total amount of technicians depending on the model),
+    compared to the country they are currently living in
+-   If people move from country A to country B, it is not likely that
+    people move from country B to country A
 :::
 
 ### Contributions
-::: {style="text-align: justify"}
-So far, the approach used in this research has not been used. By combining network analysis with many different variables, the impact of the variables can be compared and a most important factor can be determined. As mentioned in the introduction, the results from this research can help countries understand how many migrants are coming to this country, and possibly also why they are coming. With this information, appropriate accommodations can be made for them and the impact of having these migrants can be determined.
 
--   **What does the rest of the report look like? In one short paragraph, list the topics of the following sections.**
+::: {style="text-align: justify"}
+So far, the approach used in this research has not been used. By
+combining network analysis with many different variables, the impact of
+the variables can be compared and a most important factor can be
+determined. As mentioned in the introduction, the results from this
+research can help countries understand how many migrants are coming to
+this country, and possibly also why they are coming. With this
+information, appropriate accommodations can be made for them and the
+impact of having these migrants can be determined.
+
+-   **What does the rest of the report look like? In one short
+    paragraph, list the topics of the following sections.**
 :::
 
 ## Methodology
@@ -279,20 +410,62 @@ aggregated nations will have to backed up by literature research.
 
 ### Data analysis (Research Rationale)
 
-(about 500 words) -- 1 POINTS \* Why are these two methods suitable for your data?
+(about 500 words) -- 1 POINTS \* Why are these two methods suitable for
+your data?
 
 -   Why are these two methods suitable for your research questions?
 
--   Are there other methods to address these questions? If yes, why are the methods you chose better for this case?
+-   Are there other methods to address these questions? If yes, why are
+    the methods you chose better for this case?
 
 ::: {style="text-align: justify"}
-The stress centrality measure in combination with the CUG tests help to find an answer on whether Austria is a central country in Europe's migrant streams or not. The stress centrality measure fits this purpose because it considers incoming as well as outgoing edges. So, in that way, it simulates migrant streams through a country. Furthermore, this measure does not consider streams that end or start in Austria. Therefore, one can really see whether Austria is the central player, or in other words, the country that 'divides' all migrants through Europe and the country that incoming migrants use to get to other countries in Europe. The CUG tests help to see how high the average centrality in a network with a similar number of edges and vertices would 'normally' be, compared to the observed network. Therefore, one can argue whether Austria is a more central country than expected or not.  
+The stress centrality measure in combination with the CUG tests help to
+find an answer on whether Austria is a central country in Europe's
+migrant streams or not. The stress centrality measure fits this purpose
+because it considers incoming as well as outgoing edges. So, in that
+way, it simulates migrant streams through a country. Furthermore, this
+measure does not consider streams that end or start in Austria.
+Therefore, one can really see whether Austria is the central player, or
+in other words, the country that 'divides' all migrants through Europe
+and the country that incoming migrants use to get to other countries in
+Europe. The CUG tests help to see how high the average centrality in a
+network with a similar number of edges and vertices would 'normally' be,
+compared to the observed network. Therefore, one can argue whether
+Austria is a more central country than expected or not.
 
-Looking at the stress centrality measure, one could also have chosen for numerous other centrality measures. For instance, the eccentricity measure determines the maximum number of steps needed to reach any other country in the network. The country with the minimum eccentricity would be the most central country. However, this does not fit the purpose of this research since the measure only considers outgoing edges. The Shapley centrality would have been a good measure since it can also consider the weights, so the intensity of a migrant stream [@michalak2013efficient]. However, this method is currently not applied in R. 
+Looking at the stress centrality measure, one could also have chosen for
+numerous other centrality measures. For instance, the eccentricity
+measure determines the maximum number of steps needed to reach any other
+country in the network. The country with the minimum eccentricity would
+be the most central country. However, this does not fit the purpose of
+this research since the measure only considers outgoing edges. The
+Shapley centrality would have been a good measure since it can also
+consider the weights, so the intensity of a migrant stream
+[@michalak2013efficient]. However, this method is currently not applied
+in R.
 
-ERGM is used for the second hypothesis based on multiple reasons. Firstly, the data studied is network data, since the focus is on different countries and the relationships between them. Besides that, there are both network effects as well as effects coming outside of the network. Since ERGM can estimate the effect of both of these variables, it is the most suitable method for this research question.
-However, there are two other variations of ERGM that could address this research question. Firstly, the network can also be seen as a temporal network, because it has data on five different decades. This means that another approach could be to use a TERGM, or temporal ERGM. However, as mentioned in the methods section, the attribute variables included vary over time. For example, internet access is zero in the first few decades, because it did not exist back than. Same for the amount of telephone subscription, first this was a good indicator of technological progress, but now people only use mobiles and this is more accurate. Because of this, TERGM cannot measure what happens over time, and what the effect of these variables is. 
-Another option was weighted ERGM’s, since the edge attributes are weighted. However, a weighted ERGM only works well when the network is dense enough. Statistics about the network showed that the network used in this research is not that dense, meaning that weighted ERGM’s are also not appropriate. Overall, for this research regular ERGM’s seem to be the best approach.
+ERGM is used for the second hypothesis based on multiple reasons.
+Firstly, the data studied is network data, since the focus is on
+different countries and the relationships between them. Besides that,
+there are both network effects as well as effects coming outside of the
+network. Since ERGM can estimate the effect of both of these variables,
+it is the most suitable method for this research question. However,
+there are two other variations of ERGM that could address this research
+question. Firstly, the network can also be seen as a temporal network,
+because it has data on five different decades. This means that another
+approach could be to use a TERGM, or temporal ERGM. However, as
+mentioned in the methods section, the attribute variables included vary
+over time. For example, internet access is zero in the first few
+decades, because it did not exist back than. Same for the amount of
+telephone subscription, first this was a good indicator of technological
+progress, but now people only use mobiles and this is more accurate.
+Because of this, TERGM cannot measure what happens over time, and what
+the effect of these variables is. Another option was weighted ERGM's,
+since the edge attributes are weighted. However, a weighted ERGM only
+works well when the network is dense enough. Statistics about the
+network showed that the network used in this research is not that dense,
+meaning that weighted ERGM's are also not appropriate. Overall, for this
+research regular ERGM's seem to be the best approach.
 :::
 
 ## Results
@@ -300,19 +473,27 @@ Another option was weighted ERGM’s, since the edge attributes are weighted. Ho
 (about 2000 words)
 
 ::: {style="text-align: justify"}
-This research has taken two different approaches to check the hypotheses. Therefore, two models were created. The models and their results are presented and discussed in the sections below.
+This research has taken two different approaches to check the
+hypotheses. Therefore, two models were created. The models and their
+results are presented and discussed in the sections below.
 :::
 
 ### Model 1
 
 (about 1000 words) -- 2.5 POINTS
 
--   Present your results appropriately (plots, tables...) and discuss your findings in plain English
+-   Present your results appropriately (plots, tables...) and discuss
+    your findings in plain English
 
--   Discuss the meaning of your findings in relation to your hypothesis. (half of the points evaluated in this other part)
+-   Discuss the meaning of your findings in relation to your hypothesis.
+    (half of the points evaluated in this other part)
 
 ::: {style="text-align: justify"}
-The centrality of Austria was estimated by the stress centrality measure. The centrality was calculated for every country in the network, in each decade that is represented in the dataset. The results of those centrality calculations for every country can be seen in the table below.  
+The centrality of Austria was estimated by the stress centrality
+measure. The centrality was calculated for every country in the network,
+in each decade that is represented in the dataset. The results of those
+centrality calculations for every country can be seen in the table
+below.
 :::
 
 ```{r, centrality_table, echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
@@ -339,7 +520,14 @@ knitr::kable(central_data)
 ```
 
 ::: {style="text-align: justify"}
-The results for Austria, compared to other countries, show that Austria was at the higher end of the most central countries in Europe in 1960 and 1970. In later decades, Austria seems to have an average stress centrality in Europe. The results from to the table are plotted below to get a better view on the (most) central countries for migrant streams in Europe. The vertex size corresponds with the stress centrality of a country (vertex). The edge width corresponds with the edge weight, i.e., the number of migrants in that decade. 
+The results for Austria, compared to other countries, show that Austria
+was at the higher end of the most central countries in Europe in 1960
+and 1970. In later decades, Austria seems to have an average stress
+centrality in Europe. The results from to the table are plotted below to
+get a better view on the (most) central countries for migrant streams in
+Europe. The vertex size corresponds with the stress centrality of a
+country (vertex). The edge width corresponds with the edge weight, i.e.,
+the number of migrants in that decade.
 :::
 
 ```{r, centrality_plots, echo = FALSE, results = 'asis', warning = FALSE, out.width= '100%', message = FALSE, fig.height = 27}
@@ -438,9 +626,32 @@ graphics::legend(x = -1.5, y = 0, c('>= Austria', '< Austria'), pch = 21, col = 
 ```
 
 ::: {style="text-align: justify"}
-The plots show indeed that as of 1980, there are more countries within Europe that are more central than Austria regarding migrant streams. Poland seems to have the highest stress centrality in all decades except for 2000. In that decade, the differences are not that clear. In every decade, Poland has clear links with Germany (and France) and with Ukraine (and Belarus). That shows that Poland acts as a central player in the migrant stream from east to west or west to east. For Austria, those links are not that clear from the plot. The only clear link is the one with Germany but that doesn't show centrality of Austria. The migration routes that were shown by Guggenheim [-@guggenheim2019what], cannot be seen in these observations. However, looking at the color distributions of all plots, Austria is always a country that has a higher centrality than many other countries in Europe. All in all, the plots give an indication that Austria is not the country with the highest stress centrality in Europe, but does not belong to the lower end either. 
+The plots show indeed that as of 1980, there are more countries within
+Europe that are more central than Austria regarding migrant streams.
+Poland seems to have the highest stress centrality in all decades except
+for 2000. In that decade, the differences are not that clear. In every
+decade, Poland has clear links with Germany (and France) and with
+Ukraine (and Belarus). That shows that Poland acts as a central player
+in the migrant stream from east to west or west to east. For Austria,
+those links are not that clear from the plot. The only clear link is the
+one with Germany but that doesn't show centrality of Austria. The
+migration routes that were shown by Guggenheim [-@guggenheim2019what],
+cannot be seen in these observations. However, looking at the color
+distributions of all plots, Austria is always a country that has a
+higher centrality than many other countries in Europe. All in all, the
+plots give an indication that Austria is not the country with the
+highest stress centrality in Europe, but does not belong to the lower
+end either.
 
-However, the plots do not give a statistically decisive judgement about the significance of Austria's centrality. To get a better view of on that, the CUG tests are used. For each decade, the stress centrality of Austria is compared with the average expected centrality for a network with the same number of vertices and edges. Each CUG test has simulated 2000 similar networks. The average stress centrality was stored for every simulation. The empirical results can be seen below for every decade, where the simulations are represented by the density plot and the stress centrality of Austria is represented by the dashed line.
+However, the plots do not give a statistically decisive judgement about
+the significance of Austria's centrality. To get a better view of on
+that, the CUG tests are used. For each decade, the stress centrality of
+Austria is compared with the average expected centrality for a network
+with the same number of vertices and edges. Each CUG test has simulated
+2000 similar networks. The average stress centrality was stored for
+every simulation. The empirical results can be seen below for every
+decade, where the simulations are represented by the density plot and
+the stress centrality of Austria is represented by the dashed line.
 :::
 
 ```{r, cug_plots, echo = FALSE, warning = FALSE, message = FALSE, out.width= '100%', fig.height = 7}
@@ -473,7 +684,12 @@ plot(density(cug_tests[[5]]), xlim = c(aus_stress[[6]] - 10, max(density(cug_tes
 ```
 
 ::: {style="text-align: justify"}
-In every decade, the stress centrality of Austria seems to be exceptionally lower than networks with a similar number of vertices and directed edges. To quantify how exceptional this difference is, the proportion of stress centralities that are higher than the stress centrality of Austria were calculated for every decade. The results can be seen below. 
+In every decade, the stress centrality of Austria seems to be
+exceptionally lower than networks with a similar number of vertices and
+directed edges. To quantify how exceptional this difference is, the
+proportion of stress centralities that are higher than the stress
+centrality of Austria were calculated for every decade. The results can
+be seen below.
 :::
 
 ```{r, quantification, echo = FALSE, warning = FALSE, message = FALSE}
@@ -489,17 +705,54 @@ knitr::kable(quantification)
 ```
 
 ::: {style="text-align: justify"}
-So, 100% of all networks with the same number of vertices and directed edges have a higher stress centrality than Austria has, in every decade that has been analyzed. With that, it can be said that the stress centrality of Austria is statistically significantly lower than what would have been expected for a network with this number of vertices and directed edges. 
+So, 100% of all networks with the same number of vertices and directed
+edges have a higher stress centrality than Austria has, in every decade
+that has been analyzed. With that, it can be said that the stress
+centrality of Austria is statistically significantly lower than what
+would have been expected for a network with this number of vertices and
+directed edges.
 :::
 
 ### ERGM
 
 ::: {style="text-align: justify"}
-As mentioned in the method section of this paper, five different ERGM models have been created to be able to answer the second hypothesis, one model for every decennium in the data. For every model, the appropriate endogenous and exogenous variables have been added. To give an example, in the 1960's mobile phones and the internet did not exist, so here the amount of telephone subscriptions is more appropriate as a measure for technological progress. 
-A couple of different steps have been taken to get to the final model, starting with selecting these endogenous and exogenous variables. For the endogenous variables, the choice to include all of them immediately was made, since the theoretical framework showed that all these variables could have an influence on migration. However, in the first model, the measure `nodecov` was used for these exogenous variables. After trying, it appeared that this was not the most appropriate measure, and it was replaced with `dyadcov`. For the endogenous variables, `gwesp` was first used, based on the idea that there were triangles in the data. However after careful consideration, the conclusion was made that there was no theoretical proof as to why this would be true. Because of that, the measure was removed and replaced with `mutual`. After some discussion, it appeared that `asymmetric` would actually be a more appropriate measure. The goal of asymmetry is capture the fact that if a lot of people move from country A to country B, people are not likely to move from B to A. 
-After all these variables have been selected, the MCMC specifications were added. The first attempt used 1000 samples, a burn-in of 500 and 10 iterations. However, the laptops used in this research were not able to handle this much data, and after three days and nights, only 4 iterations were complete. After this, it was decided to reduce the amount of samples and iterations, to 500 samples, 250 burn-in and 4 iterations. However, after another day and night, this model got stuck around 3 iterations. Because of this, an even smaller sample size and number of iterations have been chosen, namely 100 samples, a burn-in of 50 and 2 iterations. Some models were not able too run because the sample size was too small, so for these models the sample size was set higher. With these specifications, all the models were able to run, however the GOF will likely not be good.
-This will be discussed further on in this section, as well as in the limitation section of this paper. 
-The summary of these five final models can be found below. 
+As mentioned in the method section of this paper, five different ERGM
+models have been created to be able to answer the second hypothesis, one
+model for every decennium in the data. For every model, the appropriate
+endogenous and exogenous variables have been added. To give an example,
+in the 1960's mobile phones and the internet did not exist, so here the
+amount of telephone subscriptions is more appropriate as a measure for
+technological progress. A couple of different steps have been taken to
+get to the final model, starting with selecting these endogenous and
+exogenous variables. For the endogenous variables, the choice to include
+all of them immediately was made, since the theoretical framework showed
+that all these variables could have an influence on migration. However,
+in the first model, the measure `nodecov` was used for these exogenous
+variables. After trying, it appeared that this was not the most
+appropriate measure, and it was replaced with `dyadcov`. For the
+endogenous variables, `gwesp` was first used, based on the idea that
+there were triangles in the data. However after careful consideration,
+the conclusion was made that there was no theoretical proof as to why
+this would be true. Because of that, the measure was removed and
+replaced with `mutual`. After some discussion, it appeared that
+`asymmetric` would actually be a more appropriate measure. The goal of
+asymmetry is capture the fact that if a lot of people move from country
+A to country B, people are not likely to move from B to A. After all
+these variables have been selected, the MCMC specifications were added.
+The first attempt used 1000 samples, a burn-in of 500 and 10 iterations.
+However, the laptops used in this research were not able to handle this
+much data, and after three days and nights, only 4 iterations were
+complete. After this, it was decided to reduce the amount of samples and
+iterations, to 500 samples, 250 burn-in and 4 iterations. However, after
+another day and night, this model got stuck around 3 iterations. Because
+of this, an even smaller sample size and number of iterations have been
+chosen, namely 100 samples, a burn-in of 50 and 2 iterations. Some
+models were not able too run because the sample size was too small, so
+for these models the sample size was set higher. With these
+specifications, all the models were able to run, however the GOF will
+likely not be good. This will be discussed further on in this section,
+as well as in the limitation section of this paper. The summary of these
+five final models can be found below.
 :::
 
 ```{r, echo=FALSE}
@@ -518,22 +771,63 @@ knitr::kable(texreg::matrixreg(tech4))
 load("tech5.rda")
 knitr::kable(texreg::matrixreg(tech5))
 ```
+
 ::: {style="text-align: justify"}
-Both the overall hypothesis, as well as the hypotheses for the endogenous and exogenous variables need to be answered. In the model, the three different dyad states are displayed, namely mutual, upper-triangular asymmetric, and lower-triangular asymmetric dyads. 
+Both the overall hypothesis, as well as the hypotheses for the
+endogenous and exogenous variables need to be answered. In the model,
+the three different dyad states are displayed, namely mutual,
+upper-triangular asymmetric, and lower-triangular asymmetric dyads.
 
-For our hypotheses, we are only interested in people moving from the row country to the column country, which is captured with the lower-triangular asymmetric dyads. The first hypotheses was that “people will move to countries with a lower mortality rate, compared to the country they are currently living in”. For this we found a positive and significant effect for three of our models, and the others were negative and significant as well as non-significant. Because of this, this hypothesis is partially proven.
+For our hypotheses, we are only interested in people moving from the row
+country to the column country, which is captured with the
+lower-triangular asymmetric dyads. The first hypotheses was that "people
+will move to countries with a lower mortality rate, compared to the
+country they are currently living in". For this we found a positive and
+significant effect for three of our models, and the others were negative
+and significant as well as non-significant. Because of this, this
+hypothesis is partially proven.
 
-The second hypothesis was that “people will move to countries with a higher life expectancy for women, compared to the country they are currently living in”. Two models show a positive and significant effect and two show a negative and significant effect, the last model had a non-significant effect. With this information, this hypothesis cannot be proven. 
+The second hypothesis was that "people will move to countries with a
+higher life expectancy for women, compared to the country they are
+currently living in". Two models show a positive and significant effect
+and two show a negative and significant effect, the last model had a
+non-significant effect. With this information, this hypothesis cannot be
+proven.
 
-The third hypothesis was “people will move to countries with more access to electrical power, compared to the country they are currently living in”. All the models show a negative effect for this measure, so this hypothesis has been disproven. 
-The fourth hypothesis was on technological progress, which was “people will move to countries with more telephone, mobile and internet subscriptions (depending on the model), compared to the country they are currently living in”. The results for these variables are all significant, however both positive and negative correlations have been found. Because of this, this hypothesis cannot be proven. 
+The third hypothesis was "people will move to countries with more access
+to electrical power, compared to the country they are currently living
+in". All the models show a negative effect for this measure, so this
+hypothesis has been disproven. The fourth hypothesis was on
+technological progress, which was "people will move to countries with
+more telephone, mobile and internet subscriptions (depending on the
+model), compared to the country they are currently living in". The
+results for these variables are all significant, however both positive
+and negative correlations have been found. Because of this, this
+hypothesis cannot be proven.
 
-Then the final hypothesis was “if people move from country A to country B, it is not likely that people move from country B to country A”. This was measured with asymmetry, for which four out of five results were positive. However, only two were significant, both of which captured a positive effect. Because of this, the hypothesis has been partially proven. 
+Then the final hypothesis was "if people move from country A to country
+B, it is not likely that people move from country B to country A". This
+was measured with asymmetry, for which four out of five results were
+positive. However, only two were significant, both of which captured a
+positive effect. Because of this, the hypothesis has been partially
+proven.
 
-For the overall hypothesis, the coefficient and its significance need to be compared for all five models. When looking at the results, it does not appear that technological process becomes more important with time. The coefficients of the variables are all very close to each other, and there does not appear to be a change in significance. Because of this, the overall hypothesis cannot be proven. 
+For the overall hypothesis, the coefficient and its significance need to
+be compared for all five models. When looking at the results, it does
+not appear that technological process becomes more important with time.
+The coefficients of the variables are all very close to each other, and
+there does not appear to be a change in significance. Because of this,
+the overall hypothesis cannot be proven.
 
-Besides these results, it is also important to have a look at the diagnostics of the model. This will show us whether the models used were correct and appropriate for this analysis. Firstly, the MCMC diagnostics will be displayed, after that the GOF diagnostics. 
-For the MCMC diagnostics, the focus will be on the first four plots, the trace of edges, the density of the edges, the trace of asymmetric and the density of asymmetric. To save space, the full MCMC diagnostics will be displayed for the first model only. For the other models, only the first four plots will be displayed.
+Besides these results, it is also important to have a look at the
+diagnostics of the model. This will show us whether the models used were
+correct and appropriate for this analysis. Firstly, the MCMC diagnostics
+will be displayed, after that the GOF diagnostics. For the MCMC
+diagnostics, the focus will be on the first four plots, the trace of
+edges, the density of the edges, the trace of asymmetric and the density
+of asymmetric. To save space, the full MCMC diagnostics will be
+displayed for the first model only. For the other models, only the first
+four plots will be displayed.
 :::
 
 ```{r, echo=FALSE, warning=FALSE, out.width= '100%', fig.height = 7}
@@ -542,24 +836,26 @@ knitr::kable(tech1.mcmc)
 ```
 
 ::: {style="text-align: justify"}
-![](images/MCMC model 2.png)
-MCMC diagnostics: model 1970
+![](images/MCMC%20model%202.png) MCMC diagnostics: model 1970
 
-![](images/MCMC model 3.png)
-MCMC diagnostics: model 1980
+![](images/MCMC%20model%203.png) MCMC diagnostics: model 1980
 
-![](images/MCMC model 4.png)
-MCMC diagnostics: model 1990
+![](images/MCMC%20model%204.png) MCMC diagnostics: model 1990
 
-![](images/MCMC model 5.png)
-MCMC diagnostics: model 2000
+![](images/MCMC%20model%205.png) MCMC diagnostics: model 2000
 
-When looking at these diagnostics, the traces are all centered around zero, which is a good sign. However, they are not very ‘fuzzy’, probably because of the low amount of samples and iterations. This will be further discussed in the limitations section. 
-When looking at the density of the edges and asymmetric, they appear to be normally distributed, with the only exception being the second model. Especially the density of asymmetry is not completely normally distributed, probably due to the same limitations as before. 
+When looking at these diagnostics, the traces are all centered around
+zero, which is a good sign. However, they are not very 'fuzzy', probably
+because of the low amount of samples and iterations. This will be
+further discussed in the limitations section. When looking at the
+density of the edges and asymmetric, they appear to be normally
+distributed, with the only exception being the second model. Especially
+the density of asymmetry is not completely normally distributed,
+probably due to the same limitations as before.
 
-The goodness of fit can also be plotted for all the models, which can be seen below.
+The goodness of fit can also be plotted for all the models, which can be
+seen below.
 :::
-
 
 ```{r, error=TRUE, echo=FALSE, out.width= '100%', fig.height = 7}
 load("tech1gof.rda")
@@ -580,45 +876,105 @@ knitr::kable(snafun:: stat_plot_gof(tech5.gof))
 ```
 
 ::: {style="text-align: justify"}
-As can be seen in these goodness of fit results, the models are not yet correct. For the fit of the model to be good, the black line needs to be close to the blue diamonds, which is not the case for any of the diagnostics. Because of this, the model interpretation is also limited, which will be discussed in the next section.
+As can be seen in these goodness of fit results, the models are not yet
+correct. For the fit of the model to be good, the black line needs to be
+close to the blue diamonds, which is not the case for any of the
+diagnostics. Because of this, the model interpretation is also limited,
+which will be discussed in the next section.
 :::
 
 ## Conclusion
 
 Topic and research questions
 
-Topic: Since it migration has many different effects, it is important to know why people move. This way, it can be determined which countries will be more affected by migration and the effects of it can be anticipated. An important factor is technology and technological development.
-Research Question 1: Does Austria have a high centrality in the social network of Europe's migration?
-Research Question 2: Will the technical development of a country have more positive effect on the level of migration to that country with time?
+Topic: Since it migration has many different effects, it is important to
+know why people move. This way, it can be determined which countries
+will be more affected by migration and the effects of it can be
+anticipated. An important factor is technology and technological
+development. Research Question 1: Does Austria have a high centrality in
+the social network of Europe's migration? Research Question 2: Will the
+technical development of a country have more positive effect on the
+level of migration to that country with time?
 
 CUG
 
-The stress centrality results show that Austria was at the higher end of the most central countries in Europe in 1960 and 1970. The plots showed that as of 1980, there are more countries within Europe that are more central than Austria regarding migrant streams. Poland seems to have the highest stress centrality in all decades except for 2000. In that decade, the differences are not that clear. In every decade, Poland has clear links with Germany (and France) and with Ukraine (and Belarus). That shows that Poland acts as a central player in the migrant stream from east to west or west to east. For Austria, those links are not that clear from the plots.
+The stress centrality results show that Austria was at the higher end of
+the most central countries in Europe in 1960 and 1970. The plots showed
+that as of 1980, there are more countries within Europe that are more
+central than Austria regarding migrant streams. Poland seems to have the
+highest stress centrality in all decades except for 2000. In that
+decade, the differences are not that clear. In every decade, Poland has
+clear links with Germany (and France) and with Ukraine (and Belarus).
+That shows that Poland acts as a central player in the migrant stream
+from east to west or west to east. For Austria, those links are not that
+clear from the plots.
 
-Hypothesis 1 predicted that Austria has a high centrality in the social network of Europe's migration. The results do not support this hypothesis. Therefore, this hypothesis is rejected. This also directly answers the RQ1. Whereas Austria belongs to the higher end of the centralities of European countries, considering the stress centrality plots, the number is expected to be higher for a network that is similar to the European migrant network. 
+Hypothesis 1 predicted that Austria has a high centrality in the social
+network of Europe's migration. The results do not support this
+hypothesis. Therefore, this hypothesis is rejected. This also directly
+answers the RQ1. Whereas Austria belongs to the higher end of the
+centralities of European countries, considering the stress centrality
+plots, the number is expected to be higher for a network that is similar
+to the European migrant network.
 
 ERGM
 
-Antwoorden op de hypothesis 
-- People will move to countries with a lower mortality rate, compared to the country they are currently living in 
-- People will move to countries with a higher life expectancy for women, compared to the country they are currently living in 
-- People will move to countries with more access to electrical power, compared to the country they are currently living in  
-- People will move to countries with more technological progress (telephone, mobile and internet subscriptions or medium high tech exports and the total amount of technicians depending on the model), compared to the country they are currently living in
-- If people move from country A to country B, it is not likely that people move from country B to country A
-Antwoord geven op RQ2
-GOF benoemen
+Antwoorden op de hypothesis - People will move to countries with a lower
+mortality rate, compared to the country they are currently living in -
+People will move to countries with a higher life expectancy for women,
+compared to the country they are currently living in - People will move
+to countries with more access to electrical power, compared to the
+country they are currently living in\
+- People will move to countries with more technological progress
+(telephone, mobile and internet subscriptions or medium high tech
+exports and the total amount of technicians depending on the model),
+compared to the country they are currently living in - If people move
+from country A to country B, it is not likely that people move from
+country B to country A Antwoord geven op RQ2 GOF benoemen
 
 Stakeholders
 
-Possible stakeholders who could benefit from these findings are politicians and members of the European Parliament (EMP) who are trying to understand the migration patterns and underlying reasons of why people move between European nations to a greater extent. 
+Possible stakeholders who could benefit from these findings are
+politicians and members of the European Parliament (EMP) who are trying
+to understand the migration patterns and underlying reasons of why
+people move between European nations to a greater extent.
 
 Limitations and future work
 
-Since the models were not run using a proper sample size, burning and iterations, the results (MCMC diagnostics and GOF) might differ a lot when running them using a higher number. This choice has been made after a long process of trying to speed up the process of running the models. This choice was made after different attempts including and removing endogenous variables already had been made based on the theory. However, due to time limitations using a higher amount of sample sizes, burnings and iterations were not realistic anymore. In the future, this process could be improved and sped up by using for example a supercomputer. To speed up the process, it is also possible to use a different optimization routine in ERGM called stochastic approximation. This method speeds up the process and returns a decent approximation of the exact result. 
+Since the models were not run using a proper sample size, burning and
+iterations, the results (MCMC diagnostics and GOF) might differ a lot
+when running them using a higher number. This choice has been made after
+a long process of trying to speed up the process of running the models.
+This choice was made after different attempts including and removing
+endogenous variables already had been made based on the theory. However,
+due to time limitations using a higher amount of sample sizes, burnings
+and iterations were not realistic anymore. In the future, this process
+could be improved and sped up by using for example a supercomputer. To
+speed up the process, it is also possible to use a different
+optimization routine in ERGM called stochastic approximation. This
+method speeds up the process and returns a decent approximation of the
+exact result.
 
-Like mentioned in the methods section, the decision has been made to work with an ERGM because statistics about the network showed that the network used in this research is not extremely dense (around 0.65), meaning that using a weighted ERGM’s was not appropriate. However, another possible reason why the model takes a very long time to run is because it has a hard time fitting the model. ERGM’s goal is to determine which forces shapes the structure of the network. However, when using a dense network, it is a harder time to do so. Since our density is also not low, it might be possible that our network is getting stuck when running it. This means that our network might not be the best fit to either use for an ERGM or a GERM, and is somewhere in the middle, not being able to benefit from either of the models. 
+Like mentioned in the methods section, the decision has been made to
+work with an ERGM because statistics about the network showed that the
+network used in this research is not extremely dense (around 0.65),
+meaning that using a weighted ERGM's was not appropriate. However,
+another possible reason why the model takes a very long time to run is
+because it has a hard time fitting the model. ERGM's goal is to
+determine which forces shapes the structure of the network. However,
+when using a dense network, it is a harder time to do so. Since our
+density is also not low, it might be possible that our network is
+getting stuck when running it. This means that our network might not be
+the best fit to either use for an ERGM or a GERM, and is somewhere in
+the middle, not being able to benefit from either of the models.
 
-Another limitation that needs to be considered is that the weights of the edges are not included in the analyses, since that was not possible in the current implementation of the theory in R. Including the weights of the edges in the centrality analysis might give different results for the centrality of Austria. The weights might give a better indication of how many migrants 'pass' through a country to get to their destination within Europe.
+Another limitation that needs to be considered is that the weights of
+the edges are not included in the analyses, since that was not possible
+in the current implementation of the theory in R. Including the weights
+of the edges in the centrality analysis might give different results for
+the centrality of Austria. The weights might give a better indication of
+how many migrants 'pass' through a country to get to their destination
+within Europe.
 
 GOF?
 
